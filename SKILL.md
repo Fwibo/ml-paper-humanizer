@@ -1,5 +1,5 @@
 ---
-name: ml-paper-writing-humanizer
+name: ml-paper-humanizer
 description: >
   Writing, reviewing and self-checking the English body text of AI conference papers
   (ICLR/NeurIPS/ICML/ACL/CVPR and the like) so that it does not read as machine-written.
@@ -12,7 +12,7 @@ description: >
   papers alike, with the rules split by the five paper orientations (proof, effect, design,
   evaluation, discovery).
 ---
-# ML Paper Writing Humanizer (v10.7.15)
+# ML Paper Humanizer (v10.7.15)
 
 The AI smell in a paper is a handful of writing actions, not a word list: performing (dressing a conclusion up as an insight), defending (writing the reviewer's rebuttal into the paper), piling (numbers, clauses and citations shovelled into one sentence), restating (heading, first sentence, last sentence and caption all saying one thing), drifting (one object under three names, or an internal name left in the paper). Remove the action and the words come out right.
 

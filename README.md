@@ -1,4 +1,4 @@
-# ML Paper Writing Humanizer
+# ML Paper Humanizer
 
 A Claude Code skill for writing and revising the English text of ML conference papers (ICLR, NeurIPS, ICML, ACL, CVPR and the like) so that it reads as written by its authors rather than by an LLM. Its rules, example sentences and phrase lists come from published award and oral papers.
 
@@ -50,7 +50,7 @@ Once the action is gone, the wording usually follows. There is no banned-word li
 Claude Code:
 
 ```bash
-git clone https://github.com/Fwibo/ml-paper-writing-humanizer ~/.claude/skills/ml-paper-writing-humanizer
+git clone https://github.com/Fwibo/ml-paper-humanizer ~/.claude/skills/ml-paper-humanizer
 ```
 
 Other agents that load Agent Skills (a folder with a `SKILL.md`) can use the same folder.
@@ -68,7 +68,7 @@ Ask in your own words. The skill triggers on writing, revising and polishing a p
 - "Rewrite the second paragraph of my results section, it reads like AI."
 - "Write the introduction from these notes. It is a discovery paper."
 - "Make this abstract less defensive."
-- `/ml-paper-writing-humanizer sec/experiments.tex`
+- `/ml-paper-humanizer sec/experiments.tex`
 
 The scripts also run on their own:
 
@@ -145,7 +145,7 @@ The exemplar passages are short excerpts from 30 papers under CC BY 4.0 or CC0 1
 Claude Code：
 
 ```bash
-git clone https://github.com/Fwibo/ml-paper-writing-humanizer ~/.claude/skills/ml-paper-writing-humanizer
+git clone https://github.com/Fwibo/ml-paper-humanizer ~/.claude/skills/ml-paper-humanizer
 ```
 
 其他支持 Agent Skills 格式（带 `SKILL.md` 的文件夹）的 agent 也能直接使用这个文件夹。
@@ -163,7 +163,7 @@ pip install spacy pymupdf && python -m spacy download en_core_web_sm
 - "帮我改一下实验部分第二段，读着有 AI 味"
 - "根据这些笔记写引言，这是一篇 discovery 类论文"
 - "这段摘要别写得那么防御"
-- `/ml-paper-writing-humanizer sec/experiments.tex`
+- `/ml-paper-humanizer sec/experiments.tex`
 
 脚本也可以单独运行，命令见上文 Usage 一节。
 

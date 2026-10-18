@@ -1,0 +1,7 @@
+<!-- section: intro; orientation: design; source: arXiv 2310.16834, published text, style reference only -->
+
+Many recent advances in deep learning have centered around generative modeling. Here, a model learns how to generate novel samples from unstructured data. With the powerful capabilities of modern neural networks, these ``generative AI" systems have developed unparalleled capabilities, such as creating images given only text [cite] and answering complex questions [cite].
+
+The crucial part for any deep generative model is the probabilistic modeling technique. For discrete data such as natural language, autoregressive modeling [cite]--arguably the simplest modeling type since it derives from the probabilistic chain rule--has remained the only competitive method for decades. Although modern autoregressive transformers have produced stunning results [cite], there are limits. For example, the sequential sampling of tokens is slow, hard to control, and often degrades without distribution annealing techniques like nucleus sampling [cite].
+
+To alleviate these issues, researchers have sought alternative approaches to generating text data. In particular, inspired by their success in the image domain, many works have extended diffusion models [cite] to language domains [cite]. Yet, despite considerable effort, no such approach yet rivals autoregressive modeling, as they are not competitive on likelihoods, are slower to sample from, and do not generate comparable samples without resorting to heavy annealing and empirical alterations.

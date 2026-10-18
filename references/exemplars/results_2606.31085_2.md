@@ -1,0 +1,7 @@
+<!-- section: results; orientation: design; source: arXiv 2606.31085, published text, style reference only -->
+
+In contrast, agent-based methods generally achieve the best performance among different types of methods. This is because their strong capability in handling heterogeneous knowledge sources and the shared high-recall candidate retriever provides a reasonable starting point for the prediction~(its performance is shown in Appendix~REF). Notably, methods that incorporate multiple expert agents (e.g., MDAgents and AgentVerse) consistently outperform single-agent methods (e.g., Reflexion). This comparison highlights the critical need for integrating specialized analyses from multiple complementary perspectives.
+
+To validate the effectiveness of the proposed components in DDIAgents, we compare it with the following variants: (a) w/o DynExp, which utilizes three predefined expert agents across iterations; (b) w/o DynKnow, which provides all of the knowledge sources instead of using dynamic context flow; (c) w/o Iter, which only uses a single iteration to obtain the DDI prediction.
+
+From results in Table~REF, we can see that removing any proposed component results in a performance drop, validating the necessity of the designs in DDIAgents. Specifically, the largest performance degradation is in the "w/o DynKnow" variant, highlighting the critical importance of the dynamic context flow.

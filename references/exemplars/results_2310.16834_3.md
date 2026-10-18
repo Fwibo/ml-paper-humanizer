@@ -1,0 +1,7 @@
+<!-- section: results; orientation: design; source: arXiv 2310.16834, published text, style reference only -->
+
+We also test SEDD on One Billion Words, a more medium sized and real world dataset. We follow [cite] for the tokenization, training, and model size configurations. In particular, our baselines are all around the size of GPT-2 small. Following [cite], we compare primarily against other language diffusion models, although we also train a standard autoregressive transformer as a benchmark.
+
+We report perplexity values in Table REF. Our SEDD model outperforms all other diffusion language modeling schemes by $50$-$75\%$ lower perplexity (in particular D3PM). Furthermore, SEDD is within $1$ perplexity of the autoregressive model, likely matching since we only report an upper bound.
+
+Finally, we compare SEDD against GPT-2 [cite]. We train on OpenWebText as the original WebText dataset has not been made available (this is typical practice and does not meaningfully affect results in practice) [cite] and test on the LAMBADA, WikiText2, PTB, WikiText103, and One Billion Words datasets (which were all of the GPT-2 zero-shot tasks that measured perplexity). We recompute baseline likelihoods for all datasets except 1BW, where we encountered unexpected behavior with the public implementations. Our likelihood computation changes from the original setting since we evaluate unconditionally (i.e. without a sliding window), and this results in higher values than originally reported.

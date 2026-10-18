@@ -1,0 +1,7 @@
+<!-- section: results; orientation: discovery; source: arXiv 2401.06416, published text, style reference only -->
+
+To test the \mathrm{*Hop} models' sensitivity to marker placement, we conduct two tests on a sample of 10K sentences extracted from the BabyLM dataset containing the verb marker tokens ( \setlength{\fboxsep}{1pt} \fbox{\texttt{S}} \space or \setlength{\fboxsep}{1pt} \fbox{\texttt{P}}). As an example, consider the following pair of sentences for the \mathrm{NoHop} language shown in~REF.
+
+In the first test, we compare the average surprisals of the marker tokens across the three \mathrm{*Hop} languages, using grammatical examples like~REF. In the case of~REF, the marker is singular, and its surprisal $S(\texttt{ \highlight{FF77E6}{ \setlength{\fboxsep}{1pt} \fbox{\texttt{S}} } })$ is defined as: $$S(\texttt{ \highlight{FF77E6}{ \setlength{\fboxsep}{1pt} \fbox{\texttt{S}} } }) = -\log_2p(\texttt{ \highlight{FF77E6}{ \setlength{\fboxsep}{1pt} \fbox{\texttt{S}} } $|$ \highlight{FDFD95}{He}
+
+In the second test, we construct minimal pairs from the example sentences in which the marker token appears and does not appear, and then compare the surprisal of the marker token to the surprisal of the token that follows it, both conditioned on the same context. In example~REF, the surprisal of the following token $S(\texttt{ \highlight{FFCFD2}{ his} })$ is defined as: $$S(\texttt{ \highlight{FFCFD2}{ his} }) = -\log_2p(\texttt{ \highlight{FFCFD2}{ his} $|$ \highlight{FDFD95}{He}

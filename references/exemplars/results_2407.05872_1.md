@@ -1,0 +1,5 @@
+<!-- section: results; orientation: unknown; source: arXiv 2407.05872, published text, style reference only -->
+
+We investigate the role of alignment, per-layer learning rate exponents and constant factors, and the epsilon hyperparameter by running \emph{tens of thousands} of experiments in a Transformer language model across all combinations of the three optimizers, four parameterizations, learning rate sweeps with a granularity of $2^{0.25}$ or $2^{0.5}$, and fourteen model widths ranging up to $26.8$ billion parameters.
+
+We use the NanoDO decoder-only Transformer architecture~[cite] employing learned positional embeddings, pre-layer norm~[cite], and GeLU nonlinearity~[cite]. All models are trained on the C4 dataset~[cite]. To scale the width, we fix the attention head dimension $h = 128$ and co-scale the model dimension $D$ and the number of attention heads $H$ so that $D = H \times h$. All experiments use a fixed batch size of 256, context length of 512 and depth of 8 Transformer blocks. Our fourteen model widths range from $D=128$ to $D=16,384$ corresponding to a range of $9.9$ million to $26.8$ billion parameters.

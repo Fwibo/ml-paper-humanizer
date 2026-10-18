@@ -1,0 +1,5 @@
+<!-- section: intro; orientation: design; source: arXiv 2506.12229, published text, style reference only -->
+
+Modern language models (LMs) are trained mainly on text datasets downsampled from massive, petabyte-level text corpora like Common Crawl [cite]. As these LMs are deployed more broadly, it becomes more pressing to understand the training data and its effects on model behavior [cite]. As a starting point, we want to make these text corpora \emph{searchable}; in particular, searching for \emph{exact} matches of \emph{long} sequences has gained increasing interest [cite]. The size of these corpora makes this problem extremely challenging, creating demand for more efficient indexing techniques.
+
+Prior systems for exact-match search build indexes several times as large as the text corpora. [cite] index 1.3TB of text with a suffix automaton (storage multiplier 29$\times$); [cite] index 12TB of text with a suffix array (storage multiplier 6$\times$); [cite] index 35TB of text with the proprietary ElasticSearch engine (storage multiplier about $2\times$). The size of these indexes renders it impractical to apply them to petabyte-level corpora.

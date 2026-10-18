@@ -1,0 +1,7 @@
+<!-- section: results; orientation: proof; source: arXiv 2605.00768, published text, style reference only -->
+
+One might hope that positional encodings would allow global attention to approximate locality. In our experiments, however, neither {\texttt{SiPE}}\ nor {\texttt{RoPE}}\ compensates for the absence of local attention: Positional encodings do not erase the qualitative separation between global-only and hybrid models; on the contrary, they often reduce performance on the tested languages.
+
+With {\texttt{RoPE}}, the gap between $1$-local and larger-window local attention becomes smaller. In particular, local-only models with $k=2$ or $k=4$ can now recognize ${{{{StringColor \Sigma}}^*}}{StringColor \texttt{a}}$ and ${{{{StringColor \Sigma}}^*}}{StringColor \texttt{a}}{StringColor \texttt{b}}$. In hybrid models, {\texttt{RoPE}}\ also enables $k=4$ to recognize ${{{{StringColor \Sigma}}^*}}{StringColor \texttt{a}}{StringColor \texttt{b}}{{{{StringColor \Sigma}}^*}}$. However, these gains come with tradeoffs, as {\texttt{RoPE}}\ degrades performance in several other settings. By comparison, {\texttt{SiPE}}\ does not narrow the gap and instead tends to reduce performance across the board.
+
+Overall, on one hand, the results under ${\texttt{NoPE}}$ align exactly with our theory. On the other hand, the role of positional encodings is less clear-cut and merits further investigation.

@@ -1,0 +1,7 @@
+<!-- section: results; orientation: design; source: arXiv 2310.16834, published text, style reference only -->
+
+When training, we employ sentence packing to create uniform length blocks to feed to our model, which is done typically for language modeling tasks. The only exception to this rule is our experiment on text8, which randomly samples contiguous subsequences to match prior work [cite] (although we found that this did not substantially change results). We also matched architecture hyperparameters with prior work (including number of layers, hidden dimension, attention heads, etc...), although our models have slightly more parameters ($\approx 5-10\%$) than a typical transformer due to time conditioning. We also use the same tokenizers as prior work (which otherwise could be a source of artifacts) as well as the same data splits.
+
+We compare on the text8 dataset, a small, character level language modeling task. We follow [cite] for network hyperparameters and dataset splits and compare with methods that employ a similar model size.
+
+We report bits per character (BPC) in Table REF. SEDD outperforms other non-autoregressive models and is only beaten by an autoregressive transformer and the discrete flow (which incorporates an autoregressive base distribution) [cite]. Furthermore, SEDD substantially improves upon D3PM [cite], despite both being built from the same discrete diffusion principles.

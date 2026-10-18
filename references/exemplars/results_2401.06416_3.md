@@ -1,0 +1,7 @@
+<!-- section: results; orientation: discovery; source: arXiv 2401.06416, published text, style reference only -->
+
+We sample 10K sentences from the BabyLM test set and perturb this sample for each impossible language. For a given impossible language model, we report the geometric mean of the individual sentence perplexities in the corresponding test sample.
+
+Our results are in REF. There are clear distinctions between model perplexities after about 500 training steps. First considering the \mathrm{*Shuffle} models, the \mathrm{NondeterministicShuffle} model has the highest perplexities, followed by the three \mathrm{DeterministicShuffle} models, indicating that GPT-2 is better at learning shuffling patterns when they are deterministic, invertible functions. The prevalence of certain sentence lengths in the corpus could also limit the variety of sentence shuffles in the \mathrm{DeterministicShuffle} languages, potentially resulting in similarly functioning words frequently occupying the same token positions, thus increasing their predictability.
+
+Following the sentence-level shuffles, the next models in the order of decreasing perplexity are the three \mathrm{LocalShuffle} models, with smaller window sizes having lower perplexities. \mathrm{LocalShuffle}$(w=3)$ and \mathrm{EvenOddShuffle} have perplexities closest to the \mathrm{NoShuffle} model (which represents unaltered English), but \mathrm{NoShuffle} consistently has the lowest perplexities throughout the training process.

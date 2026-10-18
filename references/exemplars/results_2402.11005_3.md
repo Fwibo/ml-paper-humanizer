@@ -1,0 +1,7 @@
+<!-- section: results; orientation: discovery; source: arXiv 2402.11005, published text, style reference only -->
+
+We evaluate the value system \textit{$C_v$} in three levels of valence: (a) positive, (b) negative, and (c) neutral (control experiment). For the positive \textit{$C_v$}, the grades are assigned such that the higher hours of ``glubbing'' get a better grade (best being \textit{A+}), and for the negative value system, the grades are assigned such that the lower hours of ``glubbing'' get a better grade (on the same scale). A sample positive prompt is given below:
+
+The `\ldots' corresponds to the rest of the values and grades (the prompt has a hundred samples and corresponding grades). The full prompt set is given in Appendix REF. The vanilla <sample prompt> is: `Based on this, pick a sample number of glubbing hours'. Different sample prompts gives similar results as shown in~REF.
+
+A shift between input distribution and sample distribution can be explained as the error of LLM in approximating the statistics of the input distribution. To exclude this alternative explanation, we compute the significance in the shift of generated samples (\textit{$S(C)$}) from the average reported by the LLM (\textit{$A(C)$}). In the neutral control experiment, we assign the mean $C_{\mu}$ with the highest grade and lower grades for increasing distance from the mean. We run the experiment for positive, negative, and control settings a hundred times each.

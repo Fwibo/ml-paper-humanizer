@@ -1,0 +1,7 @@
+<!-- section: results; orientation: evaluation; source: arXiv 2406.04327, published text, style reference only -->
+
+While our method applies to any model trained with a single pass on its training data, we focus on quantifying memorisation in pretrained LMs, which are characterised by the use of architectures with a large number of parameters and large datasets. Due to the costs of training such models from scratch, we take advantage of open-source pretrained models whose intermediate checkpoints and preprocessed data are publicly available. In this section, we detail the models and data used and describe how we collect the observed outcomes $Y_{{purplec}}({ForestGreen \boldsymbol{x}})$.
+
+transformers of sizes ranging from \qty[mode=math]{70}{\million} to \qty[mode=math]{12}{\billion} parameters. These models were trained on the Pile dataset [cite], a \qty[mode=math]{300}{\billion}-token curated collection of English documents. All models are trained using the same data. Specifically, the dataset is shuffled and \enquote{packed} into sequences of \num[ mode = math, round-mode=places, round-precision=0, group-separator={,}, group-minimum-digits=4, ]{2049}
+
+tokens; each of these sequences corresponds to an instance ${ForestGreen \boldsymbol{x}}$. Training was performed using a cosine learning rate schedule with warm-up, and using a batch size of \num[ mode = math, round-mode=places, round-precision=0, group-separator={,}, group-minimum-digits=4, ]{1024}

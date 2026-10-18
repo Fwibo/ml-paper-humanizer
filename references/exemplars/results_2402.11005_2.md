@@ -1,0 +1,5 @@
+<!-- section: results; orientation: discovery; source: arXiv 2402.11005, published text, style reference only -->
+
+We systematically vary $C_{v}$ and $C_{\mu}$ to study the effect on the distribution of samples \textit{$S(C)$}. The rest of the prompt is kept similar to isolate the influence of descriptive and prescriptive components in the LLM’s sampling process so that there is no interference from prior knowledge and prompt artifacts. Importantly, the results are designed to reflect the heuristics of sampling of the LLM, independent of the prompt design or specific experimental conditions. The prompt contains (a) statistical norm defined by a hundred samples from a distribution corresponding to hours spent ``glubbing'' and (b) $C_{v_i}$ the ideality associated with each sample $i$. $C_{v_i}$ is given by a grade on a scale of \textit{A+} to \textit{D-}.
+
+In this first run, ``glubbing'' hours of people is sampled from a Gaussian of mean 45 and a standard deviation of 15. We repeat the experiment with a bi-modal Gaussian distribution with modes at 35 and 65 and a standard deviation of 5. The implementation and analysis of the two experiments are the same.

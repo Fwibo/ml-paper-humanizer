@@ -1,0 +1,5 @@
+<!-- section: results; orientation: discovery; source: arXiv 2401.06416, published text, style reference only -->
+
+We train standard GPT-2 small models [cite] on each impossible language. To produce confidence intervals for our experiments, we train 5 sets of models for each language using different random seeds, which affect the model parameter initialization and dataset shuffling during training. Training and model hyperparameter choices are detailed in REF. The primary set of GPT-2 models we train have absolute positional encodings. We also train a set of GPT-2 small models with an architecture in which the positional encodings are removed, so that the models' only notion of word order is derived from GPT-2's causal language modeling learning objective [cite]. Results for these additional experiments supported our main findings on the unaltered GPT-2 architecture. These results are provided in REF.
+
+We train GPT-2 models on all of the languages described in REF, and evaluate each model's perplexities on a test set over the course of training. Test perplexities provide a general metric for the extent to which a model has learned a language.

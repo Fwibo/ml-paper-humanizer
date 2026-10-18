@@ -1,0 +1,7 @@
+<!-- section: intro; orientation: evaluation; source: arXiv 2502.01926, published text, style reference only -->
+
+Google Gemini's racially diverse Nazis spotlighted a structural problem in fair generative AI~[cite]. Other symptoms of this problem: Claude (incorrectly) responds that U.S. military fitness requirements are the same for men and women. Gemini recommends Benedict Cumberbatch to be cast as the last emperor of China. At their core, these issues stem from a failure to distinguish between fair differentiation and harmful prejudice.
+
+The word ``discriminate'' means to differentiate between groups. It can also mean to differentiate unjustly or with prejudice~[cite]. Unfortunately, the current trajectory of fair machine learning often conflates the two, treating any form of differentiation between groups as unfair. This has led to a proliferation of bias benchmarks for language models which can be perfectly resolved by racially color-blind models. However, in many instances, we actually \textit{desire} group discrimination.
+
+Racial color-blindness aims to treat all individuals equally, regardless of race~[cite]. [cite] has characterized it as ``an ultramodern or contemporary form of racism and a legitimizing ideology used to justify the racial status quo.'' [cite] has extended this analysis to, for example, gender-blind sexism. Under a color- or gender- blind framework, historical discrimination and current systems of oppression are ignored.

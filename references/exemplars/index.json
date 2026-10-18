@@ -1,0 +1,1010 @@
+[
+ {
+  "file": "intro_2510.04212_1.md",
+  "section": "intro",
+  "orientation": "discovery",
+  "id": "2510.04212",
+  "words": 343
+ },
+ {
+  "file": "results_2510.04212_1.md",
+  "section": "results",
+  "orientation": "discovery",
+  "id": "2510.04212",
+  "words": 181
+ },
+ {
+  "file": "results_2510.04212_2.md",
+  "section": "results",
+  "orientation": "discovery",
+  "id": "2510.04212",
+  "words": 217
+ },
+ {
+  "file": "intro_2510.19315_1.md",
+  "section": "intro",
+  "orientation": "proof",
+  "id": "2510.19315",
+  "words": 190
+ },
+ {
+  "file": "results_2510.19315_1.md",
+  "section": "results",
+  "orientation": "proof",
+  "id": "2510.19315",
+  "words": 351
+ },
+ {
+  "file": "results_2510.19315_2.md",
+  "section": "results",
+  "orientation": "proof",
+  "id": "2510.19315",
+  "words": 173
+ },
+ {
+  "file": "intro_2606.31085_1.md",
+  "section": "intro",
+  "orientation": "design",
+  "id": "2606.31085",
+  "words": 202
+ },
+ {
+  "file": "intro_2606.31085_2.md",
+  "section": "intro",
+  "orientation": "design",
+  "id": "2606.31085",
+  "words": 368
+ },
+ {
+  "file": "results_2606.31085_1.md",
+  "section": "results",
+  "orientation": "design",
+  "id": "2606.31085",
+  "words": 198
+ },
+ {
+  "file": "results_2606.31085_2.md",
+  "section": "results",
+  "orientation": "design",
+  "id": "2606.31085",
+  "words": 178
+ },
+ {
+  "file": "intro_2601.15165_1.md",
+  "section": "intro",
+  "orientation": "effect",
+  "id": "2601.15165",
+  "words": 152
+ },
+ {
+  "file": "intro_2601.15165_2.md",
+  "section": "intro",
+  "orientation": "effect",
+  "id": "2601.15165",
+  "words": 296
+ },
+ {
+  "file": "intro_2601.15165_3.md",
+  "section": "intro",
+  "orientation": "effect",
+  "id": "2601.15165",
+  "words": 200
+ },
+ {
+  "file": "results_2601.15165_1.md",
+  "section": "results",
+  "orientation": "effect",
+  "id": "2601.15165",
+  "words": 162
+ },
+ {
+  "file": "results_2601.15165_2.md",
+  "section": "results",
+  "orientation": "effect",
+  "id": "2601.15165",
+  "words": 154
+ },
+ {
+  "file": "intro_2505.06120_1.md",
+  "section": "intro",
+  "orientation": "evaluation",
+  "id": "2505.06120",
+  "words": 166
+ },
+ {
+  "file": "intro_2505.06120_2.md",
+  "section": "intro",
+  "orientation": "evaluation",
+  "id": "2505.06120",
+  "words": 157
+ },
+ {
+  "file": "intro_2505.06120_3.md",
+  "section": "intro",
+  "orientation": "evaluation",
+  "id": "2505.06120",
+  "words": 181
+ },
+ {
+  "file": "results_2505.06120_1.md",
+  "section": "results",
+  "orientation": "evaluation",
+  "id": "2505.06120",
+  "words": 194
+ },
+ {
+  "file": "results_2505.06120_2.md",
+  "section": "results",
+  "orientation": "evaluation",
+  "id": "2505.06120",
+  "words": 177
+ },
+ {
+  "file": "results_2505.06120_3.md",
+  "section": "results",
+  "orientation": "evaluation",
+  "id": "2505.06120",
+  "words": 255
+ },
+ {
+  "file": "results_2505.06120_4.md",
+  "section": "results",
+  "orientation": "evaluation",
+  "id": "2505.06120",
+  "words": 223
+ },
+ {
+  "file": "intro_2503.14858_1.md",
+  "section": "intro",
+  "orientation": "discovery",
+  "id": "2503.14858",
+  "words": 242
+ },
+ {
+  "file": "results_2503.14858_1.md",
+  "section": "results",
+  "orientation": "discovery",
+  "id": "2503.14858",
+  "words": 176
+ },
+ {
+  "file": "results_2503.14858_2.md",
+  "section": "results",
+  "orientation": "discovery",
+  "id": "2503.14858",
+  "words": 166
+ },
+ {
+  "file": "results_2503.14858_3.md",
+  "section": "results",
+  "orientation": "discovery",
+  "id": "2503.14858",
+  "words": 168
+ },
+ {
+  "file": "intro_2504.13837_1.md",
+  "section": "intro",
+  "orientation": "evaluation",
+  "id": "2504.13837",
+  "words": 209
+ },
+ {
+  "file": "intro_2504.13837_2.md",
+  "section": "intro",
+  "orientation": "evaluation",
+  "id": "2504.13837",
+  "words": 256
+ },
+ {
+  "file": "intro_2504.13837_3.md",
+  "section": "intro",
+  "orientation": "evaluation",
+  "id": "2504.13837",
+  "words": 157
+ },
+ {
+  "file": "results_2504.13837_1.md",
+  "section": "results",
+  "orientation": "evaluation",
+  "id": "2504.13837",
+  "words": 182
+ },
+ {
+  "file": "results_2504.13837_2.md",
+  "section": "results",
+  "orientation": "evaluation",
+  "id": "2504.13837",
+  "words": 187
+ },
+ {
+  "file": "results_2504.13837_3.md",
+  "section": "results",
+  "orientation": "evaluation",
+  "id": "2504.13837",
+  "words": 201
+ },
+ {
+  "file": "intro_2502.13228_1.md",
+  "section": "intro",
+  "orientation": "design",
+  "id": "2502.13228",
+  "words": 232
+ },
+ {
+  "file": "intro_2502.13228_2.md",
+  "section": "intro",
+  "orientation": "design",
+  "id": "2502.13228",
+  "words": 218
+ },
+ {
+  "file": "results_2502.13228_1.md",
+  "section": "results",
+  "orientation": "design",
+  "id": "2502.13228",
+  "words": 247
+ },
+ {
+  "file": "results_2502.13228_2.md",
+  "section": "results",
+  "orientation": "design",
+  "id": "2502.13228",
+  "words": 151
+ },
+ {
+  "file": "intro_2410.02355_1.md",
+  "section": "intro",
+  "orientation": "effect",
+  "id": "2410.02355",
+  "words": 194
+ },
+ {
+  "file": "intro_2410.02355_2.md",
+  "section": "intro",
+  "orientation": "effect",
+  "id": "2410.02355",
+  "words": 152
+ },
+ {
+  "file": "intro_2410.02355_3.md",
+  "section": "intro",
+  "orientation": "effect",
+  "id": "2410.02355",
+  "words": 259
+ },
+ {
+  "file": "intro_2404.02905_1.md",
+  "section": "intro",
+  "orientation": "effect",
+  "id": "2404.02905",
+  "words": 150
+ },
+ {
+  "file": "intro_2404.02905_2.md",
+  "section": "intro",
+  "orientation": "effect",
+  "id": "2404.02905",
+  "words": 234
+ },
+ {
+  "file": "intro_2412.00088_1.md",
+  "section": "intro",
+  "orientation": "design",
+  "id": "2412.00088",
+  "words": 264
+ },
+ {
+  "file": "results_2412.00088_1.md",
+  "section": "results",
+  "orientation": "design",
+  "id": "2412.00088",
+  "words": 191
+ },
+ {
+  "file": "results_2412.00088_2.md",
+  "section": "results",
+  "orientation": "design",
+  "id": "2412.00088",
+  "words": 151
+ },
+ {
+  "file": "results_2412.00088_3.md",
+  "section": "results",
+  "orientation": "design",
+  "id": "2412.00088",
+  "words": 182
+ },
+ {
+  "file": "results_2412.00088_4.md",
+  "section": "results",
+  "orientation": "design",
+  "id": "2412.00088",
+  "words": 184
+ },
+ {
+  "file": "intro_2510.22954_1.md",
+  "section": "intro",
+  "orientation": "discovery",
+  "id": "2510.22954",
+  "words": 201
+ },
+ {
+  "file": "intro_2510.22954_2.md",
+  "section": "intro",
+  "orientation": "discovery",
+  "id": "2510.22954",
+  "words": 198
+ },
+ {
+  "file": "intro_2505.17638_1.md",
+  "section": "intro",
+  "orientation": "discovery",
+  "id": "2505.17638",
+  "words": 338
+ },
+ {
+  "file": "intro_2505.17638_2.md",
+  "section": "intro",
+  "orientation": "discovery",
+  "id": "2505.17638",
+  "words": 339
+ },
+ {
+  "file": "intro_2505.17638_3.md",
+  "section": "intro",
+  "orientation": "discovery",
+  "id": "2505.17638",
+  "words": 379
+ },
+ {
+  "file": "intro_2310.16834_1.md",
+  "section": "intro",
+  "orientation": "design",
+  "id": "2310.16834",
+  "words": 200
+ },
+ {
+  "file": "results_2310.16834_1.md",
+  "section": "results",
+  "orientation": "design",
+  "id": "2310.16834",
+  "words": 156
+ },
+ {
+  "file": "results_2310.16834_2.md",
+  "section": "results",
+  "orientation": "design",
+  "id": "2310.16834",
+  "words": 195
+ },
+ {
+  "file": "results_2310.16834_3.md",
+  "section": "results",
+  "orientation": "design",
+  "id": "2310.16834",
+  "words": 205
+ },
+ {
+  "file": "results_2310.16834_4.md",
+  "section": "results",
+  "orientation": "design",
+  "id": "2310.16834",
+  "words": 174
+ },
+ {
+  "file": "results_2310.16834_5.md",
+  "section": "results",
+  "orientation": "design",
+  "id": "2310.16834",
+  "words": 164
+ },
+ {
+  "file": "intro_2406.11011_1.md",
+  "section": "intro",
+  "orientation": "design",
+  "id": "2406.11011",
+  "words": 170
+ },
+ {
+  "file": "intro_2406.11011_2.md",
+  "section": "intro",
+  "orientation": "design",
+  "id": "2406.11011",
+  "words": 153
+ },
+ {
+  "file": "intro_2406.11011_3.md",
+  "section": "intro",
+  "orientation": "design",
+  "id": "2406.11011",
+  "words": 216
+ },
+ {
+  "file": "intro_2406.11011_4.md",
+  "section": "intro",
+  "orientation": "design",
+  "id": "2406.11011",
+  "words": 190
+ },
+ {
+  "file": "intro_2406.11011_5.md",
+  "section": "intro",
+  "orientation": "design",
+  "id": "2406.11011",
+  "words": 214
+ },
+ {
+  "file": "results_2406.11011_1.md",
+  "section": "results",
+  "orientation": "design",
+  "id": "2406.11011",
+  "words": 167
+ },
+ {
+  "file": "results_2406.11011_2.md",
+  "section": "results",
+  "orientation": "design",
+  "id": "2406.11011",
+  "words": 210
+ },
+ {
+  "file": "results_2406.11011_3.md",
+  "section": "results",
+  "orientation": "design",
+  "id": "2406.11011",
+  "words": 204
+ },
+ {
+  "file": "intro_2405.19261_1.md",
+  "section": "intro",
+  "orientation": "design",
+  "id": "2405.19261",
+  "words": 167
+ },
+ {
+  "file": "results_2405.19261_1.md",
+  "section": "results",
+  "orientation": "design",
+  "id": "2405.19261",
+  "words": 216
+ },
+ {
+  "file": "results_2405.19261_2.md",
+  "section": "results",
+  "orientation": "design",
+  "id": "2405.19261",
+  "words": 187
+ },
+ {
+  "file": "results_2405.19261_3.md",
+  "section": "results",
+  "orientation": "design",
+  "id": "2405.19261",
+  "words": 152
+ },
+ {
+  "file": "results_2405.19261_4.md",
+  "section": "results",
+  "orientation": "design",
+  "id": "2405.19261",
+  "words": 171
+ },
+ {
+  "file": "intro_2502.06768_1.md",
+  "section": "intro",
+  "orientation": "discovery",
+  "id": "2502.06768",
+  "words": 162
+ },
+ {
+  "file": "intro_2502.06768_2.md",
+  "section": "intro",
+  "orientation": "discovery",
+  "id": "2502.06768",
+  "words": 224
+ },
+ {
+  "file": "intro_2502.06768_3.md",
+  "section": "intro",
+  "orientation": "discovery",
+  "id": "2502.06768",
+  "words": 198
+ },
+ {
+  "file": "intro_2505.24832_1.md",
+  "section": "intro",
+  "orientation": "discovery",
+  "id": "2505.24832",
+  "words": 246
+ },
+ {
+  "file": "intro_2505.24832_2.md",
+  "section": "intro",
+  "orientation": "discovery",
+  "id": "2505.24832",
+  "words": 175
+ },
+ {
+  "file": "intro_2401.06416_1.md",
+  "section": "intro",
+  "orientation": "discovery",
+  "id": "2401.06416",
+  "words": 231
+ },
+ {
+  "file": "intro_2401.06416_2.md",
+  "section": "intro",
+  "orientation": "discovery",
+  "id": "2401.06416",
+  "words": 216
+ },
+ {
+  "file": "results_2401.06416_1.md",
+  "section": "results",
+  "orientation": "discovery",
+  "id": "2401.06416",
+  "words": 178
+ },
+ {
+  "file": "results_2401.06416_2.md",
+  "section": "results",
+  "orientation": "discovery",
+  "id": "2401.06416",
+  "words": 164
+ },
+ {
+  "file": "results_2401.06416_3.md",
+  "section": "results",
+  "orientation": "discovery",
+  "id": "2401.06416",
+  "words": 175
+ },
+ {
+  "file": "results_2401.06416_4.md",
+  "section": "results",
+  "orientation": "discovery",
+  "id": "2401.06416",
+  "words": 201
+ },
+ {
+  "file": "results_2401.06416_5.md",
+  "section": "results",
+  "orientation": "discovery",
+  "id": "2401.06416",
+  "words": 178
+ },
+ {
+  "file": "results_2401.06416_6.md",
+  "section": "results",
+  "orientation": "discovery",
+  "id": "2401.06416",
+  "words": 193
+ },
+ {
+  "file": "results_2401.06416_7.md",
+  "section": "results",
+  "orientation": "discovery",
+  "id": "2401.06416",
+  "words": 223
+ },
+ {
+  "file": "results_2401.06416_8.md",
+  "section": "results",
+  "orientation": "discovery",
+  "id": "2401.06416",
+  "words": 235
+ },
+ {
+  "file": "intro_2402.09963_1.md",
+  "section": "intro",
+  "orientation": "proof",
+  "id": "2402.09963",
+  "words": 211
+ },
+ {
+  "file": "results_2402.09963_1.md",
+  "section": "results",
+  "orientation": "proof",
+  "id": "2402.09963",
+  "words": 272
+ },
+ {
+  "file": "results_2402.09963_2.md",
+  "section": "results",
+  "orientation": "proof",
+  "id": "2402.09963",
+  "words": 204
+ },
+ {
+  "file": "results_2402.09963_3.md",
+  "section": "results",
+  "orientation": "proof",
+  "id": "2402.09963",
+  "words": 293
+ },
+ {
+  "file": "results_2402.09963_4.md",
+  "section": "results",
+  "orientation": "proof",
+  "id": "2402.09963",
+  "words": 187
+ },
+ {
+  "file": "intro_2406.04327_1.md",
+  "section": "intro",
+  "orientation": "evaluation",
+  "id": "2406.04327",
+  "words": 247
+ },
+ {
+  "file": "intro_2406.04327_2.md",
+  "section": "intro",
+  "orientation": "evaluation",
+  "id": "2406.04327",
+  "words": 186
+ },
+ {
+  "file": "results_2406.04327_1.md",
+  "section": "results",
+  "orientation": "evaluation",
+  "id": "2406.04327",
+  "words": 176
+ },
+ {
+  "file": "results_2406.04327_2.md",
+  "section": "results",
+  "orientation": "evaluation",
+  "id": "2406.04327",
+  "words": 233
+ },
+ {
+  "file": "intro_2402.11005_1.md",
+  "section": "intro",
+  "orientation": "discovery",
+  "id": "2402.11005",
+  "words": 237
+ },
+ {
+  "file": "intro_2402.11005_2.md",
+  "section": "intro",
+  "orientation": "discovery",
+  "id": "2402.11005",
+  "words": 197
+ },
+ {
+  "file": "results_2402.11005_1.md",
+  "section": "results",
+  "orientation": "discovery",
+  "id": "2402.11005",
+  "words": 161
+ },
+ {
+  "file": "results_2402.11005_2.md",
+  "section": "results",
+  "orientation": "discovery",
+  "id": "2402.11005",
+  "words": 169
+ },
+ {
+  "file": "results_2402.11005_3.md",
+  "section": "results",
+  "orientation": "discovery",
+  "id": "2402.11005",
+  "words": 212
+ },
+ {
+  "file": "results_2402.11005_4.md",
+  "section": "results",
+  "orientation": "discovery",
+  "id": "2402.11005",
+  "words": 151
+ },
+ {
+  "file": "results_2402.11005_5.md",
+  "section": "results",
+  "orientation": "discovery",
+  "id": "2402.11005",
+  "words": 172
+ },
+ {
+  "file": "results_2402.11005_6.md",
+  "section": "results",
+  "orientation": "discovery",
+  "id": "2402.11005",
+  "words": 192
+ },
+ {
+  "file": "results_2402.11005_7.md",
+  "section": "results",
+  "orientation": "discovery",
+  "id": "2402.11005",
+  "words": 181
+ },
+ {
+  "file": "results_2402.11005_8.md",
+  "section": "results",
+  "orientation": "discovery",
+  "id": "2402.11005",
+  "words": 161
+ },
+ {
+  "file": "results_2402.11005_9.md",
+  "section": "results",
+  "orientation": "discovery",
+  "id": "2402.11005",
+  "words": 204
+ },
+ {
+  "file": "intro_2502.01926_1.md",
+  "section": "intro",
+  "orientation": "evaluation",
+  "id": "2502.01926",
+  "words": 192
+ },
+ {
+  "file": "intro_2502.01926_2.md",
+  "section": "intro",
+  "orientation": "evaluation",
+  "id": "2502.01926",
+  "words": 226
+ },
+ {
+  "file": "intro_2502.01926_3.md",
+  "section": "intro",
+  "orientation": "evaluation",
+  "id": "2502.01926",
+  "words": 172
+ },
+ {
+  "file": "results_2502.01926_1.md",
+  "section": "results",
+  "orientation": "evaluation",
+  "id": "2502.01926",
+  "words": 182
+ },
+ {
+  "file": "results_2502.01926_2.md",
+  "section": "results",
+  "orientation": "evaluation",
+  "id": "2502.01926",
+  "words": 238
+ },
+ {
+  "file": "intro_2412.09871_1.md",
+  "section": "intro",
+  "orientation": "effect",
+  "id": "2412.09871",
+  "words": 155
+ },
+ {
+  "file": "intro_2412.09871_2.md",
+  "section": "intro",
+  "orientation": "effect",
+  "id": "2412.09871",
+  "words": 210
+ },
+ {
+  "file": "intro_2402.12865_1.md",
+  "section": "intro",
+  "orientation": "design",
+  "id": "2402.12865",
+  "words": 162
+ },
+ {
+  "file": "intro_2402.12865_2.md",
+  "section": "intro",
+  "orientation": "design",
+  "id": "2402.12865",
+  "words": 206
+ },
+ {
+  "file": "results_2402.12865_1.md",
+  "section": "results",
+  "orientation": "design",
+  "id": "2402.12865",
+  "words": 154
+ },
+ {
+  "file": "results_2402.12865_2.md",
+  "section": "results",
+  "orientation": "design",
+  "id": "2402.12865",
+  "words": 171
+ },
+ {
+  "file": "results_2402.12865_3.md",
+  "section": "results",
+  "orientation": "design",
+  "id": "2402.12865",
+  "words": 175
+ },
+ {
+  "file": "results_2402.12865_4.md",
+  "section": "results",
+  "orientation": "design",
+  "id": "2402.12865",
+  "words": 183
+ },
+ {
+  "file": "intro_2506.12229_1.md",
+  "section": "intro",
+  "orientation": "design",
+  "id": "2506.12229",
+  "words": 153
+ },
+ {
+  "file": "intro_2506.12229_2.md",
+  "section": "intro",
+  "orientation": "design",
+  "id": "2506.12229",
+  "words": 207
+ },
+ {
+  "file": "intro_2506.12229_3.md",
+  "section": "intro",
+  "orientation": "design",
+  "id": "2506.12229",
+  "words": 179
+ },
+ {
+  "file": "intro_2504.05410_1.md",
+  "section": "intro",
+  "orientation": "design",
+  "id": "2504.05410",
+  "words": 212
+ },
+ {
+  "file": "intro_2504.05410_2.md",
+  "section": "intro",
+  "orientation": "design",
+  "id": "2504.05410",
+  "words": 224
+ },
+ {
+  "file": "intro_2504.05410_3.md",
+  "section": "intro",
+  "orientation": "design",
+  "id": "2504.05410",
+  "words": 282
+ },
+ {
+  "file": "results_2504.05410_1.md",
+  "section": "results",
+  "orientation": "design",
+  "id": "2504.05410",
+  "words": 186
+ },
+ {
+  "file": "intro_2605.00768_1.md",
+  "section": "intro",
+  "orientation": "proof",
+  "id": "2605.00768",
+  "words": 294
+ },
+ {
+  "file": "results_2605.00768_1.md",
+  "section": "results",
+  "orientation": "proof",
+  "id": "2605.00768",
+  "words": 163
+ },
+ {
+  "file": "results_2605.00768_2.md",
+  "section": "results",
+  "orientation": "proof",
+  "id": "2605.00768",
+  "words": 175
+ },
+ {
+  "file": "results_2605.00768_3.md",
+  "section": "results",
+  "orientation": "proof",
+  "id": "2605.00768",
+  "words": 157
+ },
+ {
+  "file": "intro_2407.05872_1.md",
+  "section": "intro",
+  "orientation": "unknown",
+  "id": "2407.05872",
+  "words": 341
+ },
+ {
+  "file": "intro_2407.05872_2.md",
+  "section": "intro",
+  "orientation": "unknown",
+  "id": "2407.05872",
+  "words": 302
+ },
+ {
+  "file": "intro_2407.05872_3.md",
+  "section": "intro",
+  "orientation": "unknown",
+  "id": "2407.05872",
+  "words": 155
+ },
+ {
+  "file": "intro_2407.05872_4.md",
+  "section": "intro",
+  "orientation": "unknown",
+  "id": "2407.05872",
+  "words": 200
+ },
+ {
+  "file": "results_2407.05872_1.md",
+  "section": "results",
+  "orientation": "unknown",
+  "id": "2407.05872",
+  "words": 154
+ },
+ {
+  "file": "results_2407.05872_2.md",
+  "section": "results",
+  "orientation": "unknown",
+  "id": "2407.05872",
+  "words": 227
+ },
+ {
+  "file": "results_2407.05872_3.md",
+  "section": "results",
+  "orientation": "unknown",
+  "id": "2407.05872",
+  "words": 295
+ },
+ {
+  "file": "results_2407.05872_4.md",
+  "section": "results",
+  "orientation": "unknown",
+  "id": "2407.05872",
+  "words": 230
+ },
+ {
+  "file": "results_2407.05872_5.md",
+  "section": "results",
+  "orientation": "unknown",
+  "id": "2407.05872",
+  "words": 215
+ },
+ {
+  "file": "results_2407.05872_6.md",
+  "section": "results",
+  "orientation": "unknown",
+  "id": "2407.05872",
+  "words": 223
+ },
+ {
+  "file": "results_2407.05872_7.md",
+  "section": "results",
+  "orientation": "unknown",
+  "id": "2407.05872",
+  "words": 211
+ },
+ {
+  "file": "results_2407.05872_8.md",
+  "section": "results",
+  "orientation": "unknown",
+  "id": "2407.05872",
+  "words": 264
+ },
+ {
+  "file": "results_2407.05872_9.md",
+  "section": "results",
+  "orientation": "unknown",
+  "id": "2407.05872",
+  "words": 286
+ },
+ {
+  "file": "results_2407.05872_10.md",
+  "section": "results",
+  "orientation": "unknown",
+  "id": "2407.05872",
+  "words": 226
+ },
+ {
+  "file": "results_2305.18290_1.md",
+  "section": "results",
+  "orientation": "unknown",
+  "id": "2305.18290",
+  "words": 375
+ }
+]

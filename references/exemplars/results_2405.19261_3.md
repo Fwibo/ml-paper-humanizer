@@ -1,0 +1,5 @@
+<!-- section: results; orientation: design; source: arXiv 2405.19261, published text, style reference only -->
+
+we compare to \texttt{SpecDecode} [{\tt Lossy}$^\star$] [cite] and the original {\tt BiLD} algorithm [cite]. Methods that use speculative execution are considerably faster than sequential token-level cascades ({\tt TokenCascade [Chow]}), although sequential cascades do have an advantage in the low-latency regimes. This is because unlike speculative approaches, which always call the large model after every $\gamma$ steps, a sequential cascade only invokes the large model when the small model defers.
+
+In Table REF, we report (i) the reduction in latency from T5 cascades when matching the quality of the large model, and (ii) the best quality that each method can deliver without exceeding the latency of the large model. {black\texttt{SpecCascade} [{\tt Token}] often yields the highest speed-up and the best quality metrics, with {\tt OPT} coming in second.} The cascading approaches are often seen to fare poorly on both quality and latency metrics, with the exception of WMT, where \texttt{SeqCascade} yields non-trivial speed-ups.

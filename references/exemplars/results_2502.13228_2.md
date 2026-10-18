@@ -1,0 +1,5 @@
+<!-- section: results; orientation: design; source: arXiv 2502.13228, published text, style reference only -->
+
+We first sample directly from a known loss distribution so that we can directly compute the frequency of excessively large risk. Here the loss distribution is chosen to be a scaled binomial distribution, normalized to have a maximum loss of $B = 1$ and probability of failure set to $1 - \lambda$. This was simulated by computing \begin{equation} \ell(z_i, \lambda) = \frac{1}{K} \sum_{k=1}^{K} \mathbbm{1}\{V_{ik} > \lambda \}, \end{equation} where $V_{ik} \sim \mathrm{Uniform}(0, 1)$ for $i = 1, \ldots, n$ and $k = 1, \ldots, K$. This loss is therefore monotonically non-increasing in $\lambda$ and achieves zero loss at $\lambda_max = 1$. We set $n$ = 10, $K = 4$, and $\alpha = 0.4$.
+
+Since the expectation of the loss REF is $1 - \lambda$, any trial for which $\lambda < 0.6$ constitutes a risk exceeding the $\alpha$ threshold. The relative frequency of trials exceeding this risk threshold are tabulated in Table~REF.

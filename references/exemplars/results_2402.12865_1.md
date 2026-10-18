@@ -1,0 +1,5 @@
+<!-- section: results; orientation: design; source: arXiv 2402.12865, published text, style reference only -->
+
+We employ GPT2 [cite] and Llama2-7B [cite] in our experiments. We randomly sampled 100 prompts and their corresponding editing targets from the CounterFact dataset [cite]. For each model and prompt, we conducted a single backpropagation using SGD and without scaling optimizers, such as Adam~[cite], and no batching.
+
+To examine Lemma~REF, we measure the rank of each layer gradient matrix. As depicted in REF, for every prompt with the length of $n$ tokens, the model's gradient matrices are almost always exactly rank $n$. The only exceptions are the last MLP layers, which have a rank of 1, as predicted in REF. Although unnoticeable from the figure, once in a few dozen examples, there is a drop of one or two in the rank of the gradients, indicating linear dependency in $x_i$ or $\delta_i$, see REF. This is not a result of a repeated token, since the positional encoding would still lead to a different $x_i$.

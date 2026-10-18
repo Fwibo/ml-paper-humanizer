@@ -1,0 +1,5 @@
+<!-- section: results; orientation: design; source: arXiv 2402.12865, published text, style reference only -->
+
+Next, we present examples of our gradients' interpretation through LL in REF and in REF. In each cell of these plots, the LL projections of the chosen spanning set ($FF_1$'s $x_i$ and $FF_2$'s $\delta_i$) are presented for a specific layer and a token from the prompt that was used for the editing.
+
+Prior studies that projected the forward pass examine the LL projections of hidden states, highlighting the gradual change in the projected tokens between layers [cite]. Similarly, REF presents a gradual change in the backward pass' VJP. Across most layers, LL reveals that the gradients represent the embedding of ``Paris''. Other projections have semantics that are related to ``Paris'' such as ``Macron'', the family name of the President of France. The norm of the VJP is indicted by color, and, in the top layers, the only meaningful updates are for the token ``Paris''. Some of the edits in the lower layers are harder to explain, similarly to the situation in those layers for the vanilla LL of the forward pass.

@@ -97,6 +97,8 @@ Method papers and analysis papers at ML, NLP and CV venues.
 
 ### Sources and licenses
 
+The skill itself (SKILL.md, the scripts and the reference files written for it) is released under the MIT License; see `LICENSE`.
+
 The exemplar passages are short excerpts from 30 papers under CC BY 4.0 or CC0 1.0, listed with their licenses in `references/exemplars/SOURCES.md`. The sentence bank quotes single sentences from award papers, and the Sources section of `references/sentence-bank.md` lists each paper and its license. Copyright in all quoted text stays with its authors. Citations and cross-references in the excerpts are replaced by `[cite]` and `REF`, and the skill tells the model never to reuse their content or any run of six or more words.
 
 ## 中文
@@ -183,5 +185,7 @@ pip install spacy pymupdf && python -m spacy download en_core_web_sm
 ML、NLP、CV 会议上的方法类和分析类论文。
 
 ### 来源与许可
+
+skill 本身（SKILL.md、脚本和为它编写的参考文件）以 MIT 许可发布，见 `LICENSE`。
 
 范文段落是 30 篇论文的短节选，均为 CC BY 4.0 或 CC0 1.0 许可，每篇论文及其许可见 `references/exemplars/SOURCES.md`。例句库引用的是获奖论文中的单句，每篇论文及其许可列在 `references/sentence-bank.md` 的 Sources 一节。所有引文的版权归原作者所有。节选中的引用和交叉引用已替换为 `[cite]` 和 `REF`，skill 也要求模型不复用其中的内容，也不复用任何连续六个词以上的原文。

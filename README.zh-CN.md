@@ -8,21 +8,14 @@
 
 ## 改前改后
 
-NeurIPS 2025 runner-up 论文（[arXiv 2504.13837](https://arxiv.org/abs/2504.13837)，CC BY 4.0）实验一节里的一段。同一个模型按同一份内容提纲写了两次，都没有看到原文措辞；只有用 skill 的那次建了术语表。
+NeurIPS 2025 runner-up 论文（[arXiv 2504.13837](https://arxiv.org/abs/2504.13837)，CC BY 4.0）实验一节里的两段。同一个模型按同一份内容提纲写了两次，都没有看到原文措辞；只有用 skill 的那次建了术语表。
 
-**不用 skill**
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="examples/compare-dark.png">
+  <img alt="同一节实验的两段，左边不用 skill，右边用 skill；左边标出写手自己的比喻和自拟的标题，右边标出领域句式和论文自己的术语" src="examples/compare.png">
+</picture>
 
-> RL models with strong AIME24 results. The crossover persists for models selected for their AIME24 strength (REF). Oat-Zero-7B and DAPO-32B start nearly 30% above their base models on AIME24, yet their curves flatten while the base curves keep climbing, and at the largest $k$ the base models are ahead. Strong RL training makes a correct answer far more likely within a few attempts, but it narrows rather than enlarges the set of problems the model ever solves.
-
-**用 skill**
-
-> We next check whether RLVR models with strong AIME24 results escape this pattern. REF shows that on AIME24, Oat-Zero-7B and DAPO-32B start nearly 30% above their base models, yet the base models overtake both as $k$ grows. These curves indicate that RLVR makes a correct sample more likely at small $k$ but narrows the reasoning ability boundary. With many samples, the RL-trained model solves fewer problems than its base model. We analyze the cause of this narrowing in REF.
-
-**原作者**
-
-> We further examine RL models trained with Oat-Zero and DAPO. As shown in REF, although the RL model initially demonstrates a strong performance, nearly 30% higher than the base model, it is eventually surpassed by the base model. Based on these results, we conclude that RLVR increases the likelihood of sampling correct responses at low $k$, but narrows the model's overall coverage. We further analyze the root cause of this phenomenon in REF.
-
-不用 skill 的稿子一开头就是结论和一个自拟的小标题，用写手自己的比喻读图（"the crossover persists"、"narrows rather than enlarges the set of problems the model ever solves"），论文给这个量起的名字一次没出现。用 skill 的稿子先说这段要干什么再给数字，按这个领域的习惯指向图表，沿用论文自己的名字（*reasoning ability boundary*），推论带上 reporting verb，最后交接到分析一节。整节三个版本的全文见 [examples/results-2504.13837.md](examples/results-2504.13837.md)。
+不用 skill 的稿子自拟小标题，用写手自己的比喻读图（"the crossover persists"），在实验还没说清之前就先和一个反对意见辩论，论文已经命名的东西被换成描述。用 skill 的稿子先说这段要干什么再给数字，按这个领域的习惯指向图表，沿用论文自己的名字（*reasoning ability boundary*、*hacking or lucky guesses*），推论带上 reporting verb，最后交接到分析一节。整节两个版本的全文，连同原作者的段落，见 [examples/results-2504.13837.md](examples/results-2504.13837.md)。
 
 到句子层面，skill 的教材是 40 组这样的对照，每组是模型草稿和原作者为同一个任务写的句子：
 
@@ -146,6 +139,7 @@ scripts/
   pick_exemplars.py           按章节类型和取向抽三段范文
 examples/
   results-2504.13837.md       同一节实验：不用 skill、用 skill、原作者
+  compare.html, compare*.png  上面的左右对照图和生成它的 HTML
 ```
 
 ## 来源与许可

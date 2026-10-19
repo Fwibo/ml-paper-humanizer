@@ -8,21 +8,14 @@ Its rules, phrase lists and examples are counted from 307 award and oral papers,
 
 ## Before and after
 
-One paragraph from the results section of a NeurIPS 2025 runner-up paper ([arXiv 2504.13837](https://arxiv.org/abs/2504.13837), CC BY 4.0). The same model wrote it twice from the same content outline, without seeing the authors' wording; only the run with the skill built a term ledger.
+Two paragraphs from the results section of a NeurIPS 2025 runner-up paper ([arXiv 2504.13837](https://arxiv.org/abs/2504.13837), CC BY 4.0). The same model wrote it twice from the same content outline, without seeing the authors' wording; only the run with the skill built a term ledger.
 
-**Without the skill**
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="examples/compare-dark.png">
+  <img alt="Two paragraphs of a results section written without the skill and with it, side by side, with the writer's images and coined labels marked on the left and the field's frames and the paper's own names marked on the right" src="examples/compare.png">
+</picture>
 
-> RL models with strong AIME24 results. The crossover persists for models selected for their AIME24 strength (REF). Oat-Zero-7B and DAPO-32B start nearly 30% above their base models on AIME24, yet their curves flatten while the base curves keep climbing, and at the largest $k$ the base models are ahead. Strong RL training makes a correct answer far more likely within a few attempts, but it narrows rather than enlarges the set of problems the model ever solves.
-
-**With the skill**
-
-> We next check whether RLVR models with strong AIME24 results escape this pattern. REF shows that on AIME24, Oat-Zero-7B and DAPO-32B start nearly 30% above their base models, yet the base models overtake both as $k$ grows. These curves indicate that RLVR makes a correct sample more likely at small $k$ but narrows the reasoning ability boundary. With many samples, the RL-trained model solves fewer problems than its base model. We analyze the cause of this narrowing in REF.
-
-**The authors**
-
-> We further examine RL models trained with Oat-Zero and DAPO. As shown in REF, although the RL model initially demonstrates a strong performance, nearly 30% higher than the base model, it is eventually surpassed by the base model. Based on these results, we conclude that RLVR increases the likelihood of sampling correct responses at low $k$, but narrows the model's overall coverage. We further analyze the root cause of this phenomenon in REF.
-
-The draft without the skill opens on a result and a coined heading, reads the figure through the writer's own images ("the crossover persists", "narrows rather than enlarges the set of problems the model ever solves") and never names what the paper calls this quantity. The draft with the skill says what the paragraph is for before the number, points to the figure the way the field does, keeps the paper's name for the thing (*reasoning ability boundary*), puts the inference behind a reporting verb, and hands off to the analysis section. The full section, all three versions, is in [examples/results-2504.13837.md](examples/results-2504.13837.md).
+Without the skill, the model coins its own headings, reads the figure through its own images ("the crossover persists"), argues with an objection before the test is stated, and describes things the paper has names for. With the skill, each paragraph says what it is for before the number, points to the figure the way the field does, keeps the paper's names (*reasoning ability boundary*, *hacking or lucky guesses*), puts the inference behind a reporting verb, and hands off to the analysis section. The full section in both versions, with the authors' passage for comparison, is in [examples/results-2504.13837.md](examples/results-2504.13837.md).
 
 At sentence level, the skill's teaching material is 40 pairs like these, each a model's draft set against the authors' sentence for the same job:
 
@@ -146,6 +139,7 @@ scripts/
   pick_exemplars.py           three exemplar passages for a section type and orientation
 examples/
   results-2504.13837.md       one results section: without the skill, with it, and the authors
+  compare.html, compare*.png  the side-by-side figure above and the HTML it is rendered from
 ```
 
 ## Sources and licenses

@@ -1,0 +1,71 @@
+<!doctype html>
+<!-- Rendered to compare.png / compare-dark.png with headless Chrome:
+     chrome --headless=new --hide-scrollbars --force-device-scale-factor=2 --window-size=1400,2400 --screenshot=out.png compare.html
+     (add class="dark" on <html> for the dark variant), then trim the bottom whitespace. -->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Without the skill vs with the skill</title>
+<style>
+:root{
+  --bg:#ffffff; --fg:#1b1f27; --muted:#6b7280; --rule:#e3e6ec; --head:#0f172a;
+  --bad-bg:#fde8e4; --bad-line:#c2410c; --bad-fg:#9a3412;
+  --frame-bg:#dcf3e6; --frame-line:#15803d; --frame-fg:#166534;
+  --name-bg:#dde9fb; --name-line:#1d4ed8; --name-fg:#1e40af;
+  --head-bg:#f6f7f9;
+}
+html.dark{
+  --bg:#0f141b; --fg:#e6e9ef; --muted:#98a2b3; --rule:#2a3240; --head:#f3f4f6;
+  --bad-bg:#4a2219; --bad-line:#fb923c; --bad-fg:#fdba74;
+  --frame-bg:#13311f; --frame-line:#4ade80; --frame-fg:#86efac;
+  --name-bg:#172a4d; --name-line:#60a5fa; --name-fg:#93c5fd;
+  --head-bg:#151b24;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);width:1400px;padding:36px 40px 30px;
+  font-family:"Charter","Georgia","Times New Roman",serif;font-size:19.5px;line-height:1.55}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:0 44px}
+.colhead{font-family:"Helvetica Neue","Inter",Arial,sans-serif;font-size:15px;font-weight:600;letter-spacing:.06em;
+  text-transform:uppercase;color:var(--muted);border-bottom:2px solid var(--rule);padding-bottom:9px;margin-bottom:18px}
+.colhead b{color:var(--head)}
+p{margin:0 0 16px}
+.h{font-family:"Helvetica Neue","Inter",Arial,sans-serif;font-weight:600;font-size:17.5px}
+mark{background:transparent;color:inherit;border-radius:3px;padding:0 2px;text-decoration:underline;text-decoration-thickness:2.5px;text-underline-offset:3px}
+mark.bad{background:var(--bad-bg);text-decoration-color:var(--bad-line)}
+mark.frame{background:var(--frame-bg);text-decoration-color:var(--frame-line)}
+mark.name{background:var(--name-bg);text-decoration-color:var(--name-line)}
+.legend{margin-top:14px;padding-top:16px;border-top:1px solid var(--rule);display:grid;grid-template-columns:1fr 1fr;gap:0 44px;
+  font-family:"Helvetica Neue","Inter",Arial,sans-serif;font-size:14.5px;line-height:1.5;color:var(--muted)}
+.legend span.sw{display:inline-block;width:13px;height:13px;border-radius:3px;vertical-align:-1px;margin-right:6px;border-bottom:2.5px solid}
+.sw.bad{background:var(--bad-bg);border-color:var(--bad-line)}
+.sw.frame{background:var(--frame-bg);border-color:var(--frame-line)}
+.sw.name{background:var(--name-bg);border-color:var(--name-line)}
+.legend div{display:flex;flex-direction:column;gap:5px}
+.foot{margin-top:16px;font-family:"Helvetica Neue","Inter",Arial,sans-serif;font-size:13.5px;color:var(--muted)}
+</style>
+</head>
+<body>
+<div class="grid">
+  <div class="col">
+    <div class="colhead"><b>Without the skill</b> · same model, same outline</div>
+    <p><span class="h"><mark class="bad">RL models with strong AIME24 results.</mark></span> <mark class="bad">The crossover persists</mark> for models selected for their AIME24 strength (REF). Oat-Zero-7B and DAPO-32B start nearly 30% above their base models on AIME24, yet their curves flatten while the base curves keep climbing, and at the largest <i>k</i> the base models are ahead. Strong RL training makes a correct answer far more likely within a few attempts, but it <mark class="bad">narrows rather than enlarges the set of problems the model ever solves</mark>.</p>
+    <p><span class="h"><mark class="bad">Are rare successes genuine?</mark></span> Since math is graded on the final answer alone, a flawed CoT can still <mark class="bad">land on the right number</mark>, and <mark class="bad">such hits</mark> become more frequent as <i>k</i> grows. <mark class="bad">If guessing drove the base models' coverage, the comparison above would say little about reasoning.</mark> <mark class="bad">The base samples suggest otherwise:</mark> correct CoTs we picked by hand from 2048 samples on the hardest AIME24 questions are long, reflective solutions that build the argument step by step (REF). For a systematic check we follow [cite] and read every CoT that ends in a correct answer on the most challenging solvable GSM8K problems, those with an average accuracy below 5% but above 0%; a question counts as genuinely solved if at least one of these CoTs is correct. The base model answers 25 such questions and 24 of them contain at least one correct CoT; the RL-trained model also answers 25, of which 23 do. On AIME24 we apply the same check to questions with average accuracy below 5% (REF). The base model answers 7; we set aside one whose correctness is ambiguous because the CoT skips reasoning steps, and 5 of the remaining 6 contain a correct CoT. The RL-trained model answers 6, and 4 of them do. For both models, most successes on rarely solved problems rest on valid reasoning, so the base models' wider coverage at large <i>k</i> is not explained by lucky guesses.</p>
+  </div>
+  <div class="col">
+    <div class="colhead"><b>With the skill</b> · seven steps, frames pass, checker</div>
+    <p><mark class="frame">We next check whether</mark> RLVR models with strong AIME24 results escape this pattern. <mark class="frame">REF shows that</mark> on AIME24, Oat-Zero-7B and DAPO-32B start nearly 30% above their base models, yet the base models overtake both as <i>k</i> grows. <mark class="frame">These curves indicate that</mark> RLVR makes a correct sample more likely at small <i>k</i> but narrows the <mark class="name">reasoning ability boundary</mark>. With many samples, the RL-trained model solves fewer problems than its base model. <mark class="frame">We analyze the cause of this narrowing in REF.</mark></p>
+    <p><span class="h">Validity of Chain-of-Thought.</span> Since only final answers are checked in mathematics, a correct answer can also come from an incorrect CoT through <mark class="name">hacking or lucky guesses</mark>, a risk that grows with <i>k</i>. <mark class="frame">To test whether</mark> the <mark class="name">coverage</mark> of base models at large <i>k</i> rests on lucky guesses, <mark class="frame">we follow [cite] and</mark> read by hand the CoTs behind correct answers on <mark class="name">the most challenging solvable problems</mark>. These are the problems whose average accuracy is below 5% but above 0%. On GSM8K, <mark class="frame">we find that</mark> 24 of the 25 such questions answered by the base model have at least one correct CoT, as do 23 of the 25 answered by the RL-trained model. On AIME24 <mark class="frame">(details in REF)</mark>, the base model answers 7 such questions. We exclude one whose correctness is ambiguous because reasoning steps are skipped. Of the remaining 6, 5 have at least one correct CoT, as do 4 of the 6 answered by the RL-trained model. <mark class="frame">Overall,</mark> for both models, most of these questions have a correct CoT. <mark class="frame">This indicates that</mark> the larger coverage of base models at large <i>k</i> comes from valid reasoning rather than lucky guesses.</p>
+  </div>
+</div>
+<div class="legend">
+  <div>
+    <span><span class="sw bad"></span>Headings the writer coined in place of the paper's; a result read through the writer's own image ("the crossover persists"); the paper's names replaced by descriptions ("land on the right number" for <i>hacking</i>, "the set of problems the model ever solves" for the <i>reasoning ability boundary</i>); an objection argued with before the test is stated.</span>
+  </div>
+  <div>
+    <span><span class="sw frame"></span>Frames the field uses for this job, from 307 award and oral papers: a pointer, an observation, a reading, a purpose, a hand-off.</span>
+    <span><span class="sw name"></span>The paper's own names, kept from its term ledger.</span>
+  </div>
+</div>
+<div class="foot">Results section of arXiv 2504.13837 (NeurIPS 2025 runner-up, CC BY 4.0), written by the same model from the same content outline without seeing the authors' text. The authors' passage and the full drafts are in examples/results-2504.13837.md.</div>
+</body>
+</html>

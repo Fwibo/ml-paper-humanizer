@@ -28,7 +28,7 @@ Generic "humanizer" tools degrade technical manuscripts by swapping established 
 
 ---
 
-## Before and After
+## Before and After the Skill
 
 Below are two paragraphs from the results section of a NeurIPS 2025 runner-up paper ([arXiv 2504.13837](https://arxiv.org/abs/2504.13837), CC BY 4.0). The same model drafted them twice from the same content outline, without access to the published text.
 

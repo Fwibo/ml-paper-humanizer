@@ -1,133 +1,166 @@
-# ML Paper Humanizer
+# ml-paper-humanizer
 
-A skill for Claude Code and Codex that writes and revises the English text of ML conference papers (ICLR, NeurIPS, ICML, ACL, CVPR and the like). Its goal is to remove the AI smell, so that the paper reads as written by a person.
+**An agent skill for writing and revising ML conference papers across Claude Code, Codex, and other AI coding assistants—removing LLM tells so your paper reads like a human wrote it.**
 
 [中文](README.zh-CN.md) · [Full example](examples/results-2504.13837.md)
 
+---
+
 ## Highlights
 
-**1. The phrases of award-winning papers, counted.** The corpus is every award and oral paper from NeurIPS, ICML, ICLR, ACL, EMNLP, NAACL, COLM, CVPR, ICCV, ECCV, AAAI and KDD, 2023 to 2026, 307 papers in all. From it we counted the words and phrases of academic writing and sorted them by sentence function: pointing to a figure, reporting a result, comparing, stating a purpose, limiting scope, ordering steps, naming, describing a method. There are 1,234 phrases, each used in at least 6 of the papers. A comparison of 60 original passages with 318 model drafts of the same content shows that the academic register a model draft lacks lies mostly in these common phrases.
+Out-of-the-box LLMs struggle with academic prose, defaulting to inflated claims, defensive hedging, and unnatural phrasing. Rather than relying on a brittle list of banned words, `ml-paper-humanizer` governs the writing process through corpus-backed phrasing, structural rhetoric, and strict terminology guardrails.
 
-**2. The techniques AI writing lacks most, taken from authoritative guides.** Seven standard references: Gopen and Swan, *The Science of Scientific Writing* (*American Scientist*, a staple of scientific writing courses); Williams, *Style: Toward Clarity and Grace* and Swales and Feak, *Academic Writing for Graduate Students* (writing textbooks from the University of Chicago Press and the University of Michigan Press); Strunk, *The Elements of Style* and Fowler, *The King's English* (the classic authorities on English style); Zinsser, *On Writing Well*; Pinker, *The Sense of Style*. The techniques a model finds hardest are followed while writing and checked in the read-back:
+### 1. Corpus-Backed Phrasing: Expressions Reviewers Have Read 100 Times
+We analyzed all 307 award-winning and Oral papers published between 2023 and 2026 across 12 premier venues (**NeurIPS, ICML, ICLR, ACL, EMNLP, NAACL, COLM, CVPR, ICCV, ECCV, AAAI, and KDD**). From this corpus, we extracted 1,234 recurring rhetorical patterns—each appearing in at least six distinct papers—categorized by sentence function (referencing figures, reporting results, comparing, stating purpose, hedging, scoping claims, outlining steps, naming, and describing methods).
+* **The Evidence:** Benchmarking 60 original human paragraphs against 318 LLM-generated drafts revealed that the missing "academic feel" in model drafts comes down largely to this exact set of functional phrases.
+* **The Payoff:** Your manuscript uses standard rhetorical patterns that reviewers have read hundreds of times, rather than expressions invented by a language model.
 
-- New information goes at the end of the sentence; old information opens it and connects to the sentence before (Gopen and Swan, Williams).
-- The subject stays next to its verb; the point sits in the main clause, its context in a short clause before it (Gopen and Swan).
-- An action is a verb with its agent as subject (Williams).
-- A turn is marked early (Zinsser); a connective is added only where the order of the sentences does not carry the relation (Strunk, Pinker).
-- One thing keeps one name (Fowler); parallel items take parallel form (Strunk).
-- Claims match the evidence: reporting verbs follow the ladder consistent with, suggests, indicates, shows, demonstrates; design intent is stated apart from outcome; a concession takes one clause.
+### 2. Classic Style Mechanics: The Invisible Craft LLMs Miss
+Clear academic writing is defined by how information is organized within a sentence, not superficial synonym swapping. We distilled the mechanics LLMs lack most from seven definitive style guides—Gopen & Swan's *The Science of Scientific Writing*, Williams' *Style*, Swales & Feak's *Academic Writing for Graduate Students*, Strunk's *The Elements of Style*, Fowler's *The King's English*, Zinsser's *On Writing Well*, and Pinker's *The Sense of Style*:
+* **Syntactic Flow:** Places new information at sentence endings; keeps subjects adjacent to verbs; expresses actions through verbs rather than nominalizations; signals contrast early; omits conjunctions when word order suffices; enforces one term per concept and parallel form.
+* **Calibrated Claims:** Grades reporting verbs so conclusion strength matches empirical evidence, and confines concessions to a single clause.
+* **The Payoff:** These are the structural mechanics readers rarely notice consciously, yet immediately feel in the flow of a paper. Models cannot produce them on their own; the skill follows them while writing and checks them on read-back.
 
-**3. Terms extracted and aligned.** Each sub-field has established names for its objects, mechanisms, settings and findings. The skill extracts these terms from your text and the papers you cite, verifies that each occurs verbatim, and keeps them in a term ledger. From then on each thing has one name, and nothing already named receives a new label. Numbers, model and dataset names, citations and defined terms are never changed; a doubtful number is flagged rather than corrected. General humanizers often turn a model name into "the model" or a term into a paraphrase, and a reviewer identifies such changes at once.
+### 3. Terminology Alignment: Never Turns a Model Name into "The Proposed System"
+Generic "humanizer" tools ruin technical papers by replacing established domain terms with clumsy synonyms—turning a specific architecture name into *"the model"* or *"our framework,"* which reviewers spot immediately.
+* **Verified Term Ledger:** Extracts established subfield terminology directly from your manuscript and cited papers, verifies terms verbatim, and enforces a strict *one-concept-one-term* policy.
+* **Hard Guardrails:** Numerical results, model and dataset names, citations, and defined terms are **never modified** (questionable numbers are only flagged for author review). Prose is refined without compromising technical precision.
 
-## Before and after
+---
 
-Two paragraphs from the results section of a NeurIPS 2025 runner-up paper ([arXiv 2504.13837](https://arxiv.org/abs/2504.13837), CC BY 4.0). The same model wrote them twice from the same content outline, without access to the published text.
+## Before and After
+
+Below are two paragraphs from the results section of a NeurIPS 2025 runner-up paper ([arXiv 2504.13837](https://arxiv.org/abs/2504.13837), CC BY 4.0). The same model drafted them twice from the same content outline, without access to the published text.
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="examples/compare-dark.png">
   <img alt="Two paragraphs of a results section written without the skill and with it, side by side; the left marks the writer's images and coined headings, the right marks the field's phrases and the paper's own terms" src="examples/compare.png">
 </picture>
 
-On the left, the model coins its own headings, interprets the figure through its own image ("the crossover persists"), answers an objection before the experiment is described, and replaces named things with descriptions. On the right, each paragraph states its purpose before the number, points to the figure with the field's phrases, keeps the paper's terms (*reasoning ability boundary*, *hacking or lucky guesses*), and introduces the inference with a reporting verb. Both drafts in full, with the published passage, are in [examples/results-2504.13837.md](examples/results-2504.13837.md).
+* **Without the skill (left):** The model coins its own headings, interprets the figure through an invented metaphor (*"the crossover persists"*), preemptively answers an objection before the experiment is even described, and replaces named concepts with generic descriptions.
+* **With the skill (right):** Each paragraph states its purpose before introducing numbers, points to the figure using standard domain phrasing, preserves the paper's exact terms (*reasoning ability boundary*, *hacking or lucky guesses*), and introduces inferences with calibrated reporting verbs.
+* **Full comparison:** Both complete drafts alongside the published passage are available in [examples/results-2504.13837.md](examples/results-2504.13837.md).
 
-At sentence level, the skill's teaching material is 40 pairs like these: the same writing task, one sentence from a model draft and one from a published paper.
+At the sentence level, the skill relies on 40 diagnostic pairs like those below—contrasting a model draft against published prose for the exact same rhetorical task:
 
-| Task | Model draft | Published text |
-|---|---|---|
-| Say why a comparison is unfair | That yardstick, however, measures a different goal. | This would not be a fair comparison, because LMNet is a general method to improve the intelligence of a given LLM, with additional training cost only less than 1% of the pre-training. ([2505.12741](https://arxiv.org/abs/2505.12741)) |
+| Writing Task                       | Model Draft                                                  | Published Text                                               |
+| ---------------------------------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
+| Say why a comparison is unfair     | That yardstick, however, measures a different goal.          | This would not be a fair comparison, because LMNet is a general method to improve the intelligence of a given LLM, with additional training cost only less than 1% of the pre-training. ([2505.12741](https://arxiv.org/abs/2505.12741)) |
 | Give the question, then the number | Notably, SFT on the same data lowers mean accuracy by 5.7% relative to Prompt. | Second, one may argue that the improvement mainly relies on training data. SFT (implemented by very moderate training configurations) can hardly bring improvement over the pre-trained LLM (-5.7%). ([2505.12741](https://arxiv.org/abs/2505.12741)) |
-| Mark the surprise | Actual LLMs, shown as gray points in the same panel, follow a similar exponent near 1. | Remarkably, we find that actual LLMs follow a similar scaling. ([2505.10465](https://arxiv.org/abs/2505.10465)) |
+| Mark the surprise                  | Actual LLMs, shown as gray points in the same panel, follow a similar exponent near 1. | Remarkably, we find that actual LLMs follow a similar scaling. ([2505.10465](https://arxiv.org/abs/2505.10465)) |
 
-## How the skill works
+---
 
-**AI smell is five writing actions, not a word list.** The AI smell in a paper reduces to five things the writer does:
+## How the Skill Works
 
-- *Performing*: a conclusion presented as an insight.
-- *Defending*: the reviewer's rebuttal written into the paper.
-- *Piling*: numbers, clauses and citations packed into one sentence.
-- *Restating*: the heading, the first sentence, the last sentence and the caption all expressing one point.
-- *Drifting*: one object under several names, or an internal label left in the paper.
+### 1. Eliminating Five Writing Actions—Not a Banned-Word List
+The "AI smell" in academic writing reduces to five habits models fall into:
+* **Performing:** Presenting a standard finding as a profound insight.
+* **Defending:** Writing the reviewer rebuttal preemptively into the main text.
+* **Piling:** Cramming numbers, subordinate clauses, and citations into a single sentence.
+* **Restating:** Making the section heading, opening sentence, closing sentence, and figure caption repeat the exact same point.
+* **Drifting:** Referring to a single entity by multiple names, or leaving internal shorthand in the manuscript.
 
-Remove the action and the wording follows. The skill has no banned-word list: word lists and sentence quotas were tested, produced drafts that read as templates, and were removed.
+Remove the action, and natural wording follows. **The skill has no banned-word list:** word lists and sentence quotas were tested, produced drafts that read like rigid templates, and were removed.
 
-**Two modes.** `rewrite` is the default: wording that reads in one pass is kept, and the output is the revised text with a change list (before, after, reason). `write` drafts a passage from an outline, notes or a Chinese draft; the paper text stays in English, and a clause-by-clause Chinese version can be added on request. A request in Chinese receives an answer in Chinese.
+### 2. Two Modes
+* **`rewrite` (default):** Sentences that read cleanly in a single pass are kept untouched. Outputs the revised text alongside a structured change log (*before, after, reason*).
+* **`write`:** Drafts new prose from an outline, rough notes, or a Chinese draft. The manuscript text remains in English, with a clause-by-clause Chinese translation available on request. Prompts in Chinese receive responses in Chinese.
 
-**Seven steps.** `SKILL.md` runs them in this order on every request.
+### 3. The Seven-Step Pipeline
+`SKILL.md` executes the following sequence on every request:
+1. **Determine Orientation:** Identify the paper's archetype (*proof / effect / design / evaluation / discovery*) and load the corresponding section frame from the playbook.
+2. **Build the Term Ledger:** Extract and verify domain terminology from your manuscript and cited papers.
+3. **Load Exemplars:** Review the sentence bank for the rhetorical moves about to be written (plus three full exemplar passages in `write` mode).
+4. **Draft or Revise:** Write the prose, establishing the logical relationship between each sentence and the one preceding it as it is written.
+5. **Three-Pass Read-Back:** Audit the draft three times—first for factual fidelity, second against the term ledger, and third against the syntactic rules from the style guides.
+6. **Frames Pass:** Always run in `write` mode, and on request in `rewrite` mode. Checks the draft sentence by sentence against the frames database, replacing phrasing that points to figures, reports observations, interprets trends, compares baselines, or transitions between topics with established domain idioms.
+7. **Automated Checker:** Runs a document-relative check that flags abnormal repetition—such as a single concept appearing under two names, a paragraph restating its own heading, or a reported gain that never names both sides of the comparison.
 
-1. Determine the paper's orientation (proof / effect / design / evaluation / discovery) and read that section's frame in the playbook.
-2. Build the term ledger from your text and the papers it cites.
-3. Read the examples: the sentence bank for the moves about to be written, and three exemplar passages in `write` mode.
-4. Write or revise. The relation between each sentence and the one before it is decided as the sentence is written.
-5. Read back three times: for fidelity, for the ledger, and for the points from the writing guides above.
-6. Run the frames pass (always in `write`, on request in `rewrite`): check the draft sentence by sentence against the frames file, and where a sentence points to a figure, reports an observation, gives a reading, compares, or hands off, use the field's phrase.
-7. Run the checker, which reports repetition that is abnormal for this document, such as a term under two names, a heading restated by its paragraph, or a gain whose two sides are never named.
+### 4. Scope and Limitations (What It Does Not Do)
+* **Not an AI-detector bypass:** It has not been tested against AI detectors and makes no claims about detection scores; it addresses what a human reviewer notices on the page.
+* **Out of scope:** It does not verify citation accuracy, enforce venue-specific LaTeX formatting, or mimic personal style from your past papers. The corpus covers ML, NLP, and CV.
+* **Known gaps:** Drafts produced with the skill remain slightly shorter than published text and use a narrower range of domain-specific verbs (see the example file for a direct comparison).
 
-**What it does not do.** It has not been tested against AI detectors and makes no claim about them; it addresses what a reviewer can read. It does not verify citations, adapt to a venue's house style, or learn a personal voice from earlier papers. The corpus covers ML, NLP and CV. A draft written with it is still shorter than the published text and uses fewer of the field's verbs; the example file shows the gap.
+### 5. How It Was Tested
+Every rule was validated the same way: a model drafted a section of an award-winning paper from its outline, the output was read side-by-side against the published original, and any rule that failed to improve that reading was discarded.
 
-**How it was tested.** Every rule was tested the same way: a model wrote a section of an award paper from its outline, the draft was read against the original, and rules that failed this reading were removed.
+---
 
-## Install and use
+## Install and Use
 
-Claude Code:
+### Installation
 
+**Claude Code:**
 ```bash
 git clone https://github.com/Fwibo/ml-paper-humanizer ~/.claude/skills/ml-paper-humanizer
 ```
 
-Codex CLI:
-
+**Codex CLI:**
 ```bash
 git clone https://github.com/Fwibo/ml-paper-humanizer ~/.codex/skills/ml-paper-humanizer
 ```
 
-Any other agent that loads Agent Skills (a folder containing `SKILL.md`) can use the same folder. For claude.ai, zip the folder and upload it under Settings → Capabilities → Skills.
+* **Other Coding Agents:** Any agent that supports the Agent Skills format (a directory containing `SKILL.md`) can load the cloned folder directly.
+* **claude.ai (Web):** Zip the repository folder and upload it under `Settings → Capabilities → Skills`.
 
-The checker and the exemplar picker need only Python 3. The term ledger's candidate step needs spaCy, and reading cited PDFs needs PyMuPDF; without them the ledger is listed by the model and verified by the script.
+### Dependencies
+
+The structural checker and exemplar picker require only **Python 3**. Candidate extraction for the term ledger uses `spaCy`, and parsing cited PDFs requires `PyMuPDF` (if omitted, terms are proposed by the model and verified verbatim by the script):
 
 ```bash
 pip install spacy pymupdf && python -m spacy download en_core_web_sm
 ```
 
-Ask in your own words, in English or Chinese. The skill triggers on writing, revising or polishing a paper:
+### Usage Examples
 
-- "Rewrite the second paragraph of my results section, it reads like AI."
-- "Write the introduction from these notes. It is a discovery paper."
-- "Make this abstract less defensive."
-- "Don't change anything yet, tell me what is wrong with this section."
-- `/ml-paper-humanizer sec/experiments.tex`
+Prompt the agent in plain English or Chinese. The skill triggers automatically when drafting, revising, or diagnosing a paper:
 
-The scripts also run on their own:
+* `"Rewrite the second paragraph of my results section, it reads like AI."`
+* `"Write the introduction from these notes. It is a discovery paper."`
+* `"Make this abstract less defensive."`
+* `"Don't change anything yet, tell me what is wrong with this section."`
+* `"/ml-paper-humanizer sec/experiments.tex"`
+
+The helper scripts can also be run standalone from the command line:
 
 ```bash
+# Run document-relative repetition and structural checks
 python scripts/check_tex.py paper/ --ledger ledger.json
+
+# Extract and verify terminology from LaTeX source and cited PDFs
 python scripts/term_ledger.py paper/main.tex --cited refs/*.pdf --out ledger.json
+
+# Retrieve three exemplar passages for a specific section and paper orientation
 python scripts/pick_exemplars.py results --orientation discovery
 ```
 
-## What is in the repository
+---
 
-```
-SKILL.md                      the seven steps, the reader's needs, the read-back list, the output contract
+## Repository Structure
+
+```text
+SKILL.md                      Core workflow: the seven steps, reader needs, read-back checklist, and output contract
 references/
-  section-playbook.md         what each section does, from abstract to rebuttal, by paper orientation
-  sentence-bank.md            40 pairs of model draft and published text by failure type, 23 further sentences by move
-  register-frames.md          1,234 phrases by sentence function, with paper counts
-  connectives.md              the points from the writing guides, then the cause, contrast and concession forms
-  claim-strength.md           the reporting-verb ladder, design intent apart from outcome
+  section-playbook.md         Section-by-section rhetorical goals (abstract to rebuttal) by paper orientation
+  sentence-bank.md            40 pairs of model drafts vs. published text by failure mode, plus 23 sentences by move
+  register-frames.md          1,234 corpus phrases categorized by communicative function, with paper counts
+  connectives.md              Style guide mechanics alongside standard cause, contrast, and concession forms
+  claim-strength.md           The reporting-verb ladder, separating design intent from empirical outcome
   exemplars/                  144 introduction and results passages from 30 papers, with SOURCES.md
 scripts/
-  check_tex.py                repetition checks relative to the document itself, no thresholds
-  term_ledger.py              term candidates from your text and cited papers; --verify keeps verbatim terms
-  pick_exemplars.py           three exemplar passages for a section type and orientation
+  check_tex.py                Document-relative repetition and structure checks (threshold-free)
+  term_ledger.py              Extracts term candidates from manuscript and cited PDFs; --verify keeps verbatim matches
+  pick_exemplars.py           Selects three exemplar passages matching a given section type and orientation
 examples/
-  results-2504.13837.md       one results section: without the skill, with it, and the published text
-  compare.html, compare*.png  the figure above and the HTML it is rendered from
+  results-2504.13837.md       Full results section comparison: without the skill, with the skill, and published text
+  compare.html, compare*.png  The side-by-side comparison figure above and the HTML source used to render it
 ```
 
-## Sources and licenses
+---
 
-The skill itself (SKILL.md, the scripts and the reference files written for it) is released under the MIT License; see `LICENSE`.
+## Sources and Licenses
 
-The exemplar passages are short excerpts from 30 papers under CC BY 4.0 or CC0 1.0, listed with their licenses in `references/exemplars/SOURCES.md`. The sentence bank quotes single sentences from award papers, and its Sources section lists each paper and its license. Copyright in all quoted text remains with its authors. Citations and cross-references in the excerpts are replaced by `[cite]` and `REF`, and the skill instructs the model never to reuse their content or any run of six or more words. The frames and connectives files contain phrases and counts only.
-
-The idea of writing a paper around what it achieves rather than around every possible objection comes from [anti-defensive-writing-Skill](https://github.com/Adkid-Zephyr/anti-defensive-writing-Skill) (MIT). [humanizer](https://github.com/blader/humanizer) removes the patterns in Wikipedia's "Signs of AI writing" from any kind of text; this skill covers ML papers only and works from the papers themselves.
+* **Code & Rules License:** The skill itself (`SKILL.md`, scripts, and custom reference files) is released under the **MIT License**; see `LICENSE`.
+* **Corpus & Exemplar Copyright:** The exemplar passages are brief excerpts from 30 papers licensed under **CC BY 4.0** or **CC0 1.0**, documented in `references/exemplars/SOURCES.md`. The sentence bank quotes single sentences from award papers, with full attribution and licensing listed in its Sources section. Copyright for all quoted material remains with the original authors. Citations and cross-references in the excerpts are sanitized to `[cite]` and `REF`, and the skill strictly instructs the model never to reuse their content or any contiguous sequence of six or more words. The frames and connectives files contain structural phrases and frequency counts only.
+* **Acknowledgments:** The principle of structuring a paper around what it achieves rather than preemptively defending against every possible objection is inspired by [anti-defensive-writing-Skill](https://github.com/Adkid-Zephyr/anti-defensive-writing-Skill) (MIT). While [humanizer](https://github.com/blader/humanizer) strips general-purpose AI patterns based on Wikipedia's *"Signs of AI writing,"* `ml-paper-humanizer` is built exclusively for **ML manuscripts** and derives its rules directly from the published literature.

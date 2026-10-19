@@ -6,7 +6,7 @@ A skill for Claude Code and Codex that writes and revises the English text of ML
 
 ## Highlights
 
-**1. The phrases of award-winning papers, counted.** The corpus is every award and oral paper from NeurIPS, ICML, ICLR, ACL, EMNLP, NAACL, COLM, CVPR, ICCV, ECCV, AAAI and KDD, 2023 to 2026, 307 papers in all. From it we counted the words and phrases of academic writing and sorted them by sentence function: pointing to a figure, reporting a result, comparing, stating a purpose, limiting scope, ordering steps, naming, describing a method. There are 1,234 phrases, each used in at least 6 of the papers. The connectives and reporting verbs come from the same count. We also compared 60 original passages with 318 model drafts of the same content, and marked with ★ the phrases the originals use and the drafts almost never do. When a model draft lacks the academic register, the gap lies mostly in these common phrases.
+**1. The phrases of award-winning papers, counted.** The corpus is every award and oral paper from NeurIPS, ICML, ICLR, ACL, EMNLP, NAACL, COLM, CVPR, ICCV, ECCV, AAAI and KDD, 2023 to 2026, 307 papers in all. From it we counted the words and phrases of academic writing and sorted them by sentence function: pointing to a figure, reporting a result, comparing, stating a purpose, limiting scope, ordering steps, naming, describing a method. There are 1,234 phrases, each used in at least 6 of the papers. A comparison of 60 original passages with 318 model drafts of the same content shows that the academic register a model draft lacks lies mostly in these common phrases.
 
 **2. The points AI writing omits, taken from authoritative guides.** Seven standard references: Gopen and Swan, *The Science of Scientific Writing* (*American Scientist*, a staple of scientific writing courses); Williams, *Style: Toward Clarity and Grace* and Swales and Feak, *Academic Writing for Graduate Students* (writing textbooks from the University of Chicago Press and the University of Michigan Press); Strunk, *The Elements of Style* and Fowler, *The King's English* (the classic authorities on English style); Zinsser, *On Writing Well*; Pinker, *The Sense of Style*. The points a model most often omits are followed while writing and checked in the read-back:
 
@@ -55,16 +55,16 @@ Remove the action and the wording follows. The skill has no banned-word list: wo
 **Seven steps.** `SKILL.md` runs them in this order on every request.
 
 1. Determine the paper's orientation (proof / effect / design / evaluation / discovery) and read that section's frame in the playbook.
-2. Build the term ledger from your text and the papers it cites; the script keeps only terms found verbatim.
-3. Read the examples: the sentence bank for the moves about to be written, three exemplar passages in `write` mode, and the connectives file once.
+2. Build the term ledger from your text and the papers it cites.
+3. Read the examples: the sentence bank for the moves about to be written, and three exemplar passages in `write` mode.
 4. Write or revise. The relation between each sentence and the one before it is decided as the sentence is written.
 5. Read back three times: for fidelity, for the ledger, and for the points from the writing guides above.
-6. Run the frames pass (always in `write`, on request in `rewrite`): check the draft sentence by sentence against the frames file, and where a sentence points to a figure, reports an observation, gives a reading, compares, or hands off, use the field's phrase. Connectives and verbs remain as written.
-7. Run the checker. It reports repetition that is abnormal for this document: the same opener in consecutive paragraphs, a run of same-length sentences, a term under two names, a heading restated by its paragraph, a gain whose two sides are never named. It sets no thresholds and makes no judgement about counts. Fix what is a real problem and note when a flag is a false alarm.
+6. Run the frames pass (always in `write`, on request in `rewrite`): check the draft sentence by sentence against the frames file, and where a sentence points to a figure, reports an observation, gives a reading, compares, or hands off, use the field's phrase.
+7. Run the checker, which reports repetition that is abnormal for this document, such as a term under two names, a heading restated by its paragraph, or a gain whose two sides are never named.
 
 **What it does not do.** It has not been tested against AI detectors and makes no claim about them; it addresses what a reviewer can read. It does not verify citations, adapt to a venue's house style, or learn a personal voice from earlier papers. The corpus covers ML, NLP and CV. A draft written with it is still shorter than the published text and uses fewer of the field's verbs; the example file shows the gap.
 
-**How it was tested.** Every rule was tested the same way: a model wrote a section of an award paper from its outline, and the draft was read against the original. Rules that failed this reading were removed: a readability layer that fragmented sentences, a register pass whose changes were verb substitutions readers rejected, a connective pass that only re-cast relations the draft already stated, and a rule on colons, since originals and drafts had the same rate.
+**How it was tested.** Every rule was tested the same way: a model wrote a section of an award paper from its outline, the draft was read against the original, and rules that failed this reading were removed.
 
 ## Install and use
 
@@ -111,7 +111,7 @@ SKILL.md                      the seven steps, the reader's needs, the read-back
 references/
   section-playbook.md         what each section does, from abstract to rebuttal, by paper orientation
   sentence-bank.md            40 pairs of model draft and published text by failure type, 23 further sentences by move
-  register-frames.md          1,234 phrases by sentence function, with paper counts and ★ marks
+  register-frames.md          1,234 phrases by sentence function, with paper counts
   connectives.md              the points from the writing guides, then the cause, contrast and concession forms
   claim-strength.md           the reporting-verb ladder, design intent apart from outcome
   exemplars/                  144 introduction and results passages from 30 papers, with SOURCES.md

@@ -2,11 +2,11 @@
 
 A skill for Claude Code and Codex that writes and revises the English text of ML conference papers (ICLR, NeurIPS, ICML, ACL, CVPR and the like) so that it reads as written by a person. In Chinese: 去 AI 味.
 
-[中文](README.zh-CN.md) · [Full example](examples/results-2504.13837.md) · [Changelog](references/CHANGELOG.md)
+[中文](README.zh-CN.md) · [Full example](examples/results-2504.13837.md)
 
 ## Highlights
 
-- **AI smell is five writing actions, not a word list.** The skill looks for performing, defending, piling, restating and drifting, and removes the action; the wording then follows. Word lists and sentence quotas were tried in the first five versions and withdrawn, because drafts written under them read as templates.
+- **AI smell is five writing actions, not a word list.** The skill looks for performing, defending, piling, restating and drifting, and removes the action; the wording then follows. Word lists and sentence quotas were tested and dropped, because drafts written under them read as templates.
 - **The phrases are counted from 307 award and oral papers** at NeurIPS, ICML, ICLR, ACL, CVPR and seven other venues, 2023 to 2026: 1,234 stock phrases by sentence function, each used in at least 6 of those papers, plus the connectives and reporting verbs from the same count. A ★ marks the phrases that published passages use and model drafts of the same passages rarely do.
 - **The sentence rules come from the writing guides**: Gopen and Swan, Williams, Strunk, Fowler, Zinsser, Feak and Swales, and Pinker. The point of a sentence sits in its main clause, the subject stays next to its verb, and what the sentence adds lands at its end, where the reader pauses.
 - **Your paper keeps its own names and numbers.** A term ledger is built from your text and the papers you cite and verified word by word; each thing then has one name. Numbers, model and dataset names, citations and defined terms are never changed, and a doubtful number is flagged rather than corrected.
@@ -56,7 +56,7 @@ At sentence level, the skill's teaching material is 40 pairs like these: a model
 
 **What it does not do.** It has not been tested against AI detectors and makes no claim about them; it is aimed at what a reviewer notices. It does not verify citations, adapt to a venue's house style, or learn your voice from earlier papers. The corpus is ML, NLP and CV. A draft written with it still runs shorter and uses fewer of the field's verbs than the authors do; the example file shows the gap.
 
-**How it got here.** Each version was tested by writing a section of an award paper from its outline and reading the draft against the original. The [changelog](references/CHANGELOG.md) records what each version added and which reading withdrew it: the readability layer that chopped sentences, the register pass whose changes were verb swaps readers disliked, the connective pass that only re-cast relations the draft already stated, the colon rule withdrawn because originals and drafts had the same rate.
+**How it was tested.** Every rule was tried the same way: a model wrote a section of an award paper from its outline, and the draft was read against the original. What failed that reading was dropped: a readability layer that chopped sentences, a register pass whose changes were verb swaps readers disliked, a connective pass that only re-cast relations the draft already stated, and a rule on colons, because originals and drafts had the same rate.
 
 ## Install and use
 
@@ -109,7 +109,6 @@ references/
   connectives.md              what the writing guides say, then the cause, contrast and concession forms
   claim-strength.md           the reporting-verb ladder, design intent apart from outcome
   exemplars/                  144 introduction and results passages from 30 papers, with SOURCES.md
-  CHANGELOG.md                every version, what it added, what withdrew it
 scripts/
   check_tex.py                repetition checks relative to the document itself, no thresholds
   term_ledger.py              ledger candidates from your text and cited papers; --verify keeps verbatim names

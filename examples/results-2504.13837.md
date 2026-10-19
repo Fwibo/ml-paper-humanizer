@@ -5,7 +5,7 @@ Paper: *Does Reinforcement Learning Really Incentivize Reasoning Capacity in LLM
 Setup. The model (Claude Opus) was given the section's content outline and facts, but not the authors' wording, and asked to write the section. The run with the skill also built the paper's term ledger and read three exemplar passages, as its steps require. Each draft is one generation.
 
 - **Without the skill**: the model was told to write as a careful author. Written 2026-10-10.
-- **With the skill** (v10.7.14, seven steps including the frames pass): written 2026-10-16.
+- **With the skill** (seven steps including the frames pass): written 2026-10-16.
 - **The authors**: the published passage, with citations and cross-references replaced by `[cite]` and `REF`.
 
 | | Words | Mean sentence length | Field verbs per 1k words | Sentences opening on a frame of the field |

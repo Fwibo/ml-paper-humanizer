@@ -12,7 +12,7 @@ description: >
   papers alike, with the rules split by the five paper orientations (proof, effect, design,
   evaluation, discovery).
 ---
-# ML Paper Humanizer (v10.7.15)
+# ML Paper Humanizer (v1.0)
 
 The AI smell in a paper is a handful of writing actions, not a word list: performing (dressing a conclusion up as an insight), defending (writing the reviewer's rebuttal into the paper), piling (numbers, clauses and citations shovelled into one sentence), restating (heading, first sentence, last sentence and caption all saying one thing), drifting (one object under three names, or an internal name left in the paper). Remove the action and the words come out right.
 
@@ -77,6 +77,5 @@ When the user wants a Chinese version alongside, translate clause by clause, kee
 - [references/claim-strength.md](references/claim-strength.md): the honesty line, neither defensive nor overclaiming, the reporting verbs by what the evidence is, and design intent kept apart from outcome.
 - `scripts/term_ledger.py`: the term ledger's statistical candidates and the verbatim check of the names a model adds (needs spaCy `en_core_web_sm` for the candidates; `--verify` runs without it).
 - `scripts/check_tex.py`: the anomaly report of step 7; plain Python, no dependencies.
-- `references/CHANGELOG.md`: version history with what each version withdrew and why; not read while writing.
 
 中文说明：用户用中文提问时照常回复中文，论文文本保持英文。

@@ -16,7 +16,7 @@
 * **实际效果：** 确保生成的文本严格落入审稿人最熟悉的顶会修辞习惯中，消除大模型自创的怪异表达。
 
 ### 2. 融合七部经典学术写作指南的句法重构
-良好的学术文风不仅在于剔除 AI 常见词，更取决于信息在句子内部的组织方式。我们将 Gopen & Swan《The Science of Scientific Writing》、Williams《Style》、Swales & Feak 等七部权威指南的核心原则，转化为模型在生成与回读阶段的硬性校验指标：
+良好的学术文风不仅在于剔除 AI 常见词，更取决于信息在句子内部的组织方式。我们将 Gopen & Swan《The Science of Scientific Writing》、Williams《Style》、Swales & Feak《Academic Writing for Graduate Students》、Strunk《The Elements of Style》等七部权威指南的核心原则，转化为模型在生成与回读阶段的硬性校验指标：
 * **信息流控制：** 新信息置于句末（Stress position），主语紧邻谓语，核心动作用强动词而非名词化结构表达。
 * **逻辑与克制：** 转折提前标记；语序本身能体现逻辑时绝不堆砌连接词；严格执行“一物一名”与并列同形。
 * **主张与证据对齐：** 对 Reporting verbs 进行强度分级，让步逻辑压缩至单个从句，确保结论的语气强度与实验证据严格匹配。

@@ -16,7 +16,7 @@ We analyzed the full text of all 307 award-winning and Oral papers published bet
 * **Outcome:** The resulting prose relies on standard phrases that reviewers have read hundreds of times, eliminating expressions invented by language models.
 
 ### 2. Structural Principles from Definitive Writing Guides
-Clear academic prose is defined by how information is structured, not just word choice. We distilled the mechanics most frequently mishandled by LLMs from seven authoritative texts—including Gopen & Swan's *The Science of Scientific Writing*, Williams' *Style*, Swales & Feak's *Academic Writing for Graduate Students*, Strunk, Fowler, Zinsser, and Pinker.
+Clear academic prose is defined by how information is structured, not just word choice. We distilled the mechanics most frequently mishandled by LLMs from seven authoritative texts, including Gopen & Swan's *The Science of Scientific Writing*, Williams' *Style*, Swales & Feak's *Academic Writing for Graduate Students*, and Strunk's *The Elements of Style*.
 * **Syntactic Mechanics:** Places new information at sentence endings; keeps subjects adjacent to verbs; expresses actions through verbs rather than nominalizations; signals contrast early; omits conjunctions when word order suffices; enforces parallel form.
 * **Calibrated Claims:** Grades reporting verbs so that claim strength strictly matches empirical evidence, and confines concessions to a single clause.
 * **Outcome:** These are mechanics readers rarely notice consciously, yet immediately feel in the flow of a paper. The skill enforces them during generation and verifies them on read-back.

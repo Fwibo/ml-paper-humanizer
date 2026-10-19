@@ -8,14 +8,14 @@
 
 **1. 顶会获奖论文的用语统计。** 语料为 2023 至 2026 年 NeurIPS、ICML、ICLR、ACL、EMNLP、NAACL、COLM、CVPR、ICCV、ECCV、AAAI、KDD 的全部获奖论文和 oral 论文，共 307 篇。从中统计出学术写作的常用词和短语，按句子功能分类：指向图表、报告结果、比较、说明目的、限定范围、排列步骤、命名、描述方法，共 1,234 条，每条至少出现在 6 篇论文中。连接词和 reporting verb 出自同一次统计。另外以 60 段原文对照 318 段同内容的模型稿，原文常用而模型稿几乎不用的句式以 ★ 标出。模型稿读起来缺少学术味，差距主要就在这批最常见的句式上。
 
-**2. 写作指南中 AI 写作常忽略的要点。** 依据七本学术写作指南：Gopen & Swan《The Science of Scientific Writing》、Williams《Style: Toward Clarity and Grace》、Strunk《The Elements of Style》、Fowler《The King's English》、Zinsser《On Writing Well》、Swales & Feak《Academic Writing for Graduate Students》、Pinker《The Sense of Style》。这七本是学术写作领域的标准参考：Gopen & Swan 一文发表于 American Scientist，是科技写作课程最常指定的阅读材料之一；Williams 与 Swales & Feak 分别是芝加哥大学和密歇根大学出版的写作教材，为各国高校的学术写作课程长期采用；Strunk 与 Fowler 的著作是英语文体的经典规范；Zinsser 的《On Writing Well》自 1976 年起多次再版；Pinker 为哈佛大学心理语言学家，曾任 American Heritage Dictionary 用法委员会主席。skill 从中提取模型最常忽略的要点，写作时遵循，读回时逐条检查：
+**2. 从权威学术写作指南中提取 AI 常忽略的要点。** 依据七本标准参考：Gopen & Swan《The Science of Scientific Writing》（American Scientist，科技写作课程的常用读物）、Williams《Style: Toward Clarity and Grace》和 Swales & Feak《Academic Writing for Graduate Students》（芝加哥大学、密歇根大学出版的写作教材）、Strunk《The Elements of Style》和 Fowler《The King's English》（英语文体的经典规范）、Zinsser《On Writing Well》、Pinker《The Sense of Style》。模型最常忽略的几条，写作时遵循，读回时逐条检查：
 
-- 新信息置于句末，即读者停顿并记忆的位置；旧信息置于句首，承接上一句（Gopen & Swan，Williams）。
-- 主语紧邻谓语；要点放在主句，背景放在其前的短从句中（Gopen & Swan）。
-- 动作用动词表达，施事者作主语，避免名词化加空动词的结构（Williams）。
-- 转折尽早标出，以免读者沿错误方向读完半句（Zinsser）；语序已能表达的关系不加连接词，语序不能表达的才加（Strunk，Pinker）。
-- 同一事物不换说法，换词即暗示另一事物（Fowler）；并列成分采用相同的语法形式（Strunk）。
-- 结论强度与证据匹配：reporting verb 按证据分级，consistent with、suggests、indicates、shows、demonstrates 各有其位；设计意图与实际结果分开陈述；让步限于一个从句。
+- 新信息置于句末，旧信息置于句首承接上一句（Gopen & Swan，Williams）。
+- 主语紧邻谓语；要点放在主句，背景放在其前的短从句（Gopen & Swan）。
+- 动作用动词表达，施事者作主语（Williams）。
+- 转折尽早标出（Zinsser）；语序已能表达的关系不加连接词（Strunk，Pinker）。
+- 同一事物不换说法（Fowler）；并列成分采用相同的语法形式（Strunk）。
+- 结论强度与证据匹配：reporting verb 按 consistent with、suggests、indicates、shows、demonstrates 分级；设计意图与实际结果分开；让步限于一个从句。
 
 **3. 术语提取与对齐。** 每个子领域对其中的对象、机制、设置和发现都有固定的叫法。skill 从你的正文和你引用的论文中提取这些术语，逐字核验其确实出现，整理成术语表。此后一物一名，已有名称的事物不再另起标签。数字、模型和数据集名、引用、已定义的术语一律不改，存疑的数字只标出，不代为修改。通用的去 AI 味工具常把模型名改成"该模型"、把术语换成同义描述，这类改动审稿人一眼即可识别。
 

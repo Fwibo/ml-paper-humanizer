@@ -1,51 +1,72 @@
 # ML Paper Humanizer
 
-A Claude Code skill for writing and revising the English text of ML conference papers (ICLR, NeurIPS, ICML, ACL, CVPR and the like) so that it reads as written by its authors rather than by an LLM. Its rules, example sentences and phrase lists come from published award and oral papers.
+A skill for Claude Code, Codex and other agents that writes and revises the English prose of ML conference papers (ICLR, NeurIPS, ICML, ACL, CVPR and the like) so that it reads as written by its authors rather than by a model.
 
-一个用于撰写和修改 ML 顶会论文英文正文的 Claude Code Skill，目标是让论文读起来像作者本人写的，没有 AI 味。规则、例句和句式都取自已发表的获奖论文和 oral 论文。
+Its rules, phrase lists and examples are counted from 307 award and oral papers, not from a list of banned words. It keeps your paper's own vocabulary, sizes every claim to its evidence, never touches a number or a citation, and writes new passages as well as revising existing ones.
 
-[English](#english) · [中文](#中文)
+[中文说明](README.zh-CN.md) · [Example: one section written three ways](examples/results-2504.13837.md) · [What changed and what was withdrawn](references/CHANGELOG.md)
 
-## English
+## Before and after
 
-### What it does
+One paragraph from the results section of a NeurIPS 2025 runner-up paper ([arXiv 2504.13837](https://arxiv.org/abs/2504.13837), CC BY 4.0). The same model wrote it twice from the same content outline, without seeing the authors' wording; only the run with the skill built a term ledger.
 
-The skill has two modes.
+**Without the skill**
 
-- `rewrite` (the default) makes minimal edits to your text. Wording that already reads in one pass is kept, and you get the revised text with a change list (before → after, reason).
-- `write` drafts a new passage from an outline, notes or a Chinese draft.
+> RL models with strong AIME24 results. The crossover persists for models selected for their AIME24 strength (REF). Oat-Zero-7B and DAPO-32B start nearly 30% above their base models on AIME24, yet their curves flatten while the base curves keep climbing, and at the largest $k$ the base models are ahead. Strong RL training makes a correct answer far more likely within a few attempts, but it narrows rather than enlarges the set of problems the model ever solves.
 
-It covers abstracts, introductions, method, experiments, analysis, related work, conclusions, limitations, appendices, rebuttals, and figure and table captions. Numbers, model and dataset names, defined terms, citations and any wording you asked to keep are never changed; a number that looks wrong is flagged, not corrected.
+**With the skill**
 
-### What it treats as AI smell
+> We next check whether RLVR models with strong AIME24 results escape this pattern. REF shows that on AIME24, Oat-Zero-7B and DAPO-32B start nearly 30% above their base models, yet the base models overtake both as $k$ grows. These curves indicate that RLVR makes a correct sample more likely at small $k$ but narrows the reasoning ability boundary. With many samples, the RL-trained model solves fewer problems than its base model. We analyze the cause of this narrowing in REF.
 
-The skill treats AI smell as five writing actions rather than a word list:
+**The authors**
 
-- **Performing**: dressing a conclusion up as an insight.
-- **Defending**: writing the reviewer's rebuttal into the paper.
-- **Piling**: numbers, clauses and citations shovelled into one sentence.
-- **Restating**: the heading, first sentence, last sentence and caption all saying one thing.
-- **Drifting**: one object under three names, or an internal name left in the paper.
+> We further examine RL models trained with Oat-Zero and DAPO. As shown in REF, although the RL model initially demonstrates a strong performance, nearly 30% higher than the base model, it is eventually surpassed by the base model. Based on these results, we conclude that RLVR increases the likelihood of sampling correct responses at low $k$, but narrows the model's overall coverage. We further analyze the root cause of this phenomenon in REF.
 
-Once the action is gone, the wording usually follows. There is no banned-word list. Earlier versions had word bans and quotas; drafts written under them read as templates, so they were withdrawn. `references/CHANGELOG.md` records each withdrawal and the reading that led to it.
+The draft without the skill opens on a result and a coined heading, reads the figure through the writer's own images ("the crossover persists", "narrows rather than enlarges the set of problems the model ever solves") and never names what the paper calls this quantity. The draft with the skill says what the paragraph is for before the number, points to the figure the way the field does, keeps the paper's name for the thing (*reasoning ability boundary*), puts the inference behind a reporting verb, and hands off to the analysis section. The full section, all three versions, is in [examples/results-2504.13837.md](examples/results-2504.13837.md).
 
-### Writing techniques inside
+At sentence level, the skill's teaching material is 40 pairs like these, each a model's draft set against the authors' sentence for the same job:
 
-- **Section frames** (`references/section-playbook.md`): what each section does and in what order, from the abstract to the rebuttal, with notes for five paper orientations: proof, effect, design, evaluation and discovery.
-- **Sentence and paragraph rules** from the writing guides (Gopen and Swan, Williams, Strunk, Fowler). Each sentence makes one point, carried in its main clause, with the subject next to its verb and the new information at the end, where the reader pauses. A paragraph keeps one topic string, and actions are verbs with their agent as subject.
-- **Term ledger** (`scripts/term_ledger.py`): the names your paper gives to things, built from your own text and the papers you cite. Each thing keeps one name, and no new label is coined for something you already named.
-- **Claim strength** (`references/claim-strength.md`): reporting verbs matched to the evidence (suggests, indicates, shows, demonstrates). What a component is designed to do is kept apart from what it did, and a concession takes one clause.
-- **Sentence bank** (`references/sentence-bank.md`): 40 pairs of a model draft and the authors' sentence for the same job, sorted by failure type, plus 23 further sentences sorted by move, all from award papers.
-- **Phrase frames** (`references/register-frames.md`): 1,234 stock phrases by sentence function (pointer, result, comparison, purpose, hedge, scope, sequence, naming, method). Each appears in at least 6 of 307 award and oral papers from 2023–2026. A ★ marks the frames that published passages use and model drafts almost never do.
-- **Connectives** (`references/connectives.md`): the cause, consequence, contrast and concession forms from the same count.
-- **Exemplars** (`references/exemplars/`): 144 introduction and results passages from 30 papers, read side by side with a new draft.
-- **LaTeX checker** (`scripts/check_tex.py`): reports repetition that is abnormal for your own document, such as the same opener in consecutive paragraphs, a run of same-length sentences, a term under two names, a heading restated by its paragraph, or a gain whose two sides are never named. It has no targets and never says a count is too high or too low.
+| Job | A model's draft | The authors |
+|---|---|---|
+| Say why a comparison is unfair | That yardstick, however, measures a different goal. | This would not be a fair comparison, because LMNet is a general method to improve the intelligence of a given LLM, with additional training cost only less than 1% of the pre-training. ([2505.12741](https://arxiv.org/abs/2505.12741)) |
+| Give the number after the question it answers | Notably, SFT on the same data lowers mean accuracy by 5.7% relative to Prompt. | Second, one may argue that the improvement mainly relies on training data. SFT (implemented by very moderate training configurations) can hardly bring improvement over the pre-trained LLM (-5.7%). ([2505.12741](https://arxiv.org/abs/2505.12741)) |
+| Mark the surprise | Actual LLMs, shown as gray points in the same panel, follow a similar exponent near 1. | Remarkably, we find that actual LLMs follow a similar scaling. ([2505.10465](https://arxiv.org/abs/2505.10465)) |
+| Ask two questions as two sentences | As the degree of superposition and the structure of the data change, when does the loss follow a power law in width, and, when it does, what is its exponent? | Varying the degree of superposition and data structure, when is the loss a power law? And if the loss is a power law, what will the exponent be? ([2505.10465](https://arxiv.org/abs/2505.10465)) |
 
-### How it works
+## Why this one
 
-`SKILL.md` runs seven steps: choose the paper's orientation and read the section frame; build the term ledger; read the examples for the moves about to be written; write or revise; read back for fidelity, for names and for the reader's needs; run a frames pass (by default in `write` mode, on request in `rewrite`); run the checker.
+**AI smell is five writing actions, not a word list.** The skill looks for performing (a conclusion dressed up as an insight), defending (the reviewer's rebuttal written into the paper), piling (numbers, clauses and citations in one sentence), restating (heading, first sentence, last sentence and caption all saying one thing) and drifting (one object under three names). Remove the action and the wording follows. Banned-word lists and sentence quotas were tried in the first five versions and withdrawn: drafts written under them read as templates, and the model applies any count or ban at every opportunity until it becomes a new mannerism.
 
-### Install
+**Counted from the papers, not asserted.** The phrase frames, connectives and reporting verbs come from 307 award and oral papers at NeurIPS, ICML, ICLR, ACL, EMNLP, NAACL, COLM, CVPR, ICCV, ECCV, AAAI and KDD, 2023 to 2026. The frames file lists 1,234 stock phrases by sentence function, each used in at least 6 of those papers, and a ★ marks the ones published passages use and model drafts of the same passages almost never do. Mining 60 original passages against 318 drafts showed that what readers call "not senior" is mostly this gap: the field's ordinary pointers and connectives, not rare words.
+
+**Your paper's own vocabulary.** A term ledger is built from your text and the papers you cite, and every name in it is verified verbatim against the source. Each thing then keeps one name, the author's, and no new label is coined for a thing you already named. A generic humanizer that turns a model name into "the model" or a defined term into a paraphrase is doing the thing reviewers notice first.
+
+**Claims sized to evidence, numbers untouched.** Reporting verbs follow a ladder (consistent with, suggests, indicates, shows, demonstrates). What a component is designed to do stays apart from what it did. A concession takes one clause, never a paragraph of self-defence. Numbers, model and dataset names, defined terms, citations and any wording you asked to keep are never changed; a number that looks wrong is flagged, not corrected.
+
+**Section frames by what the paper argues.** The playbook covers every section from abstract to rebuttal, with the reader's expectations split by five orientations: proof, effect, design, evaluation and discovery. A method paper and an analysis paper do not write their results section the same way, and the skill knows which one it is writing.
+
+**Checks relative to your own document, with no thresholds.** The LaTeX checker reports what is abnormal for this paper: the same opener in consecutive paragraphs, a run of same-length sentences, a term under two names, a heading restated by its paragraph, a gain whose two sides are never named, a ledger name the draft never uses. It never says a count is too high or too low, because the originals do each of these things sometimes and never on a schedule.
+
+**Writes as well as rewrites.** `write` mode drafts a passage from an outline, notes or a Chinese draft, reads three exemplar passages of the same section type first, and runs the frames pass afterwards. `rewrite` mode makes minimal edits and returns a change list with a reason for each.
+
+**Every rule earned its place.** The [changelog](references/CHANGELOG.md) records each version, what it added, and the blind reading or measurement that withdrew it: the readability layer that chopped sentences, the register pass whose "improvements" were verb swaps readers disliked, the connective pass that only re-cast relations the draft already stated, the colon rule withdrawn because originals and drafts had the same rate. The exemplar pool and the sentence bank list every source paper with its license.
+
+## How it compares
+
+| | Word-list humanizers | This skill |
+|---|---|---|
+| What counts as AI smell | Words and patterns from a general list (delve, tapestry, em dashes) | Five writing actions in a paper's argument |
+| Where the rules come from | A style guide for any text | 307 award and oral ML papers, counted |
+| Your terms and numbers | May be paraphrased | Ledger-verified names; numbers, citations and defined terms never change |
+| Claim strength | Hedges removed or added by instruction | Reporting verb chosen by what the evidence is; concession in one clause |
+| Scope | Any text | ML papers, every section, five paper orientations |
+| New text | Edits only | Writes from an outline or a Chinese draft, with exemplars and a frames pass |
+| Checks | Model judgement | Scripts that compare the document with itself, plus the model |
+| Evidence | Screenshots | Changelog of withdrawals; blind reads against the originals |
+
+The closest general tool, [humanizer](https://github.com/blader/humanizer), removes the patterns in Wikipedia's "Signs of AI writing" from any kind of text. The idea of writing a paper around what it achieves rather than around every objection comes from [anti-defensive-writing-Skill](https://github.com/Adkid-Zephyr/anti-defensive-writing-Skill); here that is one of the five actions, with a reporting-verb ladder behind it.
+
+## Install
 
 Claude Code:
 
@@ -53,22 +74,31 @@ Claude Code:
 git clone https://github.com/Fwibo/ml-paper-humanizer ~/.claude/skills/ml-paper-humanizer
 ```
 
-Other agents that load Agent Skills (a folder with a `SKILL.md`) can use the same folder.
+Codex CLI:
 
-`check_tex.py` and `pick_exemplars.py` need only Python 3. The term ledger's candidate step needs spaCy, and PDF input needs PyMuPDF:
+```bash
+git clone https://github.com/Fwibo/ml-paper-humanizer ~/.codex/skills/ml-paper-humanizer
+```
+
+Any other agent that loads Agent Skills (a folder with a `SKILL.md`) can use the same folder. For claude.ai, zip the folder and upload it under Settings → Capabilities → Skills.
+
+The checker and the exemplar picker need only Python 3. The term ledger's candidate step needs spaCy, and reading cited PDFs needs PyMuPDF; without them, the ledger is listed by the model and verified by the script.
 
 ```bash
 pip install spacy pymupdf && python -m spacy download en_core_web_sm
 ```
 
-### Usage
+## Use
 
-Ask in your own words. The skill triggers on writing, revising and polishing a paper, for example:
+Ask in your own words. The skill triggers on writing, revising or polishing a paper, including requests in Chinese (去 AI 味, 润色, 改论文, 别太防御, 回审稿意见):
 
 - "Rewrite the second paragraph of my results section, it reads like AI."
 - "Write the introduction from these notes. It is a discovery paper."
 - "Make this abstract less defensive."
+- "Don't change anything yet, tell me what is wrong with this section."
 - `/ml-paper-humanizer sec/experiments.tex`
+
+Two modes. `rewrite` (default) keeps wording that already reads in one pass and returns the revised text with a change list (before, after, reason). `write` drafts a new passage from an outline, notes or a Chinese draft; the paper text stays in English, and a clause-by-clause Chinese version can be added on request.
 
 The scripts also run on their own:
 
@@ -78,114 +108,48 @@ python scripts/term_ledger.py paper/main.tex --cited refs/*.pdf --out ledger.jso
 python scripts/pick_exemplars.py results --orientation discovery
 ```
 
-### FAQ
+## How it works
 
-**How is this different from humanizer?**
-[humanizer](https://github.com/blader/humanizer) removes the patterns in Wikipedia's "Signs of AI writing" from any kind of text. This skill covers ML papers only and works from the papers themselves: section frames, your paper's term ledger, claim strength, and phrase frames counted over 307 award and oral papers. It also writes new passages as well as revising existing ones.
+`SKILL.md` runs seven steps on every request.
 
-**Will it lower my AIGC detector score?**
-It has never been tested against AI detectors (GPTZero, Turnitin, CNKI and others) and makes no claim about them. It is aimed at what a human reader of the paper, such as a reviewer, notices.
+1. **Orientation and section.** Choose proof / effect / design / evaluation / discovery and read that section's frame in the playbook.
+2. **Term ledger.** Build the paper's names from your text and the papers it cites; the script keeps only names found verbatim.
+3. **Read the examples** for the moves about to be written: the sentence bank, three exemplar passages (in `write` mode), and the connectives file once.
+4. **Write or revise.** How each sentence follows the last is decided as it is written; most need no connective.
+5. **Read back** three times: for fidelity, for the ledger, and for the reader's needs (one point per sentence, the point in the main clause, what the sentence adds at its end).
+6. **Frames pass** (always in `write`, on request in `rewrite`): go through the draft sentence by sentence with the full frames file and add the field's marking frames where a sentence does that job. Connectives and verbs are not touched.
+7. **Run the checker** and fix what is a real problem; say when a flag is a false alarm.
 
-**Will it change my results or terms?**
-No. Numbers, model and dataset names, defined terms, citations and wording you asked to keep stay as they are.
+## What it does not do
 
-**Can I start from a Chinese draft?**
-Yes, in `write` mode. The paper text stays in English. If you ask in Chinese, the skill answers in Chinese, and it can add a clause-by-clause Chinese version of the result.
+- It has never been tested against AI detectors (GPTZero, Turnitin, CNKI) and makes no claim about them. It is aimed at what a reviewer notices.
+- It does not verify citations or check that a cited paper says what you say it says.
+- It does not adapt to a target venue's house style or match your personal voice from your earlier papers.
+- It covers ML, NLP and CV papers. Other fields may use the sentence rules, but the corpus is ML.
+- A draft written with it still runs shorter and uses fewer of the field's verbs than the authors do; the example file shows the current gap.
 
-**What kinds of papers is it for?**
-Method papers and analysis papers at ML, NLP and CV venues.
+## What is in the repository
 
-### Sources and licenses
+```
+SKILL.md                      the seven steps, the reader's needs, the read-back list, the output contract
+references/
+  section-playbook.md         what each section does, from abstract to rebuttal, by paper orientation
+  sentence-bank.md            40 draft-vs-authors pairs by failure type, 23 further sentences by move
+  register-frames.md          1,234 stock phrases by sentence function, with paper counts and ★ marks
+  connectives.md              cause, consequence, contrast and concession forms from the same count
+  claim-strength.md           reporting-verb ladder, design intent vs outcome, the honesty line
+  exemplars/                  144 introduction and results passages from 30 papers, with SOURCES.md
+  CHANGELOG.md                every version, what it added, what withdrew it
+scripts/
+  check_tex.py                anomaly checks relative to the document itself, no thresholds
+  term_ledger.py              ledger candidates from your text and cited papers; --verify keeps verbatim names
+  pick_exemplars.py           three exemplar passages for a section type and orientation
+examples/
+  results-2504.13837.md       one results section: without the skill, with it, and the authors
+```
+
+## Sources and licenses
 
 The skill itself (SKILL.md, the scripts and the reference files written for it) is released under the MIT License; see `LICENSE`.
 
-The exemplar passages are short excerpts from 30 papers under CC BY 4.0 or CC0 1.0, listed with their licenses in `references/exemplars/SOURCES.md`. The sentence bank quotes single sentences from award papers, and the Sources section of `references/sentence-bank.md` lists each paper and its license. Copyright in all quoted text stays with its authors. Citations and cross-references in the excerpts are replaced by `[cite]` and `REF`, and the skill tells the model never to reuse their content or any run of six or more words.
-
-## 中文
-
-### 能做什么
-
-两种模式：
-
-- `rewrite`（默认）：在你的原文上做最小改动。已经一遍能读懂的句子保持原样，输出改后全文和改动清单（改前 → 改后，原因）。
-- `write`：根据提纲、笔记或中文草稿写新段落。
-
-覆盖摘要、引言、方法、实验、分析、相关工作、结论、局限性、附录、rebuttal，以及图表标题。数字、模型和数据集名、已定义的术语、引用和你要求保留的说法一律不改；看起来有问题的数字只标出来，不替你改。
-
-### 它怎么理解"AI 味"
-
-这个 skill 把 AI 味看成五种写作动作，而不是一张词表：
-
-- **表演**：把一个结论包装成洞见。
-- **防御**：把给审稿人的辩解写进正文。
-- **堆砌**：数字、从句和引用全塞进一句话。
-- **复述**：标题、首句、末句和图注说的是同一件事。
-- **漂移**：同一个东西用了三个名字，或者内部代号留在了论文里。
-
-把这些动作去掉，措辞一般也就顺了。这个 skill 没有禁用词表。早期版本有禁用词和配额，照着写出来的稿子读起来像套模板，后来都撤掉了。每次撤掉了什么、根据哪次试读，都记在 `references/CHANGELOG.md` 里。
-
-### 包含的写作技巧
-
-- **章节框架**（`references/section-playbook.md`）：从摘要到 rebuttal，每一节该做哪些事、按什么顺序做，并按五类论文分别说明：proof（理论）、effect（效果）、design（方法设计）、evaluation（评测）、discovery（发现）。
-- **句子和段落规则**，来自 Gopen & Swan、Williams、Strunk、Fowler 等写作指南：一句话只讲一个要点，要点放在主句；主语紧挨谓语；新信息放在句末，也就是读者停顿的地方。一个段落围绕同一组主语展开，动作用动词表达，由施事者做主语。
-- **术语表**（`scripts/term_ledger.py`）：从你自己的文本和你引用的论文里整理出论文给各种东西起的名字。同一个东西始终用一个名字，你已经命名过的东西不会被另起新名。
-- **结论强度**（`references/claim-strength.md`）：报告动词按证据强弱选择（suggests、indicates、shows、demonstrates）；"某个模块设计来做什么"和"它实际做到了什么"分开写；让步只用一个从句。
-- **例句库**（`references/sentence-bank.md`）：40 组"模型草稿 vs. 原作者"的同功能句子对照，按问题类型分类；另有 23 句按写作动作分类。全部来自获奖论文。
-- **句式表**（`references/register-frames.md`）：1,234 个按句子功能分类的常用句式（指向图表、报告结果、比较、目的、限定语气、范围、顺序、命名、方法），每个都至少出现在 2023–2026 年 307 篇获奖和 oral 论文中的 6 篇里。标 ★ 的是原文常用、模型草稿几乎不用的句式。
-- **连接词**（`references/connectives.md`）：同一批论文里表示因果、结果、对比、让步的说法。
-- **范文段落**（`references/exemplars/`）：30 篇论文的 144 段引言和实验结果段落，写新段落时拿来和草稿对照着读。
-- **LaTeX 检查脚本**（`scripts/check_tex.py`）：以你自己的文档为基准，找出不正常的重复，比如连续几段用同一个词开头、一连串长度相同的句子、同一术语有两个名字、段落复述了标题、提到提升却没说清跟谁比。脚本不设指标，也从不说某个数量太多或太少。
-
-### 工作流程
-
-`SKILL.md` 分七步：确定论文类型并读对应的章节框架；建术语表；读与要写内容相关的例句；写或改；回读三遍，分别检查忠实度、术语和读者需求；过一遍句式（`write` 模式默认执行，`rewrite` 模式按需执行）；运行检查脚本。
-
-### 安装
-
-Claude Code：
-
-```bash
-git clone https://github.com/Fwibo/ml-paper-humanizer ~/.claude/skills/ml-paper-humanizer
-```
-
-其他支持 Agent Skills 格式（带 `SKILL.md` 的文件夹）的 agent 也能直接使用这个文件夹。
-
-`check_tex.py` 和 `pick_exemplars.py` 只需要 Python 3。术语表的候选提取需要 spaCy，读 PDF 需要 PyMuPDF：
-
-```bash
-pip install spacy pymupdf && python -m spacy download en_core_web_sm
-```
-
-### 使用
-
-直接用自己的话说就行，写论文、改论文、润色时都会触发，比如：
-
-- "帮我改一下实验部分第二段，读着有 AI 味"
-- "根据这些笔记写引言，这是一篇 discovery 类论文"
-- "这段摘要别写得那么防御"
-- `/ml-paper-humanizer sec/experiments.tex`
-
-脚本也可以单独运行，命令见上文 Usage 一节。
-
-### 常见问题
-
-**和 humanizer 有什么区别？**
-[humanizer](https://github.com/blader/humanizer) 依据维基百科的 "Signs of AI writing"，从各类文本中去掉 AI 写作痕迹。这个 skill 只针对 ML 论文，依据的是论文本身：章节框架、你这篇论文的术语表、结论强度，以及从 307 篇获奖和 oral 论文里统计出的句式。而且它不只能改，也能从头写。
-
-**能降低 AIGC 检测率吗？**
-没有拿任何 AI 检测工具（GPTZero、Turnitin、知网等）测过，所以不做这方面的承诺。它针对的是审稿人这样的真人读者会注意到的问题。
-
-**会改我的实验结果或术语吗？**
-不会。数字、模型和数据集名、已定义的术语、引用和你要求保留的说法都保持原样。
-
-**可以给中文草稿吗？**
-可以，用 `write` 模式。论文正文保持英文；你用中文提问，它就用中文回复，也可以附一份逐句对照的中文译文。
-
-**适合哪类论文？**
-ML、NLP、CV 会议上的方法类和分析类论文。
-
-### 来源与许可
-
-skill 本身（SKILL.md、脚本和为它编写的参考文件）以 MIT 许可发布，见 `LICENSE`。
-
-范文段落是 30 篇论文的短节选，均为 CC BY 4.0 或 CC0 1.0 许可，每篇论文及其许可见 `references/exemplars/SOURCES.md`。例句库引用的是获奖论文中的单句，每篇论文及其许可列在 `references/sentence-bank.md` 的 Sources 一节。所有引文的版权归原作者所有。节选中的引用和交叉引用已替换为 `[cite]` 和 `REF`，skill 也要求模型不复用其中的内容，也不复用任何连续六个词以上的原文。
+The exemplar passages are short excerpts from 30 papers under CC BY 4.0 or CC0 1.0, listed with their licenses in `references/exemplars/SOURCES.md`. The sentence bank quotes single sentences from award papers, and its Sources section lists each paper and its license. Copyright in all quoted text stays with its authors. Citations and cross-references in the excerpts are replaced by `[cite]` and `REF`, and the skill tells the model never to reuse their content or any run of six or more words. The frames and connectives files contain phrases and counts only, no paper text.

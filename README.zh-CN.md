@@ -1,6 +1,6 @@
 # ML Paper Humanizer
 
-给 Claude Code、Codex 和其他 agent 用的论文写作 skill：撰写和修改 ML 顶会论文（ICLR、NeurIPS、ICML、ACL、CVPR 等）的英文正文，让它读起来像作者本人写的，而不是模型写的。
+给 Claude Code、Codex 和其他 agent 用的论文写作 skill：撰写和修改 ML 顶会论文（ICLR、NeurIPS、ICML、ACL、CVPR 等）的英文正文，给论文去 AI 味：让它读起来像人写的，不像 AI 写的。
 
 它的规则、句式和例句统计自 307 篇获奖和 oral 论文，不是一张禁用词表。它沿用你论文自己的术语，让每个结论的强度和证据匹配，不动任何数字和引用，并且既能改也能从头写。
 

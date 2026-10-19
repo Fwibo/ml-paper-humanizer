@@ -1,6 +1,6 @@
 # ML Paper Humanizer
 
-A skill for Claude Code, Codex and other agents that writes and revises the English prose of ML conference papers (ICLR, NeurIPS, ICML, ACL, CVPR and the like) so that it reads as written by its authors rather than by a model.
+A skill for Claude Code, Codex and other agents that writes and revises the English prose of ML conference papers (ICLR, NeurIPS, ICML, ACL, CVPR and the like) so that it reads as written by a person, not by an AI. In one phrase: it removes the AI smell (去 AI 味).
 
 Its rules, phrase lists and examples are counted from 307 award and oral papers, not from a list of banned words. It keeps your paper's own vocabulary, sizes every claim to its evidence, never touches a number or a citation, and writes new passages as well as revising existing ones.
 

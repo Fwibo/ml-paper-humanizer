@@ -8,27 +8,27 @@
 
 ## Highlights
 
-Out-of-the-box LLMs struggle with academic prose, defaulting to inflated claims, defensive hedging, and unnatural phrasing. Rather than relying on a brittle list of banned words, `ml-paper-humanizer` governs the writing process through corpus-backed phrasing, structural rhetoric, and strict terminology guardrails.
+Out-of-the-box LLMs struggle with academic writing, often defaulting to inflated claims, mechanical transitions, and unnatural phrasing. Rather than relying on a brittle list of banned words, `ml-paper-humanizer` governs the writing process through corpus-backed phrasing, structural rhetoric, and strict terminology guardrails.
 
-### 1. Corpus-Backed Phrasing: Expressions Reviewers Have Read 100 Times
-We analyzed the full text of all 307 award-winning and Oral papers published between 2023 and 2026 across 12 premier venues (**NeurIPS, ICML, ICLR, ACL, EMNLP, NAACL, COLM, CVPR, ICCV, ECCV, AAAI, and KDD**). From this corpus, we extracted 1,234 recurring rhetorical patterns—each appearing in at least six distinct papers—categorized by sentence function (referencing figures, reporting results, comparing baselines, stating purpose, scoping claims, outlining steps, naming, and describing methods).
-* **The Evidence:** Benchmarking 60 original human paragraphs against 318 LLM-generated drafts revealed that the missing "academic feel" in model drafts comes down largely to this exact set of functional phrases.
-* **The Payoff:** Your manuscript uses standard rhetorical patterns that reviewers have read hundreds of times, rather than expressions invented by a language model.
+### 1. Corpus-Backed Phrasing from 307 Award & Oral Papers
+We analyzed the full text of all 307 award-winning and Oral papers published between 2023 and 2026 across 12 premier venues (**NeurIPS, ICML, ICLR, ACL, EMNLP, NAACL, COLM, CVPR, ICCV, ECCV, AAAI, and KDD**). From this corpus, we extracted 1,234 recurring rhetorical patterns—each appearing in at least six distinct papers—categorized by communicative function (e.g., referencing figures, reporting empirical results, scoping claims, and contrasting baselines).
+* **Empirical Grounding:** A comparative analysis of 60 original human paragraphs against 318 LLM-generated drafts revealed that the "LLM accent" stems largely from missing these exact functional idioms.
+* **Outcome:** The resulting prose relies on standard phrases that reviewers have read hundreds of times, eliminating expressions invented by language models.
 
-### 2. Classic Style Mechanics: The Invisible Craft LLMs Miss
-Clear academic writing is defined by how information is organized within a sentence, not superficial synonym swapping. We distilled the mechanics LLMs lack most from seven definitive style guides—Gopen & Swan's *The Science of Scientific Writing*, Williams' *Style*, Swales & Feak's *Academic Writing for Graduate Students*, Strunk's *The Elements of Style*, Fowler's *The King's English*, Zinsser's *On Writing Well*, and Pinker's *The Sense of Style*:
-* **Syntactic Flow:** Places new information at sentence endings; keeps subjects adjacent to verbs; expresses actions through verbs rather than nominalizations; signals contrast early; omits conjunctions when word order suffices; enforces one term per concept and parallel form.
-* **Calibrated Claims:** Grades reporting verbs so conclusion strength matches empirical evidence, and confines concessions to a single clause.
-* **The Payoff:** These are the structural mechanics readers rarely notice consciously, yet immediately feel in the flow of a paper. Models cannot produce them on their own; the skill enforces them while writing and audits them on read-back.
+### 2. Structural Principles from Definitive Writing Guides
+Clear academic prose is defined by how information is structured, not just word choice. We distilled the mechanics most frequently mishandled by LLMs from seven authoritative texts—including Gopen & Swan's *The Science of Scientific Writing*, Williams' *Style*, Swales & Feak's *Academic Writing for Graduate Students*, Strunk, Fowler, Zinsser, and Pinker.
+* **Syntactic Mechanics:** Places new information at sentence endings; keeps subjects adjacent to verbs; expresses actions through verbs rather than nominalizations; signals contrast early; omits conjunctions when word order suffices; enforces parallel form.
+* **Calibrated Claims:** Grades reporting verbs so that claim strength strictly matches empirical evidence, and confines concessions to a single clause.
+* **Outcome:** These are mechanics readers rarely notice consciously, yet immediately feel in the flow of a paper. The skill enforces them during generation and verifies them on read-back.
 
-### 3. Terminology Alignment: Never Turns a Model Name into "The Proposed System"
-Generic "humanizer" tools ruin technical papers by replacing established domain terms with clumsy synonyms—turning a specific architecture name into *"the model"* or *"our framework,"* which reviewers spot immediately.
-* **Verified Term Ledger:** Extracts established subfield terminology directly from your manuscript and cited papers, verifies terms verbatim, and enforces a strict *one-concept-one-term* policy.
-* **Hard Guardrails:** Numerical results, model and dataset names, citations, and defined terms are **never modified** (questionable numbers are only flagged for author review). Prose is refined without compromising technical precision.
+### 3. Subfield Terminology Alignment & Hard Guardrails
+Generic "humanizer" tools degrade technical manuscripts by swapping established domain terms for synonyms—turning a specific model name into *"the system"* or *"our approach,"* which reviewers spot immediately.
+* **Verified Glossary:** Extracts established subfield terminology directly from your draft and cited literature, verifies terms verbatim, and enforces a strict *one-concept-one-term* policy.
+* **Immutable Redlines:** Numerical results, model and dataset names, citations, and defined terms are **never modified** (questionable metrics are only flagged for author review). Language is refined without compromising technical accuracy.
 
 ---
 
-## With and Without the Skill
+## Before and After
 
 Below are two paragraphs from the results section of a NeurIPS 2025 runner-up paper ([arXiv 2504.13837](https://arxiv.org/abs/2504.13837), CC BY 4.0). The same model drafted them twice from the same content outline, without access to the published text.
 
@@ -162,5 +162,5 @@ examples/
 ## Sources and Licenses
 
 * **Code & Rules License:** The skill itself (`SKILL.md`, scripts, and custom reference files) is released under the **MIT License**; see `LICENSE`.
-* **Corpus & Exemplar Copyright:** The exemplar passages are brief excerpts from 30 papers licensed under **CC BY 4.0** or **CC0 1.0**, documented in `references/exemplars/SOURCES.md`. The sentence bank quotes single sentences from award papers, with full attribution and licensing listed in its Sources section. Copyright for all quoted material remains with the original authors. Citations and cross-references in the excerpts are sanitized to `[cite]` and `REF`, and the skill strictly instructs the model never to reuse their content or any contiguous sequence of six or more words. The frames and connectives files contain structural phrases and frequency counts only.
+* **Corpus & Exemplar Copyright:** The exemplar passages are brief excerpts from 30 papers licensed under **CC BY 4.0** or **CC0 1.0**, documented in `references/exemplars/SOURCES.md`. The sentence bank quotes single sentences from award papers, with full attribution and licensing listed in its Sources section. Copyright for all quoted material remains with the original authors. Citations and cross-references in the excerpts are sanitized to `[cite]` and `REF`, and the skill strictly instructs the model never to reuse their factual content or any contiguous sequence of six or more words. The frames and connectives files contain structural phrases and frequency counts only.
 * **Acknowledgments:** The principle of structuring a paper around what it achieves rather than preemptively defending against every possible objection is inspired by [anti-defensive-writing-Skill](https://github.com/Adkid-Zephyr/anti-defensive-writing-Skill) (MIT). While [humanizer](https://github.com/blader/humanizer) strips general-purpose AI patterns based on Wikipedia's *"Signs of AI writing,"* `ml-paper-humanizer` is built exclusively for **ML manuscripts** and derives its rules directly from the published literature.

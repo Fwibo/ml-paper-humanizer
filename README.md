@@ -11,7 +11,7 @@
 Out-of-the-box LLMs struggle with academic prose, defaulting to inflated claims, defensive hedging, and unnatural phrasing. Rather than relying on a brittle list of banned words, `ml-paper-humanizer` governs the writing process through corpus-backed phrasing, structural rhetoric, and strict terminology guardrails.
 
 ### 1. Corpus-Backed Phrasing: Expressions Reviewers Have Read 100 Times
-We analyzed all 307 award-winning and Oral papers published between 2023 and 2026 across 12 premier venues (**NeurIPS, ICML, ICLR, ACL, EMNLP, NAACL, COLM, CVPR, ICCV, ECCV, AAAI, and KDD**). From this corpus, we extracted 1,234 recurring rhetorical patterns—each appearing in at least six distinct papers—categorized by sentence function (referencing figures, reporting results, comparing, stating purpose, hedging, scoping claims, outlining steps, naming, and describing methods).
+We analyzed the full text of all 307 award-winning and Oral papers published between 2023 and 2026 across 12 premier venues (**NeurIPS, ICML, ICLR, ACL, EMNLP, NAACL, COLM, CVPR, ICCV, ECCV, AAAI, and KDD**). From this corpus, we extracted 1,234 recurring rhetorical patterns—each appearing in at least six distinct papers—categorized by sentence function (referencing figures, reporting results, comparing baselines, stating purpose, scoping claims, outlining steps, naming, and describing methods).
 * **The Evidence:** Benchmarking 60 original human paragraphs against 318 LLM-generated drafts revealed that the missing "academic feel" in model drafts comes down largely to this exact set of functional phrases.
 * **The Payoff:** Your manuscript uses standard rhetorical patterns that reviewers have read hundreds of times, rather than expressions invented by a language model.
 
@@ -19,7 +19,7 @@ We analyzed all 307 award-winning and Oral papers published between 2023 and 202
 Clear academic writing is defined by how information is organized within a sentence, not superficial synonym swapping. We distilled the mechanics LLMs lack most from seven definitive style guides—Gopen & Swan's *The Science of Scientific Writing*, Williams' *Style*, Swales & Feak's *Academic Writing for Graduate Students*, Strunk's *The Elements of Style*, Fowler's *The King's English*, Zinsser's *On Writing Well*, and Pinker's *The Sense of Style*:
 * **Syntactic Flow:** Places new information at sentence endings; keeps subjects adjacent to verbs; expresses actions through verbs rather than nominalizations; signals contrast early; omits conjunctions when word order suffices; enforces one term per concept and parallel form.
 * **Calibrated Claims:** Grades reporting verbs so conclusion strength matches empirical evidence, and confines concessions to a single clause.
-* **The Payoff:** These are the structural mechanics readers rarely notice consciously, yet immediately feel in the flow of a paper. Models cannot produce them on their own; the skill follows them while writing and checks them on read-back.
+* **The Payoff:** These are the structural mechanics readers rarely notice consciously, yet immediately feel in the flow of a paper. Models cannot produce them on their own; the skill enforces them while writing and audits them on read-back.
 
 ### 3. Terminology Alignment: Never Turns a Model Name into "The Proposed System"
 Generic "humanizer" tools ruin technical papers by replacing established domain terms with clumsy synonyms—turning a specific architecture name into *"the model"* or *"our framework,"* which reviewers spot immediately.
@@ -79,7 +79,7 @@ Remove the action, and natural wording follows. **The skill has no banned-word l
 
 ### 4. Scope and Limitations (What It Does Not Do)
 * **Not an AI-detector bypass:** It has not been tested against AI detectors and makes no claims about detection scores; it addresses what a human reviewer notices on the page.
-* **Out of scope:** It does not verify citation accuracy, enforce venue-specific LaTeX formatting, or mimic personal style from your past papers. The corpus covers ML, NLP, and CV.
+* **Non-intrusive:** It does not verify citation accuracy, enforce venue-specific LaTeX formatting, or mimic personal style from your past papers. The corpus covers ML, NLP, and CV.
 * **Known gaps:** Drafts produced with the skill remain slightly shorter than published text and use a narrower range of domain-specific verbs (see the example file for a direct comparison).
 
 ### 5. How It Was Tested

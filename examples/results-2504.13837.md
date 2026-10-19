@@ -2,7 +2,7 @@
 
 Paper: *Does Reinforcement Learning Really Incentivize Reasoning Capacity in LLMs Beyond the Base Model?* ([arXiv 2504.13837](https://arxiv.org/abs/2504.13837), NeurIPS 2025 runner-up, CC BY 4.0). Section: "RLVR for Mathematical Reasoning".
 
-Setup. The model (Claude Opus) was given the section's content outline and facts, but not the authors' wording, and asked to write the section. The run with the skill also built the paper's term ledger and read three exemplar passages, as its steps require. Each draft is one generation.
+Setup. The model (Claude Opus) was given the section's content outline and facts, but not the published wording, and asked to write the section. The run with the skill also built the paper's term ledger and read three exemplar passages, as its steps require. Each draft is one generation.
 
 - **Without the skill**: the model was told to write as a careful author. Written 2026-10-10.
 - **With the skill** (seven steps including the frames pass): written 2026-10-16.
@@ -12,9 +12,9 @@ Setup. The model (Claude Opus) was given the section's content outline and facts
 |---|---|---|---|---|
 | Without the skill | 342 | 19.0 | 5.8 | not measured |
 | With the skill | 342 | 19.0 | 5.8 | 39% |
-| The authors | 506 | 22.0 | 13.8 | 65% |
+| Published text | 506 | 22.0 | 13.8 | 65% |
 
-The counts say what is still missing (the authors write longer and with more of the field's verbs). What the skill changes is visible in the text: each paragraph says what it is for before the number, the paper's own names stay (*reasoning ability boundary*, *coverage*), results are read with the field's frames (*REF shows that*, *These curves indicate that*, *We analyze ... in REF*) rather than with the writer's images (*The crossover persists*, *the ordering does not survive*), and the inference carries its reporting verb.
+The counts say what is still missing (the published text is longer and uses more of the field's verbs). What the skill changes is visible in the text: each paragraph says what it is for before the number, the paper's own names stay (*reasoning ability boundary*, *coverage*), results are read with the field's frames (*REF shows that*, *These curves indicate that*, *We analyze ... in REF*) rather than with the writer's images (*The crossover persists*, *the ordering does not survive*), and the inference carries its reporting verb.
 
 ---
 
@@ -62,4 +62,4 @@ We also manually check the CoTs for problems in the challenging AIME24 benchmark
 
 ---
 
-The authors' passage is quoted from a CC BY 4.0 paper; copyright stays with its authors. The two drafts are model output and carry no claim of authorship.
+The published passage is quoted from a CC BY 4.0 paper; copyright remains with its authors. The two drafts are model output and carry no claim of authorship.

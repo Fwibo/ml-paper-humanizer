@@ -8,7 +8,7 @@
 
 **1. 顶会获奖论文的用语统计。** 语料为 2023 至 2026 年 NeurIPS、ICML、ICLR、ACL、EMNLP、NAACL、COLM、CVPR、ICCV、ECCV、AAAI、KDD 的全部获奖论文和 oral 论文，共 307 篇。从中统计出学术写作的常用词和短语，按句子功能分类：指向图表、报告结果、比较、说明目的、限定范围、排列步骤、命名、描述方法，共 1,234 条，每条至少出现在 6 篇论文中。以 60 段原文对照 318 段同内容的模型稿，模型稿缺少的学术味，主要就差在这批最常见的句式上。
 
-**2. 从权威学术写作指南中提取 AI 常忽略的要点。** 依据七本标准参考：Gopen & Swan《The Science of Scientific Writing》（American Scientist，科技写作课程的常用读物）、Williams《Style: Toward Clarity and Grace》和 Swales & Feak《Academic Writing for Graduate Students》（芝加哥大学、密歇根大学出版的写作教材）、Strunk《The Elements of Style》和 Fowler《The King's English》（英语文体的经典规范）、Zinsser《On Writing Well》、Pinker《The Sense of Style》。模型最常忽略的几条，写作时遵循，读回时逐条检查：
+**2. 从权威学术写作指南中提炼 AI 写作最欠缺的技巧。** 依据七本标准参考：Gopen & Swan《The Science of Scientific Writing》（American Scientist，科技写作课程的常用读物）、Williams《Style: Toward Clarity and Grace》和 Swales & Feak《Academic Writing for Graduate Students》（芝加哥大学、密歇根大学出版的写作教材）、Strunk《The Elements of Style》和 Fowler《The King's English》（英语文体的经典规范）、Zinsser《On Writing Well》、Pinker《The Sense of Style》。其中模型最难做到的几条，写作时遵循，读回时逐条检查：
 
 - 新信息置于句末，旧信息置于句首承接上一句（Gopen & Swan，Williams）。
 - 主语紧邻谓语；要点放在主句，背景放在其前的短从句（Gopen & Swan）。

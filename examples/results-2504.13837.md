@@ -6,7 +6,7 @@ Setup. The model (Claude Opus) was given the section's content outline and facts
 
 - **Without the skill**: the model was told to write as a careful author. Written 2026-10-10.
 - **With the skill** (seven steps including the frames pass): written 2026-10-16.
-- **The authors**: the published passage, with citations and cross-references replaced by `[cite]` and `REF`.
+- **Published text**: the passage as published, with citations and cross-references replaced by `[cite]` and `REF`.
 
 | | Words | Mean sentence length | Field verbs per 1k words | Sentences opening on a frame of the field |
 |---|---|---|---|---|
@@ -44,7 +44,7 @@ We next check whether RLVR models with strong AIME24 results escape this pattern
 
 ---
 
-## The authors
+## Published text
 
 **Models and Benchmarks.** In math problems, models are required to generate a reasoning process (i.e., CoT) along with the final answer. To ensure the robustness of conclusions, we experiment with multiple LLM families, primarily Qwen2.5 (7B/14B/32B base variants) [cite] and additionally LLaMA-3.1-8B [cite]. We adopt RLVR models released by SimpleRLZoo [cite], which train zero-RL models using GRPO on GSM8K and the MATH training set, with correctness reward only, excluding any format-based reward. We compare the pass@$k$ curves of base and zero-RL models on benchmarks of varying difficulty: GSM8K [cite], MATH500 [cite], Minerva [cite], Olympiad [cite], AIME24, and AMC23. Additionally, we include the RLVR model Oat-Zero-7B and DAPO-32B [cite]. These two models are characterized by strong performance on the challenging AIME24 benchmark.
 

@@ -65,7 +65,7 @@ Remove the action, and natural wording follows. **The skill has no banned-word l
 
 ### 2. Two Modes
 * **`rewrite` (default):** Sentences that read cleanly in a single pass are kept untouched. Outputs the revised text alongside a structured change log (*before, after, reason*).
-* **`write`:** Drafts new prose from an outline, rough notes, or a Chinese draft. The manuscript text remains in English, with a clause-by-clause Chinese translation available on request. Prompts in Chinese receive responses in Chinese.
+* **`write`:** Drafts new prose from an outline, rough notes, or a rough draft. The manuscript text remains in English, with a clause-by-clause Chinese translation available on request. Prompts in Chinese receive responses in Chinese.
 
 ### 3. The Seven-Step Pipeline
 `SKILL.md` executes the following sequence on every request:
@@ -87,6 +87,18 @@ Every rule was validated the same way: a model drafted a section of an award-win
 
 ---
 
+## Companion Skill: `ml-paper-outliner`
+
+Polishing keeps the wording honest, but it cannot keep a step of the argument that the draft never stated. [`ml-paper-outliner/`](ml-paper-outliner/SKILL.md) is a second skill in this repository that works one layer down. It writes the paper's **skeleton**: the contribution in one sentence, the paper's orientation, and one line per paragraph giving the question it answers, its claim with its reporting verb, its evidence and what it hands to the next paragraph. It works from notes, an outline or an existing draft (as a reverse outline), and writes no paper prose.
+
+The skeleton is the contract between the two skills. `ml-paper-humanizer` takes it as the outline in `write` mode and checks the revised text against it in `rewrite` mode: every paragraph line still present, no claim added, no verb moved up or down the ladder. Format and a worked example: [ml-paper-outliner/references/skeleton.md](ml-paper-outliner/references/skeleton.md). The two skills share `section-playbook.md` and `claim-strength.md`, linked rather than copied.
+
+* `"Before we touch the wording, sort out the logic of my introduction. Here are my notes."`
+* `"Reverse-outline this results section and tell me where the argument breaks."`
+* `"/ml-paper-outliner sec/method.tex"`
+
+---
+
 ## Install and Use
 
 ### Installation
@@ -94,15 +106,17 @@ Every rule was validated the same way: a model drafted a section of an award-win
 **Claude Code:**
 ```bash
 git clone https://github.com/Fwibo/ml-paper-humanizer ~/.claude/skills/ml-paper-humanizer
+ln -s ~/.claude/skills/ml-paper-humanizer/ml-paper-outliner ~/.claude/skills/ml-paper-outliner
 ```
 
 **Codex CLI:**
 ```bash
 git clone https://github.com/Fwibo/ml-paper-humanizer ~/.codex/skills/ml-paper-humanizer
+ln -s ~/.codex/skills/ml-paper-humanizer/ml-paper-outliner ~/.codex/skills/ml-paper-outliner
 ```
 
-* **Other Coding Agents:** Any agent that supports the Agent Skills format (a directory containing `SKILL.md`) can load the cloned folder directly.
-* **claude.ai (Web):** Zip the repository folder and upload it under `Settings → Capabilities → Skills`.
+* **Other Coding Agents:** Any agent that supports the Agent Skills format (a directory containing `SKILL.md`) can load the cloned folder directly. The second line above links the companion skill `ml-paper-outliner` as a skill of its own; agents that scan nested folders do not need it.
+* **claude.ai (Web):** Zip the repository folder and upload it under `Settings → Capabilities → Skills`. Zip `ml-paper-outliner/` separately and upload it as a second skill.
 
 ### Dependencies
 
@@ -149,12 +163,16 @@ references/
   claim-strength.md           The reporting-verb ladder, separating design intent from empirical outcome
   exemplars/                  144 introduction and results passages from 30 papers, with SOURCES.md
 scripts/
-  check_tex.py                Document-relative repetition and structure checks (threshold-free)
+  check_tex.py                Document-relative repetition and structure checks (threshold-free; .tex or .md)
   term_ledger.py              Extracts term candidates from manuscript and cited PDFs; --verify keeps verbatim matches
   pick_exemplars.py           Selects three exemplar passages matching a given section type and orientation
 examples/
   results-2504.13837.md       Full results section comparison: without the skill, with the skill, and published text
   compare.html, compare*.png  The side-by-side comparison figure above and the HTML source used to render it
+ml-paper-outliner/            Companion skill: the argument skeleton, written before the prose or recovered from a draft
+  SKILL.md                    Two modes (skeleton, reverse), what the argument owes the reader, the chain check
+  references/skeleton.md      The skeleton format, what the humanizer checks against it, and a worked example
+  references/*.md             Links to section-playbook.md and claim-strength.md above, shared by both skills
 ```
 
 ---

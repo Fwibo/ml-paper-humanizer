@@ -4,6 +4,11 @@ itself; it has no targets and never says a count is too low or too high.
 
 Usage: check_tex.py <dir-or-file> [more files] [--ledger ledger.json] [--json]
 
+Input is LaTeX (.tex) or Markdown (.md, .markdown, .txt). A Markdown file is turned into minimal LaTeX in memory
+(headings, bold and italics, inline code, fenced code, tables, lists, [cite] and [@key] citations) and read by the
+same parser, so every flag means the same thing for both. A directory is searched for .tex files, and for .md
+files only when it holds no .tex.
+
 Flags (places to look, not verdicts):
   same-opener           the same opening word in 3+ consecutive paragraphs
   even-run              5 sentences in a row within 6 words of each other
@@ -81,15 +86,79 @@ def detex(s):
     return re.sub(r"\s+", " ", s).strip()
 
 
+# ---------- Markdown reading ----------
+MD_EXTS = (".md", ".markdown", ".txt")
+HEADING_CMD = {1: "section", 2: "subsection", 3: "subsubsection", 4: "paragraph"}
+
+
+def md_to_tex(raw):
+    """Minimal Markdown -> LaTeX so that parse() and detex() see the same structure as in a .tex file."""
+    out, fenced, in_table = [], False, False
+    # the shallowest heading in the file is a section, whatever its number of #, so a draft of one section
+    # that starts at ### is split into sections the same way as the .tex it will become
+    levels = [len(m.group(1)) for l in raw for m in [re.match(r"\s*(#{1,6})\s+\S", l)] if m]
+    shift = min(levels) - 1 if levels else 0
+    for line in raw:
+        if re.match(r"\s*(```|~~~)", line):
+            fenced = not fenced
+            out.append("\\begin{verbatim}" if fenced else "\\end{verbatim}"); continue
+        if fenced:
+            out.append(line); continue
+        is_table = line.lstrip().startswith("|")
+        if is_table and not in_table:
+            out.append("\\begin{tabular}"); in_table = True
+        elif in_table and not is_table:
+            out.append("\\end{tabular}"); in_table = False
+        if is_table:
+            out.append(line); continue
+        line = re.sub(r"<!--.*?-->", "", line)
+        hm = re.match(r"\s*(#{1,6})\s+(.*?)\s*#*\s*$", line)
+        if hm:
+            level = min(len(hm.group(1)) - shift, 4)
+            out.append("\\%s{%s}" % (HEADING_CMD[level], md_inline(hm.group(2)))); continue
+        if re.match(r"\s*(-{3,}|\*{3,}|_{3,})\s*$", line):
+            out.append(""); continue
+        line = re.sub(r"^(\s*)>\s?", r"\1", line)
+        lm = re.match(r"^(\s*)([-*+]|\d+[.)])\s+(.*)$", line)
+        if lm:
+            out.append("%s\\item %s" % (lm.group(1), md_inline(lm.group(3)))); continue
+        out.append(md_inline(line))
+    if in_table:
+        out.append("\\end{tabular}")
+    if fenced:
+        out.append("\\end{verbatim}")
+    return out
+
+
+def md_inline(s):
+    parts = re.split(r"(\$[^$]*\$)", s)  # leave inline math alone
+    for i in range(0, len(parts), 2):
+        t = parts[i]
+        t = re.sub(r"(?<!\\)%", r"\\%", t)
+        t = re.sub(r"`([^`]+)`", r"\\texttt{\1}", t)
+        t = re.sub(r"!\[[^\]]*\]\([^)]*\)", " ", t)
+        t = re.sub(r"\[([^\]]+)\]\([^)]*\)", r"\1", t)
+        t = re.sub(r"\[(@[^\]]+|cite[^\]]*)\]", r"\\cite{x}", t, flags=re.I)
+        t = re.sub(r"\*\*(.+?)\*\*", r"\\textbf{\1}", t)
+        t = re.sub(r"__(.+?)__", r"\\textbf{\1}", t)
+        t = re.sub(r"(?<![\w*])\*(?!\s)(.+?)(?<!\s)\*(?![\w*])", r"\\emph{\1}", t)
+        t = re.sub(r"(?<![\w_])_(?!\s)(.+?)(?<!\s)_(?![\w_])", r"\\emph{\1}", t)
+        parts[i] = t
+    return "".join(parts)
+
+
 def load(paths):
     files = []
     for p in paths:
         if os.path.isdir(p):
+            tex, md = [], []
             for root, _, names in os.walk(p):
+                if "build" in root.split(os.sep): continue
                 for n in sorted(names):
-                    if n.endswith(".tex") and "build" not in root.split(os.sep):
-                        files.append(os.path.join(root, n))
-        elif p.endswith(".tex"):
+                    if n.endswith(".tex"): tex.append(os.path.join(root, n))
+                    elif n.endswith(MD_EXTS) and not n.lower().startswith("readme"): md.append(os.path.join(root, n))
+            files.extend(tex or md)
+        elif p.endswith(".tex") or p.endswith(MD_EXTS):
             files.append(p)
     return files
 
@@ -98,6 +167,8 @@ def parse(path):
     """Return prose paragraphs, headings, captions with line numbers."""
     with open(path, encoding="utf-8", errors="replace") as f:
         raw = f.read().split("\n")
+    if path.endswith(MD_EXTS):
+        raw = md_to_tex(raw)
     paragraphs, headings, captions = [], [], []
     cur, cur_start = [], None
     stack = []  # env names
@@ -261,7 +332,7 @@ def main():
     led = next((a[i + 1] for i, x in enumerate(a) if x == "--ledger" and i + 1 < len(a)), None)
     if led: paths = [p for p in paths if p != led]
     files = load(paths)
-    if not files: print("no .tex files found"); return
+    if not files: print("no .tex or .md files found"); return
     R = report(files)
     if js: print(json.dumps(R, indent=1)); return
     print(f"check_tex: {len(files)} file(s). Flags are places to look; none is a target.\n")
@@ -277,7 +348,8 @@ def main():
     for i in R.get("info", []): print(f"info only (no target): {os.path.basename(i['file'])}: {i['sentences']} sentences, mean {i['mean_len']} words, sd {i['sd_len']}, over 30 words {i['share_over_30']}, under 12 words {i['share_under_12']}")
     if led and os.path.exists(led):
         L = json.load(open(led)); ents = L.get("entries", L if isinstance(L, list) else [])
-        full = " ".join(open(f, errors="ignore").read() for f in files)
+        full = " ".join(" ".join(md_to_tex(open(f, errors="ignore").read().split("\n"))) if f.endswith(MD_EXTS)
+                        else open(f, errors="ignore").read() for f in files)
         low = re.sub(r"\\[a-zA-Z]+\*?(\[[^\]]*\])?\{([^{}]*)\}", r"\2", full).lower()
         names = [e["term"] for e in ents if isinstance(e, dict) and e.get("term")]
         def cnt(t): return len(re.findall(r"(?<![\w-])" + re.escape(t.lower()).replace(r"\ ", r"[\s-]+") + r"(?![\w-])", low))

@@ -66,7 +66,7 @@
 
 ### 2. 两种工作模式
 * **`rewrite`（默认修改模式）：** 一遍即可读懂的原句予以保留；输出修改后的英文正文及逐条改动清单（改前、改后、修改原因）。
-* **`write`（起草模式）：** 根据提纲、笔记或中文草稿撰写新段落；论文正文保持英文，可按需附带逐句中文直译。使用中文提问时，Skill 会以中文回复沟通。
+* **`write`（起草模式）：** 根据提纲、笔记或粗稿撰写新段落；论文正文保持英文，可按需附带逐句中文直译。使用中文提问时，Skill 会以中文回复沟通。
 
 ### 3. 七步执行流水线
 `SKILL.md` 对每次请求严格按以下顺序执行：
@@ -88,6 +88,18 @@
 
 ---
 
+## 配套 Skill：`ml-paper-outliner`
+
+润色能守住措辞，却守不住底稿里从未写明的那一步论证。[`ml-paper-outliner/`](ml-paper-outliner/SKILL.md) 是本仓库里的第二个 Skill，往下一层工作：它只写论文的**骨架**，即一句话的贡献、论文取向，以及每段一行——这段回答什么问题、主张是什么（含 reporting verb）、证据在哪、交给下一段什么。输入可以是笔记、提纲，也可以是已有草稿（做反向大纲）；它不写论文正文。
+
+骨架是两个 Skill 之间唯一的合同。`ml-paper-humanizer` 在 `write` 模式下以它为提纲，在 `rewrite` 模式下拿它核对改稿：每段的那一行都还在、没有多出主张、reporting verb 没有上调或下调。格式与完整示例见 [ml-paper-outliner/references/skeleton.md](ml-paper-outliner/references/skeleton.md)。两个 Skill 共用 `section-playbook.md` 与 `claim-strength.md`，以链接方式共享而非复制。
+
+* `"先别动措辞，把我 introduction 的逻辑理顺。这是我的笔记。"`
+* `"给这节 results 做个反向大纲，告诉我论证在哪断了。"`
+* `"/ml-paper-outliner sec/method.tex"`
+
+---
+
 ## 安装与使用
 
 ### 安装 Skill
@@ -95,15 +107,17 @@
 **Claude Code：**
 ```bash
 git clone https://github.com/Fwibo/ml-paper-humanizer ~/.claude/skills/ml-paper-humanizer
+ln -s ~/.claude/skills/ml-paper-humanizer/ml-paper-outliner ~/.claude/skills/ml-paper-outliner
 ```
 
 **Codex CLI：**
 ```bash
 git clone https://github.com/Fwibo/ml-paper-humanizer ~/.codex/skills/ml-paper-humanizer
+ln -s ~/.codex/skills/ml-paper-humanizer/ml-paper-outliner ~/.codex/skills/ml-paper-outliner
 ```
 
-* **其他 AI Coding Agent：** 凡支持加载 Agent Skills（即读取含 `SKILL.md` 的目录）的工具，可直接指向同一文件夹。
-* **claude.ai 网页版：** 将本仓库文件夹打包为 `.zip`，在 `Settings → Capabilities → Skills` 中上传即可。
+* **其他 AI Coding Agent：** 凡支持加载 Agent Skills（即读取含 `SKILL.md` 的目录）的工具，可直接指向同一文件夹。上面第二行把配套 Skill `ml-paper-outliner` 链接为独立 Skill；会扫描子目录的工具不需要这一步。
+* **claude.ai 网页版：** 将本仓库文件夹打包为 `.zip`，在 `Settings → Capabilities → Skills` 中上传即可。`ml-paper-outliner/` 单独打包，作为第二个 Skill 上传。
 
 ### 环境依赖
 
@@ -150,12 +164,16 @@ references/
   claim-strength.md           Reporting verb 强度分级表，区分设计意图与实验结果
   exemplars/                  取自 30 篇顶会论文的 144 段引言与实验范文，附 SOURCES.md
 scripts/
-  check_tex.py                基于文档自身分布的无阈值重复与结构检查脚本
+  check_tex.py                基于文档自身分布的无阈值重复与结构检查脚本（.tex 或 .md）
   term_ledger.py              从正文与引用 PDF 提取术语候选；--verify 仅保留逐字匹配的术语
   pick_exemplars.py           按章节类型和论文取向抽取三段参考范文
 examples/
   results-2504.13837.md       完整实验章节对比：不用 Skill、使用 Skill 与发表原文
   compare.html, compare*.png  README 顶部的对比图及用于渲染该图的 HTML 源码
+ml-paper-outliner/            配套 Skill：论证骨架，动笔前写出，或从草稿反向抽出
+  SKILL.md                    两种模式（skeleton、reverse）、论证欠读者什么、论证链核查
+  references/skeleton.md      骨架格式、humanizer 据此核对什么、以及一个完整示例
+  references/*.md             指向上面 section-playbook.md 与 claim-strength.md 的链接，两个 Skill 共用
 ```
 
 ---

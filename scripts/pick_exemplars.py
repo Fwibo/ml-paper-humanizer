@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Print 3 passages of published papers for the section being written (style reference, read before writing).
-Usage: pick_exemplars.py <intro|results> [--orientation ...] [--n 3] [--seed k]
+Usage: pick_exemplars.py <intro|results> [--orientation ...] [--n 3] [--seed k] [--exclude arxiv-id,...]
 Passages come from references/exemplars/ (award / reference papers, macros expanded, cites and refs neutralised).
 The pool holds introductions and results sections only; "method", "experiments" and "analysis" draw from results,
 anything else from intro. Three different papers are drawn; with --orientation one of the three matches it when available."""
@@ -10,7 +10,8 @@ orient = a[a.index("--orientation") + 1] if "--orientation" in a else None
 n = int(a[a.index("--n") + 1]) if "--n" in a else 3
 rng = random.Random(int(a[a.index("--seed") + 1]) if "--seed" in a else None)
 here = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "references", "exemplars")
-pool = [p for p in json.load(open(os.path.join(here, "index.json"))) if p["section"] == sec]
+excl = a[a.index("--exclude") + 1].split(",") if "--exclude" in a else []
+pool = [p for p in json.load(open(os.path.join(here, "index.json"))) if p["section"] == sec and p["id"] not in excl]
 ids = sorted({p["id"] for p in pool}); rng.shuffle(ids); chosen = []
 if orient:
     m = [i for i in ids if any(p["id"] == i and p["orientation"] == orient for p in pool)]

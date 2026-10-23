@@ -8,7 +8,7 @@
 
 ## Highlights
 
-Out-of-the-box LLMs struggle with academic writing, often defaulting to inflated claims, mechanical transitions, and unnatural phrasing. Rather than relying on a brittle list of banned words, `ml-paper-humanizer` governs the writing process through corpus-backed phrasing, structural rhetoric, and strict terminology guardrails, with an optional audited Gemini wording pass.
+Out-of-the-box LLMs struggle with academic writing, often defaulting to inflated claims, mechanical transitions, and unnatural phrasing. Rather than relying on a brittle list of banned words, `ml-paper-humanizer` governs the writing process through corpus-backed phrasing, structural rhetoric, and strict terminology guardrails, with an optional Gemini polish on top.
 
 ### 1. Corpus-Backed Phrasing from 307 Award & Oral Papers
 We analyzed the full text of all 307 award-winning and Oral papers published between 2023 and 2026 across 12 premier venues (**NeurIPS, ICML, ICLR, ACL, EMNLP, NAACL, COLM, CVPR, ICCV, ECCV, AAAI, and KDD**). From this corpus, we extracted 1,234 recurring rhetorical patterns—each appearing in at least six distinct papers—categorized by communicative function (e.g., referencing figures, reporting empirical results, scoping claims, and contrasting baselines).
@@ -26,11 +26,10 @@ Generic "humanizer" tools degrade technical manuscripts by swapping established 
 * **Verified Glossary:** Extracts established subfield terminology directly from your draft and cited literature, verifies terms verbatim, and enforces a strict *one-concept-one-term* policy.
 * **Immutable Redlines:** Numerical results, model and dataset names, citations, and defined terms are **never modified** (questionable metrics are only flagged for author review). Language is refined without compromising technical accuracy.
 
-### 4. Optional Gemini Wording Pass with Automated Diff Auditing
-When an external model drafts a section directly from an outline, it tends to inject unprompted qualifiers and claims; restricting a second model strictly to surface wording after Steps 1–7 improved the prose in blind tests. In `write` mode, you can optionally invoke an external OpenAI-compatible endpoint (tested with `gemini-4-argon` via zero-dependency Python scripts) for a post-checker wording pass.
-* **Strict Division of Labor:** Claude drafts the section and completes Steps 1–7. The external model receives the draft alongside the skill's claim-strength ladder, sentence bank, and exemplar passages, with instructions to revise only wording while keeping paragraph order, claim verbs and scopes, numbers, citations, and qualifiers intact.
-* **Automated Revert & Line-by-Line Audit:** `scripts/revise_check.py` aligns the draft and revision sentence by sentence—discarding the revision if paragraphs were split, merged, or moved, and automatically reverting any altered numbers, citations, cross-references, math spans, headings, bold labels, or skeleton "Keep" items. It then flags remaining edits (e.g., a ledger term used less often, new scope/strength words like *"significantly"* or *"across"*, or sentence splits) in a compact change list. Claude audits only this list (adding ~20k tokens, or ~13% overhead), reverts any edit that shifts claim scope or renames a concept, and re-runs the checker. In the tests, about half of the 13–28 edits per section were put back.
-* **Outcome:** In blind evaluations across three published introductions and results sections—judged by GPT, Gemini, and Claude—this pass beat the pre-pass draft in 7 of 8 writing-quality judgments and matched the published authors' prose more closely in 8 of 8 (and beat the skill alone in 9 of 12 quality and 11 of 12 closeness judgments in an earlier round). Because it sends your draft and skeleton to an external endpoint, it never runs unless explicitly requested.
+### 4. Optional Gemini Wording Polish with Claude Guardrails
+Combine Claude's rule adherence with Gemini's natural phrasing: after Claude drafts a section, Gemini can refine the wording while Claude keeps only edits that leave claims, numbers, citations, and terms untouched.
+* **Plug-and-Play & Opt-In:** Runs only when requested via your own OpenAI-compatible endpoint or proxy (just set a base URL, key, and model name; no SDK needed).
+* **Outcome:** In blind tests across three published sections judged by GPT, Gemini, and Claude, the polished text beat Claude's draft alone on quality in 7 of 8 judgments and read closer to the original authors in 8 of 8.
 
 ---
 
@@ -82,7 +81,7 @@ Remove the action, and natural wording follows. **The skill has no banned-word l
 5. **Three-Pass Read-Back:** Audit the draft three times—first for factual fidelity, second against the term ledger, and third against the syntactic rules from the style guides.
 6. **Frames Pass:** Always run in `write` mode, and on request in `rewrite` mode. Checks the draft sentence by sentence against the frames database, replacing phrasing that points to figures, reports observations, interprets trends, compares baselines, or transitions between topics with established domain idioms.
 7. **Automated Checker:** Runs a document-relative check that flags abnormal repetition—such as a single concept appearing under two names, a paragraph restating its own heading, or a reported gain that never names both sides of the comparison.
-8. **External Wording Pass (Optional, `write` mode only):** Only when requested by the user, sends the post-checker draft and skeleton to a user-configured OpenAI-compatible endpoint (tested with Gemini, `gemini-4-argon`) for wording-only revision. `scripts/revise_check.py` automatically reverts any changes to numbers, citations, math, headings, or skeleton "Keep" items, and the agent audits the remaining sentence-level diff—reverting any edit that alters claim strength, scope, or terminology—before running the automated checker one final time.
+8. **Gemini Wording Pass (Optional):** On request, Gemini (or any model behind an OpenAI-compatible endpoint) rewords the checked draft. A script puts back any change to numbers, citations, math, or headings; the agent reviews the rest, undoes any edit that shifts a claim or renames a term, and reruns the checker.
 
 ### 4. Scope and Limitations (What It Does Not Do)
 * **Not an AI-detector bypass:** It has not been tested against AI detectors and makes no claims about detection scores; it addresses what a human reviewer notices on the page.

@@ -8,7 +8,7 @@
 
 ## 亮点
 
-直接使用大模型起草或润色论文，往往会产生浮夸的修辞、冗余的逻辑连接词以及生造的学术短语。`ml-paper-humanizer` 不依赖简单的“禁用词表”，而是通过**顶会语料约束、经典修辞法则、领域术语对齐**三个底层机制，系统性重建模型的学术写作能力。
+直接使用大模型起草或润色论文，往往会产生浮夸的修辞、冗余的逻辑连接词以及生造的学术短语。`ml-paper-humanizer` 不依赖简单的“禁用词表”，而是通过**顶会语料约束、经典修辞法则、领域术语对齐**三个底层机制，配合可选的外部模型（如 Gemini）受控字句润色，系统性重建模型的学术写作能力。
 
 ### 1. 基于 307 篇顶会获奖与 Oral 论文的语料实证
 我们对 2023–2026 年间 **NeurIPS、ICML、ICLR、ACL、CVPR** 等 12 个顶会的全部获奖及 Oral 论文（共 307 篇）进行了语料库分析，按句子功能（引出图表、汇报结果、基线对比、界定范围、陈述方法等）提取出 1,234 条高频学术句式（每条均在至少 6 篇独立论文中复现）。
@@ -26,6 +26,12 @@
 通用的“去 AI 味”工具常通过同义词替换来规避检测（例如将具体的模型架构名泛化为“该模型”或“所提出的系统”），这在专业审稿人眼中会立即暴露外行痕迹。
 * **术语提取与对齐：** 自动从当前正文及引用文献中提取子领域的既定术语，建立经逐字核验的术语表，全篇贯彻“一物一名”。
 * **事实红线：** 实验数值、模型与数据集名称、LaTeX 引用标签及已定义术语**一律锁死不改**（存疑数据仅做标记提示），确保语言润色绝不越界干扰科学事实。
+
+### 4. 可选的 Gemini 字句润色与逐句差分审查
+实验表明，若让外部模型直接根据提纲起草章节，往往会凭空添加提纲之外的限定词与实质内容，质量反而不及本 Skill 的初稿；但若将其严格限制在“完稿后的字句微调”，则在盲评中提升了文风表现。在 `write` 模式下，用户可按需调用任意兼容 OpenAI 接口的外部模型（配套纯 Python 零依赖脚本，已通过 `gemini-4-argon` 测试）执行第八步字句润色。
+* **严格的分工边界：** 主 Agent（Claude）负责完成第 1–7 步的起草与校验；外部模型随后接收初稿及本 Skill 裁切出的读者需求、主张强度阶梯、例句库与顶会范文，仅被允许在保持段落结构、主张动词与范围、数值、引用及限定词完全不变的前提下优化字句表达。
+* **脚本自动回退与逐条复核：** `scripts/revise_check.py` 会将初稿与润色稿逐句对齐——若发现段落被合并、拆分或移动则整篇丢弃；若数值、引用、交叉引用、数学公式、标题、粗体标签或提纲中的“Keep”项被改动则自动回退。脚本随后将其余改动（并标记术语频次下降、新增 *"significantly"* 或 *"across"* 等强度/范围词、句子拆分合并等风险项）汇总为变更清单。Claude 仅需读取该清单（同会话下约增加 20k tokens，即约 13% 的额外开销），将改变主张范围、把解读变成事实或打破“一物一名”的修改逐一退回（每节 13–28 处改动中约半数会被退回），最后重跑终检脚本。
+* **实际效果：** 在基于三篇已发表论文 Introduction 与 Results 章节的盲评中（由不知晓文本来源的 GPT、Gemini 和 Claude 担任评委），经此步润色后的文本在 8 次写作质量评判中有 7 次优于润色前初稿，在 8 次原文贴近度评判中全部更接近发表原文（在更早一轮对比中，也在 12 次质量评判的 9 次、12 次贴近度评判的 11 次中胜过仅用本 Skill 的版本）。由于该步骤会将章节草稿与提纲发送至用户配置的外部服务，除非用户明确要求，否则绝不会自动运行。
 
 ---
 
@@ -68,7 +74,7 @@
 * **`rewrite`（默认修改模式）：** 一遍即可读懂的原句予以保留；输出修改后的英文正文及逐条改动清单（改前、改后、修改原因）。
 * **`write`（起草模式）：** 根据提纲、笔记或粗稿撰写新段落；论文正文保持英文，可按需附带逐句中文直译。使用中文提问时，Skill 会以中文回复沟通。
 
-### 3. 七步执行流水线
+### 3. 执行流水线：七步与可选的第八步
 `SKILL.md` 对每次请求严格按以下顺序执行：
 1. **定取向：** 确定论文类型（proof / effect / design / evaluation / discovery），读取 Playbook 中对应章节的结构框架。
 2. **建术语表：** 从当前正文和引用文献中提取并核验领域术语。
@@ -77,6 +83,7 @@
 5. **三遍回读：** 一查事实保真，二查术语表一致性，三查权威写作指南的各项句法指标。
 6. **句式对齐（Frames Pass）：** `write` 模式必做，`rewrite` 模式按需执行。对照句式库逐句检查，凡涉及指向图表、报告观察、给出解读、基线比较或承上启下的句子，统一替换为领域标准句式。
 7. **脚本终检：** 运行检查脚本，以当前文档自身为基准报告异常重复（如同一概念使用了两个名称、段落首尾复述小标题、提及性能提升却未指明比较基准等）。
+8. **外部模型字句润色（可选，仅限 `write` 模式）：** 仅在用户明确要求时运行，在第 6 步与第 7 步之后将初稿与提纲发送至用户配置的 OpenAI 兼容接口（已通过 Gemini `gemini-4-argon` 测试）进行纯字句微调。`scripts/revise_check.py` 会自动回退任何针对数值、引用、公式、标题及提纲“Keep”项的改动并生成变更清单；主 Agent 逐条审查该清单，退回任何越界改动主张强度、范围或术语的句子，最后重新运行终检脚本。
 
 ### 4. 边界与局限（它不做什么）
 * **不针对 AI 检测器：** 本工具未在任何 AI 检测器上测试，也不对检测率作任何承诺；它解决的是**人类审稿人**能读出来的问题。
@@ -127,6 +134,8 @@ ln -s ~/.codex/skills/ml-paper-humanizer/ml-paper-outliner ~/.codex/skills/ml-pa
 pip install spacy pymupdf && python -m spacy download en_core_web_sm
 ```
 
+可选的 Gemini 字句润色无需安装 SDK，只需一个 OpenAI 兼容接口，通过 `HUMANIZER_LLM_BASE_URL`、`HUMANIZER_LLM_API_KEY` 与 `HUMANIZER_LLM_MODEL` 配置。
+
 ### 触发示例
 
 用自然语言（中文或英文）直接提出写作、修改或诊断请求即可触发：
@@ -136,6 +145,7 @@ pip install spacy pymupdf && python -m spacy download en_core_web_sm
 * `"这个摘要太防御了，改一下。"`
 * `"先别改，告诉我这一节哪里有问题。"`
 * `"/ml-paper-humanizer sec/experiments.tex"`
+* `"按这个提纲写 results 这一节，并跑一下 Gemini 字句润色。"`
 
 配套工具脚本也可在命令行下独立运行：
 
@@ -148,6 +158,12 @@ python scripts/term_ledger.py paper/main.tex --cited refs/*.pdf --out ledger.jso
 
 # 按章节类型与论文取向抽取三段顶会范文
 python scripts/pick_exemplars.py results --orientation discovery
+
+# 运行可选的外部模型字句润色，输出 final.md 与差异清单 final.changes.md
+export HUMANIZER_LLM_BASE_URL="https://your-openai-compatible-endpoint/v1"
+export HUMANIZER_LLM_API_KEY="your-api-key"
+export HUMANIZER_LLM_MODEL="gemini-4-argon"
+python scripts/external_draft.py results --skeleton skeleton.md --names ledger.json --orientation discovery --revise draft.md --out final.md
 ```
 
 ---
@@ -155,7 +171,7 @@ python scripts/pick_exemplars.py results --orientation discovery
 ## 仓库结构
 
 ```text
-SKILL.md                      核心指令：七步工作流、读者需求、回读核查表与输出契约
+SKILL.md                      核心指令：七步工作流与可选的第 8 步字句润色、读者需求、回读核查表与输出契约
 references/
   section-playbook.md         按论文取向划分的各章节（从 Abstract 到 Rebuttal）写作任务框架
   sentence-bank.md            40 组模型初稿与顶会原文的病句对照（按问题分类）及 23 句动作范例
@@ -167,6 +183,8 @@ scripts/
   check_tex.py                基于文档自身分布的无阈值重复与结构检查脚本（.tex 或 .md）
   term_ledger.py              从正文与引用 PDF 提取术语候选；--verify 仅保留逐字匹配的术语
   pick_exemplars.py           按章节类型和论文取向抽取三段参考范文
+  external_draft.py           第 8 步：调用 OpenAI 兼容接口的模型做字句润色（--revise），并运行差分检查
+  revise_check.py             逐句对齐初稿与润色稿，自动回退受保护的改动，其余列为待审清单
 examples/
   results-2504.13837.md       完整实验章节对比：不用 Skill、使用 Skill 与发表原文
   compare.html, compare*.png  README 顶部的对比图及用于渲染该图的 HTML 源码

@@ -8,7 +8,7 @@
 
 ## Highlights
 
-Out-of-the-box LLMs struggle with academic writing, often defaulting to inflated claims, mechanical transitions, and unnatural phrasing. Rather than relying on a brittle list of banned words, `ml-paper-humanizer` governs the writing process through corpus-backed phrasing, structural rhetoric, and strict terminology guardrails.
+Out-of-the-box LLMs struggle with academic writing, often defaulting to inflated claims, mechanical transitions, and unnatural phrasing. Rather than relying on a brittle list of banned words, `ml-paper-humanizer` governs the writing process through corpus-backed phrasing, structural rhetoric, and strict terminology guardrails, with an optional audited Gemini wording pass.
 
 ### 1. Corpus-Backed Phrasing from 307 Award & Oral Papers
 We analyzed the full text of all 307 award-winning and Oral papers published between 2023 and 2026 across 12 premier venues (**NeurIPS, ICML, ICLR, ACL, EMNLP, NAACL, COLM, CVPR, ICCV, ECCV, AAAI, and KDD**). From this corpus, we extracted 1,234 recurring rhetorical patterns—each appearing in at least six distinct papers—categorized by communicative function (e.g., referencing figures, reporting empirical results, scoping claims, and contrasting baselines).
@@ -25,6 +25,12 @@ Clear academic prose is defined by how information is structured, not just word 
 Generic "humanizer" tools degrade technical manuscripts by swapping established domain terms for synonyms—turning a specific model name into *"the system"* or *"our approach,"* which reviewers spot immediately.
 * **Verified Glossary:** Extracts established subfield terminology directly from your draft and cited literature, verifies terms verbatim, and enforces a strict *one-concept-one-term* policy.
 * **Immutable Redlines:** Numerical results, model and dataset names, citations, and defined terms are **never modified** (questionable metrics are only flagged for author review). Language is refined without compromising technical accuracy.
+
+### 4. Optional Gemini Wording Pass with Automated Diff Auditing
+When an external model drafts a section directly from an outline, it tends to inject unprompted qualifiers and claims; restricting a second model strictly to surface wording after Steps 1–7 improved the prose in blind tests. In `write` mode, you can optionally invoke an external OpenAI-compatible endpoint (tested with `gemini-4-argon` via zero-dependency Python scripts) for a post-checker wording pass.
+* **Strict Division of Labor:** Claude drafts the section and completes Steps 1–7. The external model receives the draft alongside the skill's claim-strength ladder, sentence bank, and exemplar passages, with instructions to revise only wording while keeping paragraph order, claim verbs and scopes, numbers, citations, and qualifiers intact.
+* **Automated Revert & Line-by-Line Audit:** `scripts/revise_check.py` aligns the draft and revision sentence by sentence—discarding the revision if paragraphs were split, merged, or moved, and automatically reverting any altered numbers, citations, cross-references, math spans, headings, bold labels, or skeleton "Keep" items. It then flags remaining edits (e.g., a ledger term used less often, new scope/strength words like *"significantly"* or *"across"*, or sentence splits) in a compact change list. Claude audits only this list (adding ~20k tokens, or ~13% overhead), reverts any edit that shifts claim scope or renames a concept, and re-runs the checker. In the tests, about half of the 13–28 edits per section were put back.
+* **Outcome:** In blind evaluations across three published introductions and results sections—judged by GPT, Gemini, and Claude—this pass beat the pre-pass draft in 7 of 8 writing-quality judgments and matched the published authors' prose more closely in 8 of 8 (and beat the skill alone in 9 of 12 quality and 11 of 12 closeness judgments in an earlier round). Because it sends your draft and skeleton to an external endpoint, it never runs unless explicitly requested.
 
 ---
 
@@ -67,7 +73,7 @@ Remove the action, and natural wording follows. **The skill has no banned-word l
 * **`rewrite` (default):** Sentences that read cleanly in a single pass are kept untouched. Outputs the revised text alongside a structured change log (*before, after, reason*).
 * **`write`:** Drafts new prose from an outline, rough notes, or a rough draft. The manuscript text remains in English, with a clause-by-clause Chinese translation available on request. Prompts in Chinese receive responses in Chinese.
 
-### 3. The Seven-Step Pipeline
+### 3. The Pipeline: Seven Steps and an Optional Eighth
 `SKILL.md` executes the following sequence on every request:
 1. **Determine Orientation:** Identify the paper's archetype (*proof / effect / design / evaluation / discovery*) and load the corresponding section frame from the playbook.
 2. **Build the Term Ledger:** Extract and verify domain terminology from your manuscript and cited papers.
@@ -76,6 +82,7 @@ Remove the action, and natural wording follows. **The skill has no banned-word l
 5. **Three-Pass Read-Back:** Audit the draft three times—first for factual fidelity, second against the term ledger, and third against the syntactic rules from the style guides.
 6. **Frames Pass:** Always run in `write` mode, and on request in `rewrite` mode. Checks the draft sentence by sentence against the frames database, replacing phrasing that points to figures, reports observations, interprets trends, compares baselines, or transitions between topics with established domain idioms.
 7. **Automated Checker:** Runs a document-relative check that flags abnormal repetition—such as a single concept appearing under two names, a paragraph restating its own heading, or a reported gain that never names both sides of the comparison.
+8. **External Wording Pass (Optional, `write` mode only):** Only when requested by the user, sends the post-checker draft and skeleton to a user-configured OpenAI-compatible endpoint (tested with Gemini, `gemini-4-argon`) for wording-only revision. `scripts/revise_check.py` automatically reverts any changes to numbers, citations, math, headings, or skeleton "Keep" items, and the agent audits the remaining sentence-level diff—reverting any edit that alters claim strength, scope, or terminology—before running the automated checker one final time.
 
 ### 4. Scope and Limitations (What It Does Not Do)
 * **Not an AI-detector bypass:** It has not been tested against AI detectors and makes no claims about detection scores; it addresses what a human reviewer notices on the page.
@@ -126,6 +133,8 @@ The structural checker and exemplar picker require only **Python 3**. Candidate 
 pip install spacy pymupdf && python -m spacy download en_core_web_sm
 ```
 
+The optional Gemini wording pass needs no SDK, only an OpenAI-compatible endpoint set through `HUMANIZER_LLM_BASE_URL`, `HUMANIZER_LLM_API_KEY` and `HUMANIZER_LLM_MODEL`.
+
 ### Usage Examples
 
 Prompt the agent in plain English or Chinese. The skill triggers automatically when drafting, revising, or diagnosing a paper:
@@ -135,6 +144,7 @@ Prompt the agent in plain English or Chinese. The skill triggers automatically w
 * `"Make this abstract less defensive."`
 * `"Don't change anything yet, tell me what is wrong with this section."`
 * `"/ml-paper-humanizer sec/experiments.tex"`
+* `"Write the results section from this skeleton and run the Gemini wording pass."`
 
 The helper scripts can also be run standalone from the command line:
 
@@ -147,6 +157,12 @@ python scripts/term_ledger.py paper/main.tex --cited refs/*.pdf --out ledger.jso
 
 # Retrieve three exemplar passages for a specific section and paper orientation
 python scripts/pick_exemplars.py results --orientation discovery
+
+# Run the optional external wording pass and generate final.md + final.changes.md
+export HUMANIZER_LLM_BASE_URL="https://your-openai-compatible-endpoint/v1"
+export HUMANIZER_LLM_API_KEY="your-api-key"
+export HUMANIZER_LLM_MODEL="gemini-4-argon"
+python scripts/external_draft.py results --skeleton skeleton.md --names ledger.json --orientation discovery --revise draft.md --out final.md
 ```
 
 ---
@@ -154,7 +170,7 @@ python scripts/pick_exemplars.py results --orientation discovery
 ## Repository Structure
 
 ```text
-SKILL.md                      Core workflow: the seven steps, reader needs, read-back checklist, and output contract
+SKILL.md                      Core workflow: the seven steps and the optional wording pass, reader needs, read-back checklist, and output contract
 references/
   section-playbook.md         Section-by-section rhetorical goals (abstract to rebuttal) by paper orientation
   sentence-bank.md            40 pairs of model drafts vs. published text by failure mode, plus 23 sentences by move
@@ -166,6 +182,8 @@ scripts/
   check_tex.py                Document-relative repetition and structure checks (threshold-free; .tex or .md)
   term_ledger.py              Extracts term candidates from manuscript and cited PDFs; --verify keeps verbatim matches
   pick_exemplars.py           Selects three exemplar passages matching a given section type and orientation
+  external_draft.py           Calls an OpenAI-compatible model for step 8's wording pass (--revise) and runs the check
+  revise_check.py             Aligns draft and revision, puts back protected changes, lists the rest for review
 examples/
   results-2504.13837.md       Full results section comparison: without the skill, with the skill, and published text
   compare.html, compare*.png  The side-by-side comparison figure above and the HTML source used to render it

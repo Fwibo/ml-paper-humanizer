@@ -91,7 +91,7 @@ Every rule was validated the same way: a model drafted a section of an award-win
 
 Polishing keeps the wording honest, but it cannot keep a step of the argument that the draft never stated. [`ml-paper-outliner/`](ml-paper-outliner/SKILL.md) is a second skill in this repository that works one layer down. It writes the paper's **skeleton**: the contribution in one sentence, the paper's orientation, and one line per paragraph giving the question it answers, its claim with its reporting verb, its evidence and what it hands to the next paragraph. It works from notes, an outline or an existing draft (as a reverse outline), and writes no paper prose.
 
-The skeleton is the contract between the two skills. `ml-paper-humanizer` takes it as the outline in `write` mode and checks the revised text against it in `rewrite` mode: every paragraph line still present, no claim added, no verb moved up or down the ladder. Format and a worked example: [ml-paper-outliner/references/skeleton.md](ml-paper-outliner/references/skeleton.md). The two skills share `section-playbook.md` and `claim-strength.md`, linked rather than copied.
+The skeleton is the contract between the two skills. `ml-paper-humanizer` takes it as the outline in `write` mode and checks the revised text against it in `rewrite` mode: every paragraph line still present, no claim added, no verb moved up or down the ladder. Format and a worked example: [ml-paper-outliner/references/skeleton.md](ml-paper-outliner/references/skeleton.md). The two skills share `section-playbook.md` and `claim-strength.md`; the outliner reads them from the parent folder, so there is one copy to maintain.
 
 * `"Before we touch the wording, sort out the logic of my introduction. Here are my notes."`
 * `"Reverse-outline this results section and tell me where the argument breaks."`
@@ -116,7 +116,7 @@ ln -s ~/.codex/skills/ml-paper-humanizer/ml-paper-outliner ~/.codex/skills/ml-pa
 ```
 
 * **Other Coding Agents:** Any agent that supports the Agent Skills format (a directory containing `SKILL.md`) can load the cloned folder directly. The second line above links the companion skill `ml-paper-outliner` as a skill of its own; agents that scan nested folders do not need it.
-* **claude.ai (Web):** Zip the repository folder and upload it under `Settings → Capabilities → Skills`. Zip `ml-paper-outliner/` separately and upload it as a second skill.
+* **claude.ai (Web):** Zip the repository folder once and upload it under `Settings → Capabilities → Skills`. The companion skill is inside the folder and is reached from `SKILL.md`; do not upload `ml-paper-outliner/` on its own, since it reads two reference files from the parent folder.
 
 ### Dependencies
 

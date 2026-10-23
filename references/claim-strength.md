@@ -27,6 +27,18 @@ The verb of a result sentence tells the reader how far the evidence goes, so it 
 
 A paper that writes "demonstrates" for a correlation and "suggests" for its main ablated result has the ladder upside down: a reviewer reads the first as overreach and the second as the authors not believing their own evidence. A pointer frame ("As shown in Table 2,") says where the evidence is; it does not say how far it goes, so it precedes a reporting verb rather than replacing one.
 
+## Scope by what the evidence covers
+
+The verb says how far the evidence goes; the scope says how much of the world the claim covers. The two are separate, and a claim can be right on one and wrong on the other ("shows" on a single run is right about the verb and wrong about the scope). The scopes, from the narrowest, and what each needs:
+
+- *An existence claim*: X happens in at least one case. One clear case is enough, and the claim says it is one case ("we find a setting in which", "two of the sampled CoTs").
+- *A narrow claim*: X holds under conditions V and W. The conditions are in the sentence, and the evidence covers them.
+- *A systematic claim*: X holds across the range tested. The sentence names the range (all sizes, all benchmarks, both families) and the evidence spans it; one benchmark and one size do not make a trend.
+- *A hedged systematic claim*: there is suggestive or compelling evidence that X holds in general. For a pattern that reaches beyond what was tested; the hedge is the scope, stated once.
+- *A guarantee*: X always holds. A theorem, under its assumptions, and nothing else in this field.
+
+A stronger scope makes a more interesting paper and needs more evidence; the one to write is the widest the evidence covers, not the widest the authors would like. Several lines of evidence of different kinds pointing one way widen the scope more than many repeats of one kind. The scope is fixed when the claim is outlined, and a skeleton from `ml-paper-outliner` carries it in the claim line; the revision keeps it as it keeps the verb.
+
 ## When a result does not support the story
 
 Rebuild the story around the strongest evidence instead of defending the original plan. Narrow the claim to what holds, choose the setting or comparison where the paper's value shows, or move a result that does not bear on the contribution out of the main line. Two things stay off the table: dropping a result that bears on the core claim, and hiding the condition under which the method fails.

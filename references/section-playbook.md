@@ -32,7 +32,7 @@ Frame. Context, the gap, the idea, the mechanism that closes the gap, the eviden
 
 ## Introduction
 
-Frame. Background, the limitation of existing work, the insight that explains the limitation, the solution that follows from the insight, the contributions. The limitation is structural, not a convenient weakness; the insight paragraph comes before the method; the contribution items match the gap and the experiments.
+Frame. Background, the limitation of existing work, why the obvious fix does not remove it, the insight that explains the limitation, the solution that follows from the insight, the contributions. The limitation is structural, not a convenient weakness; the step on why the obvious fix fails is what makes the problem hard rather than merely open, and may share a paragraph with the limitation; the insight paragraph comes before the method; the contribution items match the gap and the experiments, each one refutable and carried by a section the introduction points to.
 
 Plan Figure 1 and Table 1 with the introduction. Both should show the contribution before the reader reaches the details.
 
@@ -99,7 +99,14 @@ Frame. What is compared, on what and by which metric, in a sentence or two; the 
 - State the metric in the body at least once, even in one sentence. A table note alone does not count.
 - A caption says what the table or figure shows, in one or two plain sentences, and stops; the reading it supports goes in the body, not in a bold sentence in the caption. Symbols and column names get a sentence only where the body does not explain them.
 - Give every experiment a question it answers for the argument (claim-strength.md). An experiment whose question the reader cannot name goes to the appendix.
-- Open each results paragraph on one sentence that carries both the pointer and the claim ("Table 2 shows that the gate lowers perplexity by 0.2 at every size"); row readings come after the claim. A results subsection may open on a whether-question ("We first check whether …") or a five-word pointer sentence, not on a hypothesis restated from the lead-in or a stakes frame ("This would be a poor trade if …").
+- Order the results by the logic that carries the claim, not by the order the experiments were run. Where results carry subsection headings, each heading is a declarative sentence stating what the subsection shows.
+- One decisive experiment carries more than several similar ones, and evidence of different kinds (a matched comparison, an ablation, an intervention, a case) carries more than more of the same kind. Write the decisive one first and say what each further one adds.
+- Tune the baselines as hard as the method and say so. A result that is "decent" is not a result; better than the plausible alternative, at matched budget, is.
+- A surprising result names the likeliest alternative explanation in the same subsection and the experiment that rules it out; a likely reviewer concern is answered where it arises, not in the rebuttal.
+- For a qualitative example, say how it was chosen: at random, or picked, and from how many. A picked example is written as an illustration of the phenomenon, not as evidence of how often it occurs.
+- Say which analyses were fixed before the results were seen and which were drawn after. A post-hoc reading is written as a reading ("suggests", "is consistent with"), not as a confirmed prediction.
+- Give enough detail to rerun every experiment: the exact setup in the appendix when the body has no room, with one sentence pointing there.
+- Open each results paragraph on one sentence that carries both the pointer and the claim ("Table 2 shows that the gate lowers perplexity by 0.2 at every size"), or on the question the paragraph answers ("To check that the gain is not an artefact of the tokenizer, …") with the answer as its last sentence; row readings come after the claim. A results subsection may open on a whether-question ("We first check whether …") or a five-word pointer sentence, not on a hypothesis restated from the lead-in or a stakes frame ("This would be a poor trade if …").
 - Keep every number the outline attaches to a claim (a setting, a margin, a count, a row value). "Roughly doubles" with no figure, or "in every column but one" with no value, reads as evasion. Numbers already in a table are read out when the sentence makes a claim about them, and left in the table otherwise.
 - Read the table as the authors would, by naming the comparison that matters, not by table geometry ("in every column but one", "the cells in the third block").
 - Land every analysis paragraph on a result or a hedged mechanism sentence about this paragraph's evidence ("…, suggesting that …"), not on a row-by-row reading of the table and not on a derived takeaway that the next paragraph picks up.
@@ -120,6 +127,7 @@ Frame. What is compared, on what and by which metric, in a sentence or two; the 
 Frame. One question per subsection, with a heading that answers it in a short sentence; inside, observation, then analysis, then conclusion; one boundary sentence at the end of the subsection, not at the end of every paragraph.
 
 - Ask one question per section, and make the heading a short sentence that answers it.
+- A discussion opens by saying how the results fill the gap the introduction named, in a few sentences. Each later paragraph takes one strength or one weakness of the result and reads it against the literature, then says what it leaves open.
 - Run observation, analysis, conclusion. Do not open with "X fails, as …".
 - Keep each concession to one clause, and put one boundary sentence at the end.
 - Do not string paragraphs together with rhetorical questions.
@@ -170,3 +178,7 @@ Frame. The real limitations in one paragraph, each with the conclusion it affect
 - Answer the point raised and stop. Concede no more than the reviewer asked for, and do not turn one reviewer's local doubt into a general defect.
 - Give only the supplementary numbers needed to answer the question.
 - When a review contradicts the manuscript, quote the manuscript's sentence and its location. Do not write "we respectfully disagree".
+
+## Sources
+
+The frames restate, per section, what these guides ask for; none is reproduced. The Contribution-Centered Paper Writing Checklist (LARS Group, 2026) gives the core principle, the five orientations, the Figure 1 and Table 1 plans and the section checklists. Mensh & Kording, *Ten simple rules for structuring papers* (2017), gives the context–content–conclusion shape of the abstract, the narrowing introduction and the question-and-answer results paragraph. Widom, *Tips for Writing Technical Papers*, gives the introduction's five questions, including why the problem is hard, and the rule for where related work goes. Peyton Jones, *How to write a great research paper*, gives the refutable contribution list that the rest of the paper substantiates. Farquhar, *How to Write ML Papers* (2024), gives the results block that says what an experiment shows and how it bears on the contribution. Nanda, *Highly Opinionated Advice on How to Write ML Papers* (2025), gives the rules on baselines tuned as hard as the method, one decisive experiment over several similar ones, evidence of different kinds, the cherry-picking level of an example, and pre-specified against post-hoc analyses. Mensh & Kording also give the results subsection headed by a declarative sentence, the paragraph that opens on its question and closes on its answer, and the discussion that reads each strength or weakness against the literature. 刘知远《如何写一篇合格的NLP论文》 gives the one-to-one correspondence of challenges, ideas, components and experiments, and the rule that the introduction sketches the method and the method section details it.

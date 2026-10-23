@@ -92,7 +92,7 @@
 
 润色能守住措辞，却守不住底稿里从未写明的那一步论证。[`ml-paper-outliner/`](ml-paper-outliner/SKILL.md) 是本仓库里的第二个 Skill，往下一层工作：它只写论文的**骨架**，即一句话的贡献、论文取向，以及每段一行——这段回答什么问题、主张是什么（含 reporting verb）、证据在哪、交给下一段什么。输入可以是笔记、提纲，也可以是已有草稿（做反向大纲）；它不写论文正文。
 
-骨架是两个 Skill 之间唯一的合同。`ml-paper-humanizer` 在 `write` 模式下以它为提纲，在 `rewrite` 模式下拿它核对改稿：每段的那一行都还在、没有多出主张、reporting verb 没有上调或下调。格式与完整示例见 [ml-paper-outliner/references/skeleton.md](ml-paper-outliner/references/skeleton.md)。两个 Skill 共用 `section-playbook.md` 与 `claim-strength.md`，以链接方式共享而非复制。
+骨架是两个 Skill 之间唯一的合同。`ml-paper-humanizer` 在 `write` 模式下以它为提纲，在 `rewrite` 模式下拿它核对改稿：每段的那一行都还在、没有多出主张、reporting verb 没有上调或下调。格式与完整示例见 [ml-paper-outliner/references/skeleton.md](ml-paper-outliner/references/skeleton.md)。两个 Skill 共用 `section-playbook.md` 与 `claim-strength.md`，outliner 从上级目录读取，只维护一份。
 
 * `"先别动措辞，把我 introduction 的逻辑理顺。这是我的笔记。"`
 * `"给这节 results 做个反向大纲，告诉我论证在哪断了。"`
@@ -117,7 +117,7 @@ ln -s ~/.codex/skills/ml-paper-humanizer/ml-paper-outliner ~/.codex/skills/ml-pa
 ```
 
 * **其他 AI Coding Agent：** 凡支持加载 Agent Skills（即读取含 `SKILL.md` 的目录）的工具，可直接指向同一文件夹。上面第二行把配套 Skill `ml-paper-outliner` 链接为独立 Skill；会扫描子目录的工具不需要这一步。
-* **claude.ai 网页版：** 将本仓库文件夹打包为 `.zip`，在 `Settings → Capabilities → Skills` 中上传即可。`ml-paper-outliner/` 单独打包，作为第二个 Skill 上传。
+* **claude.ai 网页版：** 将本仓库文件夹整体打包为一个 `.zip`，在 `Settings → Capabilities → Skills` 中上传即可。配套 Skill 在文件夹内，由 `SKILL.md` 指向；不要单独上传 `ml-paper-outliner/`，它要从上级目录读两份参考文件。
 
 ### 环境依赖
 

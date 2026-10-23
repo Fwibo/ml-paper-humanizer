@@ -95,9 +95,9 @@ Every rule was validated the same way: a model drafted a section of an award-win
 
 ## Companion Skill: `ml-paper-outliner`
 
-Polishing keeps the wording honest, but it cannot keep a step of the argument that the draft never stated. [`ml-paper-outliner/`](ml-paper-outliner/SKILL.md) is a second skill in this repository that works one layer down. It writes the paper's **skeleton**: the contribution in one sentence, the paper's orientation, and one line per paragraph giving the question it answers, its claim with its reporting verb, its evidence and what it hands to the next paragraph. It works from notes, an outline or an existing draft (as a reverse outline), and writes no paper prose.
+Polishing keeps the wording honest, but it cannot keep a step of the argument that the draft never stated. [`ml-paper-outliner/`](ml-paper-outliner/SKILL.md) is a second skill in this repository that works one layer down. It writes the paper's **skeleton**: the contribution in one sentence, the paper's orientation, and for each section a writing brief with one numbered note per paragraph giving the question it answers, its claim with its reporting verb and scope, its evidence, what it does not say and what it hands to the next paragraph. It works from notes, an outline or an existing draft (as a reverse outline), and writes no paper prose.
 
-The skeleton is the contract between the two skills. `ml-paper-humanizer` takes it as the outline in `write` mode and checks the revised text against it in `rewrite` mode: every paragraph line still present, no claim added, no verb moved up or down the ladder. Format and a worked example: [ml-paper-outliner/references/skeleton.md](ml-paper-outliner/references/skeleton.md). The two skills share `section-playbook.md` and `claim-strength.md`; the outliner reads them from the parent folder, so there is one copy to maintain.
+The skeleton is the contract between the two skills. `ml-paper-humanizer` takes it as the outline in `write` mode and checks the revised text against it in `rewrite` mode: every paragraph note still has its paragraph, no claim added, no verb moved up or down the ladder. Format and a worked example: [ml-paper-outliner/references/skeleton.md](ml-paper-outliner/references/skeleton.md). The two skills share `section-playbook.md` and `claim-strength.md`; the outliner reads them from the parent folder, so there is one copy to maintain.
 
 * `"Before we touch the wording, sort out the logic of my introduction. Here are my notes."`
 * `"Reverse-outline this results section and tell me where the argument breaks."`
@@ -171,7 +171,8 @@ python scripts/external_draft.py results --skeleton skeleton.md --names ledger.j
 ```text
 SKILL.md                      Core workflow: the seven steps and the optional wording pass, reader needs, read-back checklist, and output contract
 references/
-  section-playbook.md         Section-by-section rhetorical goals (abstract to rebuttal) by paper orientation
+  section-playbook.md         Index of the section files: core principle, orientation tags, opening logic
+  sections/*.md               One file per section (abstract to rebuttal): its frame and orientation-tagged lines; sources.md lists the guides
   sentence-bank.md            40 pairs of model drafts vs. published text by failure mode, plus 23 sentences by move
   register-frames.md          1,234 corpus phrases categorized by communicative function, with paper counts
   connectives.md              Style guide mechanics alongside standard cause, contrast, and concession forms
@@ -189,7 +190,7 @@ examples/
 ml-paper-outliner/            Companion skill: the argument skeleton, written before the prose or recovered from a draft
   SKILL.md                    Two modes (skeleton, reverse), what the argument owes the reader, the chain check
   references/skeleton.md      The skeleton format, what the humanizer checks against it, and a worked example
-  references/*.md             Links to section-playbook.md and claim-strength.md above, shared by both skills
+  references/*.md             Read section-playbook.md, sections/ and claim-strength.md from the parent folder, shared by both skills
 ```
 
 ---

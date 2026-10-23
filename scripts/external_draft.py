@@ -25,10 +25,11 @@ import json, os, re, subprocess, sys, time, urllib.error, urllib.request
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.join(HERE, "..")
 REF = os.path.join(ROOT, "references")
-PLAYBOOK = {"abstract": "Abstract", "intro": "Introduction", "introduction": "Introduction", "method": "Method",
-            "results": "Experiments and results", "experiments": "Experiments and results",
-            "analysis": "Analysis and discussion", "related": "Related work", "conclusion": "Conclusion",
-            "limitations": "Limitations", "appendix": "Appendix", "rebuttal": "Rebuttal"}
+# section name as the user types it -> file in references/sections/
+PLAYBOOK = {"abstract": "abstract", "intro": "introduction", "introduction": "introduction", "method": "method",
+            "results": "experiments", "experiments": "experiments", "analysis": "analysis", "related": "related-work",
+            "related-work": "related-work", "conclusion": "conclusion", "limitations": "limitations",
+            "appendix": "appendix", "rebuttal": "rebuttal"}
 
 
 def read(p):
@@ -58,8 +59,8 @@ DETACH = [("Everything else in this skill is", "Everything else here is"),
 
 TASK_DRAFT = (
     "# The draft\n\n"
-    "- Every paragraph line of the skeleton becomes a paragraph, in the skeleton's order, with its claim at the "
-    "skeleton's strength and scope (the reporting verb and the range in the Claim line are part of the claim) and "
+    "- Every numbered paragraph note (### P…) of the skeleton becomes one paragraph, in the skeleton's order, with its claim at the "
+    "skeleton's strength and scope (the reporting verb and the scope in parentheses after the claim are part of it) and "
     "its evidence named. Add no claim, number, fact or qualifier the skeleton and brief do not give; leave a gap as a "
     "visible [TODO: …].\n"
     "- Use the ledger's names verbatim, one name per thing; coin no label for a thing the ledger names.\n"
@@ -131,12 +132,16 @@ def names(path):
 
 
 def user_prompt(a, ex_text):
-    playbook = read(os.path.join(REF, "section-playbook.md"))
+    playbook = read(os.path.join(REF, "section-playbook.md"))  # the index: orientation tags and opening logic
+    section_file = os.path.join(REF, "sections", PLAYBOOK.get(a["section"].lower(), a["section"].lower()) + ".md")
+    section_text = read(section_file) if os.path.exists(section_file) else ""
+    # the file's first paragraph points at the index and sources.md, which the writer does not get
+    section_text = "\n".join(ln for ln in section_text.splitlines() if "section-playbook.md" not in ln).strip()
     parts = [
         ("Skeleton", read(a["skeleton"])),
         ("Ledger names", names(a.get("names")) or "Use the Names line of the skeleton."),
         ("Orientation", (a.get("orientation") or "see the skeleton") + "\n\n" + block(playbook, "Orientation opening logic (light reference)", "###")),
-        (f"Section frame and what readers expect: {PLAYBOOK.get(a['section'], a['section'])}", block(playbook, PLAYBOOK.get(a["section"], a["section"]))),
+        (f"Section frame and what readers expect: {a['section']}", section_text),
     ]
     if not a.get("lean"):
         parts += [("Sentence bank", bank(a["exclude"])), ("Exemplar passages", ex_text),

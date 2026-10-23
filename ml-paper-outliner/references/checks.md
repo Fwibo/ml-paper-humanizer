@@ -11,14 +11,16 @@ The hard lines are in [SKILL.md](../SKILL.md): no invented fact, no changed numb
 ## The chain
 
 - A paragraph whose question nothing before it raised; a conclusion whose premise is in no earlier line and in no named evidence.
-- A hand-off that is a derived takeaway the next paragraph restates, instead of the fact or the open question it draws the takeaway from.
-- A paragraph the argument would not miss. Default: it goes to the appendix or is cut. Reasons to keep it: it introduces a concept a later line needs, or states a condition the reader must hold; then its Q says so.
+- A paragraph that ends on a derived takeaway the next paragraph restates, instead of the fact or the open question it draws the takeaway from.
+- A note that reads as a paragraph of the paper (declarative sentences in the paper's voice, no imperative, no verb and scope in parentheses). The humanizer would paraphrase it; the note is rewritten as instructions to the writer.
+- A note missing one of its five parts: the question, the claim with verb and scope, the evidence with status, what it does not say, the ending.
+- A paragraph the argument would not miss. Default: it goes to the appendix or is cut. Reasons to keep it: it introduces a concept a later line needs, or states a condition the reader must hold; then its note says so.
 - An introduction paragraph that closes on a conclusion where the next paragraph needs an open question. Default: the paragraph ends on what is still unknown at its level. Reasons to depart: a background paragraph that only sets up a concept, or the last paragraph, which states the contributions.
 - The introduction's account of the method repeated, rather than detailed, in the method section.
 
 ## Correspondence across sections
 
-The introduction's challenges, the ideas that answer them, the method's components and the experiments that test the claims answer to one another. The check is for completeness of the correspondence, not for equal counts: one idea may answer two challenges, several components may serve one bottleneck, one experiment may test two claims, and one claim may need several experiments of different kinds. The finding is an item with no partner that the material cannot explain.
+The gaps the introduction names, the answers to them, the parts of the paper that realize the answers and the experiments that test the claims answer to one another. The columns take the orientation's names: for `design` and `effect` challenge, idea, component of the method; for `evaluation` the realistic factor missed, the construction principle, the construction element; for `discovery` the link of the chain, the hypothesis part, the measurement or intervention; for `proof` the obstruction, the assumption, the lemma or construction. The example below is a design paper. The check is for completeness of the correspondence, not for equal counts: one idea may answer two challenges, several components may serve one bottleneck, one experiment may test two claims, and one claim may need several experiments of different kinds. The finding is an item with no partner that the material cannot explain.
 
 | Challenge (introduction) | Idea | Component (method) | Claim tested | Experiment |
 |---|---|---|---|---|
@@ -45,48 +47,36 @@ The third row is the finding: a component with no challenge before it. The last 
 
 ## A reverse outline with a missing link
 
-A four-paragraph results draft, as it stands:
+A four-paragraph results draft, as it stands. The current skeleton records what each paragraph does, improving nothing:
 
 ```markdown
 ### P1 setup
-Q: what is compared and on what
-Claim: the gate and the no-gate model are compared on three benchmarks by perplexity
-Evidence: provided (Table 2 setup)
-Hands off: perplexity at each size is the quantity to read
+Tell what is compared and on what: the gate and the no-gate model on three benchmarks by perplexity (provided; Table 2 setup). Ends on perplexity at each size as the quantity to read.
 
 ### P2 main result
-Q: does the gate lower perplexity
-Claim: the gate lowers perplexity by 0.2 at every size (shows)
-Evidence: provided (Table 2)
-Hands off: the gain is uniform across sizes
+Does the gate lower perplexity: by 0.2 at every size (shows; provided, Table 2). Ends on the gain being uniform across sizes.
 
 ### P3 mechanism
-Q: [no question found]
-Claim: the gate removes distractor tokens, which is why perplexity falls (demonstrates)
-Evidence: not identified in the supplied material
-Hands off: the gate is the component to keep
+[no question found] The gate removes distractor tokens, which is why perplexity falls (demonstrates; evidence not identified in the supplied material). Ends on the gate as the component to keep.
 
 ### P4 ablation
-Q: which component carries the gain
-Claim: removing the gate loses the whole 0.2 (shows)
-Evidence: provided (Table 3)
-Hands off: none
+Which component carries the gain: removing the gate loses the whole 0.2 (shows; provided, Table 3). Ends on nothing.
 ```
 
 Proposed:
 
 ```markdown
-### P1 setup  (P1)
-### P2 main result  (P2)
-Hands off: the gain is uniform across sizes; which component carries it is open
-### P3 ablation  (P4 → P3)
-Q: which component carries the gain
-Claim: removing the gate loses the whole 0.2 (shows; Table 3)
-Hands off: the gate carries the gain; why it does is open
-### P4 mechanism  (P3 → P4)
-Q: why does the gate lower perplexity
-Claim: the gate is designed to drop distractor tokens, and the ablation is consistent with its doing so (is consistent with); whether it drops them: [?]
-Evidence: Table 3; a count of dropped distractors: not identified in the supplied material
+### P1 setup (P1)
+unchanged
+
+### P2 main result (P2)
+unchanged, except the ending: end on the gain being uniform across sizes and on which component carries it being open.
+
+### P3 ablation (P4 → P3)
+Answer which component carries the gain: removing the gate loses the whole 0.2 (shows; provided, Table 3). End on the gate carrying the gain and on why it does being open.
+
+### P4 mechanism (P3 → P4)
+Answer why the gate lowers perplexity, at the strength the material allows: the gate is designed to drop distractor tokens, and the ablation is consistent with its doing so (is consistent with; Table 3). Keep design intent and outcome in separate clauses. Do not write that it drops them: no count of dropped distractors is in the material [?]. End on the gate as the component to keep.
 ```
 
 Change list: P4 → P3, because P3's question (why) needs P4's answer (which component) first; P3 → P4, verb lowered from "demonstrates" to "is consistent with", since no measurement of distractor tokens is in the material; design intent and outcome split into two clauses. Open question, blocking: is there a measurement of distractor tokens dropped (affects P4's verb)? Nothing was removed; nothing was added.

@@ -98,7 +98,7 @@
 
 润色能守住措辞，却守不住底稿里从未写明的那一步论证。[`ml-paper-outliner/`](ml-paper-outliner/SKILL.md) 是本仓库里的第二个 Skill，往下一层工作：它只写论文的**骨架**，即一句话的贡献、论文取向，以及每段一行——这段回答什么问题、主张是什么（含 reporting verb）、证据在哪、交给下一段什么。输入可以是笔记、提纲，也可以是已有草稿（做反向大纲）；它不写论文正文。
 
-骨架是两个 Skill 之间唯一的合同。`ml-paper-humanizer` 在 `write` 模式下以它为提纲，在 `rewrite` 模式下拿它核对改稿：每段的那一行都还在、没有多出主张、reporting verb 没有上调或下调。格式与完整示例见 [ml-paper-outliner/references/skeleton.md](ml-paper-outliner/references/skeleton.md)。两个 Skill 共用 `section-playbook.md` 与 `claim-strength.md`，outliner 从上级目录读取，只维护一份。
+骨架是两个 Skill 之间唯一的合同。`ml-paper-humanizer` 在 `write` 模式下以它为提纲，在 `rewrite` 模式下拿它核对改稿：每段的说明都还对应一段、没有多出主张、reporting verb 没有上调或下调。骨架以节为单位：每节一段写作说明（这节要证明什么、按什么顺序、为什么），下面每个段落一条编号说明，用对写作者说话的口吻写清这段回答什么、主张什么和多强、证据是什么、不说什么、收在哪里。格式与完整示例见 [ml-paper-outliner/references/skeleton.md](ml-paper-outliner/references/skeleton.md)。两个 Skill 共用 `section-playbook.md` 与 `claim-strength.md`，outliner 从上级目录读取，只维护一份。
 
 * `"先别动措辞，把我 introduction 的逻辑理顺。这是我的笔记。"`
 * `"给这节 results 做个反向大纲，告诉我论证在哪断了。"`
@@ -172,7 +172,8 @@ python scripts/external_draft.py results --skeleton skeleton.md --names ledger.j
 ```text
 SKILL.md                      核心指令：七步工作流与可选的第 8 步字句润色、读者需求、回读核查表与输出契约
 references/
-  section-playbook.md         按论文取向划分的各章节（从 Abstract 到 Rebuttal）写作任务框架
+  section-playbook.md         各节文件的索引：核心原则、取向标签、开场逻辑
+  sections/*.md               每节一个文件（Abstract 到 Rebuttal）：该节的框架和带取向标签的条目；sources.md 列出依据的指南
   sentence-bank.md            40 组模型初稿与顶会原文的病句对照（按问题分类）及 23 句动作范例
   register-frames.md          1,234 条按句子功能分类的顶会高频句式（附出现篇数统计）
   connectives.md              权威写作指南要点，以及因果、对比、让步的标准表达形式
@@ -190,7 +191,7 @@ examples/
 ml-paper-outliner/            配套 Skill：论证骨架，动笔前写出，或从草稿反向抽出
   SKILL.md                    两种模式（skeleton、reverse）、论证欠读者什么、论证链核查
   references/skeleton.md      骨架格式、humanizer 据此核对什么、以及一个完整示例
-  references/*.md             指向上面 section-playbook.md 与 claim-strength.md 的链接，两个 Skill 共用
+  references/*.md             从上级目录读取 section-playbook.md、sections/ 与 claim-strength.md，两个 Skill 共用
 ```
 
 ---
